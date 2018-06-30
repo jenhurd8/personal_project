@@ -1,0 +1,14 @@
+.landing {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/v1528746062/MountainPic_zbiezm.jpg");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+button {
+  color: white;
+  background-color: blue;
+}

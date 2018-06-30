@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  padding: 20px;
+}
+.logo {
+}
+.menu {
+  display: flex;
+  justify-content: space-between;
+}
+.menuItems {
+  width: 15vw;
+}
+a {
+  text-decoration: none;
+}
