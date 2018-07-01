@@ -1,0 +1,14 @@
+.family {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.inputs {
+  padding: 50px;
+}
+.familyMember {
+  width: 20vw;
+  height: 10vh;
+  background-color: aqua;
+  margin: 10px;
+}
