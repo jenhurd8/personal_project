@@ -16,7 +16,10 @@ class Provider extends Component {
       responseName: "",
       responseAddress: "",
       responseId: "",
-      responseReference: ""
+      responseReference: "",
+      bdPhoto: "",
+      bdPhone: null,
+      bdPracticeName: ""
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
@@ -51,6 +54,23 @@ class Provider extends Component {
           });
         }
       });
+
+    ///insert next call here///
+    axios
+      .get(
+        `https://api.betterdoctor.com/2016-03-01/doctors?name=${
+          this.state.providerSearchName
+        }&location=${this.state.value}&skip=0&limit=10&user_key=${
+          process.env.REACT_APP_api_key2
+        }`
+      )
+      .then(response => {
+        this.setState({
+          bdImage: response.data.data[0].profile.image_url,
+          bdPhone: response.data.data[0].practices[0].phones[0].number,
+          bdPracticeName: response.data.data[0].practices[0].name
+        });
+      });
   }
 
   onChangeHandler = e => {
@@ -73,7 +93,16 @@ class Provider extends Component {
         }`
       )
       .then(response => {
-        console.log(response.data);
+        this.setState({
+          bdImage: response.data.data[0].profile.image_url,
+          bdPhone: response.data.data[0].practices[0].phones[0].number,
+          bdPracticeName: response.data.data[0].practices[0].name
+        });
+        console.log(
+          this.state.bdImage,
+          this.state.bdPhone,
+          this.state.bdPracticeName
+        );
       });
   }
 
@@ -168,6 +197,9 @@ class Provider extends Component {
           <br />
           <p>{this.state.responseName}</p>
           <p>{this.state.responseAddress}</p>
+          <p>{this.state.bdPracticeName}</p>
+          <p>{this.state.bdPhone}</p>
+          <p>{this.state.bdImage}</p>
           <br />
           <button onClick={this.confirmedProvider}>Confirm Provider</button>
           <button onClick={this.searchAgain}>Search Again</button>
