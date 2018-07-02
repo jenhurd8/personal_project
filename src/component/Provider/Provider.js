@@ -18,6 +18,8 @@ class Provider extends Component {
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
+    this.searchAgain = this.searchAgain.bind(this);
+    this.confirmedProvider = this.confirmedProvider.bind(this);
   }
 
   onSearchHandler() {
@@ -31,25 +33,36 @@ class Provider extends Component {
         }`
       )
       .then(response => {
-        this.setState({
-          providers: response.data,
-          responseName: response.data.candidates[0].name,
-          responseAddress: response.data.candidates[0].formatted_address
-        });
-        // this.setState({
-        //   responseName: response.data.providers.candidates[0].name,
-        //   responseAddress:
-        //     response.data.providers.candidates[0].formatted_address
-        // });
-        console.log(this.state.providers);
-        console.log(this.state.providers.candidates[0].name);
-        console.log(this.state.providers.candidates[0].formatted_address);
+        if (response.data.status !== "ZERO_RESULTS") {
+          this.setState({
+            providers: response.data,
+            responseName: response.data.candidates[0].name,
+            responseAddress: response.data.candidates[0].formatted_address
+          });
+        } else {
+          this.setState({
+            providers: response.data,
+            responseName: "No Providers Found"
+          });
+        }
+        // console.log(this.state.providers);
+        // console.log(this.state.providers.candidates[0].name);
+        // console.log(this.state.providers.candidates[0].formatted_address);
       });
   }
 
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  searchAgain() {
+    this.setState({
+      suffix: "",
+      value: "",
+      providerSearchName: ""
+    });
+  }
+  confirmedProvider() {}
 
   render() {
     return (
@@ -140,9 +153,13 @@ class Provider extends Component {
             Click to Search for Provider
           </button>
           <br />
-          <button>Confirm Provider</button>
           <p>{this.state.responseName}</p>
           <p>{this.state.responseAddress}</p>
+          <br />
+          <button onClick={() => this.confirmedProvider}>
+            Confirm Provider
+          </button>
+          <button onClick={() => this.searchAgain}>Search Again</button>
         </div>
         <Link to="/dashboard">
           <button>Cancel</button>
