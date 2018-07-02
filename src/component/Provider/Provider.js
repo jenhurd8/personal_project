@@ -9,6 +9,8 @@ class Provider extends Component {
   constructor() {
     super();
     this.state = {
+      suffix: "",
+      value: "",
       providerSearchName: "",
       providers: []
     };
@@ -17,11 +19,15 @@ class Provider extends Component {
   }
 
   onSearchHandler() {
+    let completeSearchString = `${this.state.providerSearchName} ${
+      this.state.suffix
+    } ${this.state.value}`;
+    console.log(this.state.suffix);
+    console.log(this.state.value);
+    console.log(completeSearchString);
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${
-          this.state.providerSearchName
-        }&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${completeSearchString}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
           process.env.REACT_APP_api_key
         }`
       )
@@ -44,6 +50,8 @@ class Provider extends Component {
         <div className="inputs">
           Add a doctor or health care provider here:
           <br />
+          Provide all three inputs for more accurate results.
+          <br />
           <br />
           Provider Name:
           <input
@@ -52,6 +60,70 @@ class Provider extends Component {
             type="text"
             onChange={this.onChangeHandler}
           />
+          <br />
+          Provider Category:
+          <select name="suffix" onChange={this.onChangeHandler}>
+            <option value="DR">Doctor</option>
+            <option value="PA">Physician Assistant</option>
+            <option value="Hospital">Hospital</option>
+            <option value="Urgent Care">Urgent Care</option>
+          </select>
+          <br />
+          Provider Location:
+          <select name="value" onChange={this.onChangeHandler}>
+            <option value="">Select Provider State</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="DC">District Of Columbia</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+          </select>
           <br />
           <button
             onClick={() => this.onSearchHandler(this.state.providerSearchName)}
