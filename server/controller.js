@@ -49,10 +49,18 @@ module.exports = {
       });
   },
 
-  getProvider: (req, res, next) => {
+  getProviders: (req, res, next) => {
     let db = req.app.get("db");
-
-    db.get_providers().then(providers => {
+    // axios
+    // .get(
+    // `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Nadera%20Sweiss&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
+    //   process.env.key
+    // }`
+    // )
+    // .then(function(response) {
+    //   console.log("google response:" + response);
+    // });
+    db.getProviders().then(providers => {
       return res.status(200).send(providers);
     });
   },

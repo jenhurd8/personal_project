@@ -25,7 +25,7 @@ app.delete("/api/family/:id", controller.deleteFamily);
 //patch is changing existing data --- axios#patch(url[, data[, config]])
 //app.patch("/api/family/:id", controller.patchFamily);
 
-app.get("/api/providers", controller.getProvider);
+app.get("/api/providers", controller.getProviders);
 app.post("/api/providers", controller.addProvider);
 app.delete("/api/providers/:id", controller.deleteProvider);
 
