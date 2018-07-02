@@ -9,6 +9,7 @@ class Provider extends Component {
   constructor() {
     super();
     this.state = {
+      providerSearchName: "",
       providers: []
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -18,7 +19,9 @@ class Provider extends Component {
   onSearchHandler() {
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Nadera%20Sweiss&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${
+          this.state.providerSearchName
+        }&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
           process.env.REACT_APP_api_key
         }`
       )
@@ -44,14 +47,15 @@ class Provider extends Component {
           <br />
           Provider Name:
           <input
-            name="provider"
+            name="providerSearchName"
             placeholder="Enter Provider's First and Last Name (ex: John Jones)"
             type="text"
             onChange={this.onChangeHandler}
           />
           <br />
-          <button onClick={() => this.onSearchHandler()}>
-            {/* this.state.provider add back to onSearchHandler after test */}
+          <button
+            onClick={() => this.onSearchHandler(this.state.providerSearchName)}
+          >
             Click to Search for Provider
           </button>
           <button>Confirm Provider</button>
