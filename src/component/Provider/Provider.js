@@ -14,7 +14,9 @@ class Provider extends Component {
       providerSearchName: "",
       providers: [],
       responseName: "",
-      responseAddress: ""
+      responseAddress: "",
+      responseId: "",
+      responseReference: ""
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
@@ -28,7 +30,7 @@ class Provider extends Component {
     } ${this.state.value}`;
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${completeSearchString}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${completeSearchString}&inputtype=textquery&fields=photos,id,icon,photos,plus_code,reference,formatted_address,name,rating,opening_hours,geometry&key=${
           process.env.REACT_APP_api_key
         }`
       )
@@ -37,17 +39,17 @@ class Provider extends Component {
           this.setState({
             providers: response.data,
             responseName: response.data.candidates[0].name,
-            responseAddress: response.data.candidates[0].formatted_address
+            responseAddress: response.data.candidates[0].formatted_address,
+            responseId: response.data.candidates[0].id,
+            responseReference: response.data.candidates[0].reference
           });
+          console.log(this.state.providers);
         } else {
           this.setState({
             providers: response.data,
             responseName: "No Providers Found"
           });
         }
-        // console.log(this.state.providers);
-        // console.log(this.state.providers.candidates[0].name);
-        // console.log(this.state.providers.candidates[0].formatted_address);
       });
   }
 
@@ -56,13 +58,24 @@ class Provider extends Component {
   };
 
   searchAgain() {
-    this.setState({
-      suffix: "",
-      value: "",
-      providerSearchName: ""
-    });
+    //forces page reload
+    window.location.reload();
   }
-  confirmedProvider() {}
+
+  confirmedProvider() {
+    console.log(this.state.responseName);
+    axios
+      .get(
+        `https://api.betterdoctor.com/2016-03-01/doctors?name=${
+          this.state.providerSearchName
+        }&location=${this.state.value}&skip=0&limit=10&user_key=${
+          process.env.REACT_APP_api_key2
+        }`
+      )
+      .then(response => {
+        console.log(response.data);
+      });
+  }
 
   render() {
     return (
@@ -156,13 +169,16 @@ class Provider extends Component {
           <p>{this.state.responseName}</p>
           <p>{this.state.responseAddress}</p>
           <br />
-          <button onClick={() => this.confirmedProvider}>
-            Confirm Provider
-          </button>
-          <button onClick={() => this.searchAgain}>Search Again</button>
+          <button onClick={this.confirmedProvider}>Confirm Provider</button>
+          <button onClick={this.searchAgain}>Search Again</button>
+          <br />
+          <br />
+          Provider not found?
+          <br />
+          <button>Add Provider Manually</button>
         </div>
         <Link to="/dashboard">
-          <button>Cancel</button>
+          <button>Exit</button>
         </Link>
       </div>
     );
