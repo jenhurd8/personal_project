@@ -12,7 +12,9 @@ class Provider extends Component {
       suffix: "",
       value: "",
       providerSearchName: "",
-      providers: []
+      providers: [],
+      responseName: "",
+      responseAddress: ""
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
@@ -22,9 +24,6 @@ class Provider extends Component {
     let completeSearchString = `${this.state.providerSearchName} ${
       this.state.suffix
     } ${this.state.value}`;
-    console.log(this.state.suffix);
-    console.log(this.state.value);
-    console.log(completeSearchString);
     axios
       .get(
         `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${completeSearchString}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
@@ -33,9 +32,18 @@ class Provider extends Component {
       )
       .then(response => {
         this.setState({
-          providers: response.data
+          providers: response.data,
+          responseName: response.data.candidates[0].name,
+          responseAddress: response.data.candidates[0].formatted_address
         });
-        console.log(response.data);
+        // this.setState({
+        //   responseName: response.data.providers.candidates[0].name,
+        //   responseAddress:
+        //     response.data.providers.candidates[0].formatted_address
+        // });
+        console.log(this.state.providers);
+        console.log(this.state.providers.candidates[0].name);
+        console.log(this.state.providers.candidates[0].formatted_address);
       });
   }
 
@@ -56,14 +64,15 @@ class Provider extends Component {
           Provider Name:
           <input
             name="providerSearchName"
-            placeholder="Enter Provider's First and Last Name (ex: John Jones)"
+            placeholder="Provider's First Last (ex: John Jones)"
             type="text"
             onChange={this.onChangeHandler}
           />
           <br />
           Provider Category:
           <select name="suffix" onChange={this.onChangeHandler}>
-            <option value="DR">Doctor</option>
+            <option value="">Select Provider Type</option>
+            <option value="MD">Doctor</option>
             <option value="PA">Physician Assistant</option>
             <option value="Hospital">Hospital</option>
             <option value="Urgent Care">Urgent Care</option>
@@ -130,7 +139,10 @@ class Provider extends Component {
           >
             Click to Search for Provider
           </button>
+          <br />
           <button>Confirm Provider</button>
+          <p>{this.state.responseName}</p>
+          <p>{this.state.responseAddress}</p>
         </div>
         <Link to="/dashboard">
           <button>Cancel</button>
