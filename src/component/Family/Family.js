@@ -56,7 +56,6 @@ class Family extends Component {
       this.setState({
         family: response.data
       });
-      // location.reload();
     });
   }
 

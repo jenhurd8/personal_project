@@ -17,7 +17,8 @@ class Provider extends Component {
       responseAddress: "",
       responseId: "",
       responseReference: "",
-      bdPhoto: "",
+      bdPhoto:
+        "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_200/v1530567672/computer-desk-doctor-48604_exuiyj.jpg",
       bdPhone: null,
       bdPracticeName: ""
     };
@@ -55,7 +56,9 @@ class Provider extends Component {
         }
       });
 
-    ///insert next call here///
+    //change this call if hospital not to pull from better doctors, possibly yelp search for phone
+    //hospital search returns random worker photo
+    //also need to account for null doctor response
     axios
       .get(
         `https://api.betterdoctor.com/2016-03-01/doctors?name=${
@@ -65,11 +68,18 @@ class Provider extends Component {
         }`
       )
       .then(response => {
-        this.setState({
-          bdImage: response.data.data[0].profile.image_url,
-          bdPhone: response.data.data[0].practices[0].phones[0].number,
-          bdPracticeName: response.data.data[0].practices[0].name
-        });
+        console.log(response);
+        if (response.data.data.length !== 0) {
+          this.setState({
+            bdPhoto: response.data.data[0].profile.image_url,
+            bdPhone: response.data.data[0].practices[0].phones[0].number,
+            bdPracticeName: response.data.data[0].practices[0].name
+          });
+        } else {
+          this.setState({
+            responseName: this.state.providerSearchName
+          });
+        }
       });
   }
 
@@ -84,26 +94,26 @@ class Provider extends Component {
 
   confirmedProvider() {
     console.log(this.state.responseName);
-    axios
-      .get(
-        `https://api.betterdoctor.com/2016-03-01/doctors?name=${
-          this.state.providerSearchName
-        }&location=${this.state.value}&skip=0&limit=10&user_key=${
-          process.env.REACT_APP_api_key2
-        }`
-      )
-      .then(response => {
-        this.setState({
-          bdImage: response.data.data[0].profile.image_url,
-          bdPhone: response.data.data[0].practices[0].phones[0].number,
-          bdPracticeName: response.data.data[0].practices[0].name
-        });
-        console.log(
-          this.state.bdImage,
-          this.state.bdPhone,
-          this.state.bdPracticeName
-        );
-      });
+    // axios
+    //   .get(
+    //     `https://api.betterdoctor.com/2016-03-01/doctors?name=${
+    //       this.state.providerSearchName
+    //     }&location=${this.state.value}&skip=0&limit=10&user_key=${
+    //       process.env.REACT_APP_api_key2
+    //     }`
+    //   )
+    //   .then(response => {
+    //     this.setState({
+    //       bdPhoto: response.data.data[0].profile.image_url,
+    //       bdPhone: response.data.data[0].practices[0].phones[0].number,
+    //       bdPracticeName: response.data.data[0].practices[0].name
+    //     });
+    //     console.log(
+    //       this.state.bdImage,
+    //       this.state.bdPhone,
+    //       this.state.bdPracticeName
+    //     );
+    //   });
   }
 
   render() {
@@ -199,7 +209,7 @@ class Provider extends Component {
           <p>{this.state.responseAddress}</p>
           <p>{this.state.bdPracticeName}</p>
           <p>{this.state.bdPhone}</p>
-          <p>{this.state.bdImage}</p>
+          <img src={this.state.bdPhoto} alt="provider" />
           <br />
           <button onClick={this.confirmedProvider}>Confirm Provider</button>
           <button onClick={this.searchAgain}>Search Again</button>
