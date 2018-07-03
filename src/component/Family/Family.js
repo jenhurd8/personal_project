@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Family.css";
-import { Component } from "react";
 import Nav from "../../component/Nav/Nav.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
+import { removeFamily, addFamily, getFamily } from "../../redux/reducer";
 
 class Family extends Component {
   constructor() {
@@ -13,8 +14,8 @@ class Family extends Component {
       name: "",
       dob: "",
       image: "",
-      color: "Red",
-      family: []
+      color: "Red"
+      //family: []
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -23,11 +24,7 @@ class Family extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3001/api/family/").then(response => {
-      this.setState({
-        family: response.data
-      });
-    });
+    this.props.getFamily();
   }
 
   onChangeHandler = e => {
@@ -35,49 +32,59 @@ class Family extends Component {
   };
 
   onSubmitHandler = e => {
-    axios
-      .post("http://localhost:3001/api/family/", {
+    axios.post(
+      "http://localhost:3001/api/family/",
+      {
         name: this.state.name,
         image: this.state.image,
         dob: this.state.dob,
         themecolor: this.state.color
-      })
-      .then(response => {
-        this.setState({
-          family: response.data
-        });
-      });
+      }
+        //);
+        .then(
+          axios.get("http://localhost:3001/api/family/").then(response => {
+            this.setState({
+              // family: response.data
+              family: this.props.family
+            });
+          })
+        )
+    );
+    //.get("http://localhost:3001/api/family/")
+    // .then(response => {
+    // this.setState({
+    //   // family: response.data
+    //   family: this.props.family
+    // });
+    console.log(this.props.family);
+    // );
+    //  });
   };
 
   editHandler = e => {};
 
   deleteHandler(id) {
-    axios.delete("http://localhost:3001/api/family/" + id).then(response => {
-      this.setState({
-        family: response.data
-      });
-    });
+    this.props.removeFamily(id);
   }
 
   render() {
-    let familyArray =
-      this.state.family &&
-      this.state.family.map((element, index) => {
+    const { family, isLoading } = this.props;
+    let familyArray = isLoading ? (
+      <p>Loading...</p>
+    ) : (
+      family.map((element, index) => {
         return (
           <div className="familyMember" key={index}>
-            <p>{this.state.family[index].name}</p>
-            <p>{this.state.family[index].image}</p>
-            <p>{this.state.family[index].dob.substring(0, 10)}</p>
-            <p>{this.state.family[index].color}</p>
+            <p>{element.name}</p>
             <button onClick={() => this.editHandler}>Edit</button>
-            <button
-              onClick={() => this.deleteHandler(this.state.family[index].id)}
-            >
+            <button onClick={() => this.deleteHandler(element.id)}>
               Delete
             </button>
           </div>
         );
-      });
+      })
+    );
+
     return (
       <div>
         <Nav />
@@ -137,4 +144,14 @@ class Family extends Component {
   }
 }
 
-export default Family;
+function mapStateToProps(state) {
+  return {
+    family: state.family,
+    loading: state.loading
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { removeFamily, addFamily, getFamily }
+)(Family);
