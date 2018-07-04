@@ -1,5 +1,15 @@
 input {
   width: 30vw;
 }
-.editable {
+.provider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.providerArray {
+  /* display: flex;
+  align-items: flex-end; */
+}
+h1 {
+  font-weight: bold;
 }
