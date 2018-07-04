@@ -27,7 +27,7 @@ module.exports = {
 
   deleteFamily: (req, res, next) => {
     let db = req.app.get("db");
-    console.log(req.params.id);
+    //console.log(req.params.id);
     db.deleteFamily(req.params.id).then(family => {
       db.getFamily().then(family => {
         return res.status(200).send(family);
@@ -51,15 +51,7 @@ module.exports = {
 
   getProviders: (req, res, next) => {
     let db = req.app.get("db");
-    // axios
-    // .get(
-    // `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Nadera%20Sweiss&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
-    //   process.env.key
-    // }`
-    // )
-    // .then(function(response) {
-    //   console.log("google response:" + response);
-    // });
+
     db.getProviders().then(providers => {
       return res.status(200).send(providers);
     });
@@ -68,8 +60,10 @@ module.exports = {
   deleteProvider: (req, res, next) => {
     let db = req.app.get("db");
 
-    db.delete_provider(req.params.id).then(providers => {
-      return res.status(200).send(providers);
+    db.deleteProvider(req.params.id).then(providers => {
+      db.getProviders().then(providers => {
+        return res.status(200).send(providers);
+      });
     });
   }
 };

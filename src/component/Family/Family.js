@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Family.css";
 import Nav from "../../component/Nav/Nav.js";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { connect } from "react-redux";
 import { removeFamily, addFamily, getFamily } from "../../redux/reducer";
 
@@ -10,12 +9,10 @@ class Family extends Component {
   constructor() {
     super();
     this.state = {
-      id: null,
       name: "",
       dob: "",
       image: "",
       color: "Red"
-      //family: []
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -32,33 +29,13 @@ class Family extends Component {
   };
 
   onSubmitHandler = e => {
-    axios.post(
-      "http://localhost:3001/api/family/",
-      {
-        name: this.state.name,
-        image: this.state.image,
-        dob: this.state.dob,
-        themecolor: this.state.color
-      }
-        //);
-        .then(
-          axios.get("http://localhost:3001/api/family/").then(response => {
-            this.setState({
-              // family: response.data
-              family: this.props.family
-            });
-          })
-        )
-    );
-    //.get("http://localhost:3001/api/family/")
-    // .then(response => {
-    // this.setState({
-    //   // family: response.data
-    //   family: this.props.family
-    // });
-    console.log(this.props.family);
-    // );
-    //  });
+    this.props.addFamily({
+      name: this.state.name,
+      image: this.state.image,
+      dob: this.state.dob,
+      themecolor: this.state.color
+    });
+    window.location.reload();
   };
 
   editHandler = e => {};
@@ -76,6 +53,9 @@ class Family extends Component {
         return (
           <div className="familyMember" key={index}>
             <p>{element.name}</p>
+            <p>{element.image}</p>
+            <p>{element.dob}</p>
+            <p>{element.themecolor}</p>
             <button onClick={() => this.editHandler}>Edit</button>
             <button onClick={() => this.deleteHandler(element.id)}>
               Delete

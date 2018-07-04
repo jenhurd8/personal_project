@@ -1,18 +1,18 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Provider.css";
-import { Component } from "react";
 import Nav from "../../component/Nav/Nav.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
+import { removeProvider, addProvider, getProviders } from "../../redux/reducer";
 
 class Provider extends Component {
   constructor() {
     super();
     this.state = {
+      providerSearchName: "",
       suffix: "",
       value: "",
-      providerSearchName: "",
-      providers: [],
       responseName: "",
       responseAddress: "",
       responseId: "",
@@ -26,6 +26,27 @@ class Provider extends Component {
     this.onSearchHandler = this.onSearchHandler.bind(this);
     this.searchAgain = this.searchAgain.bind(this);
     this.confirmedProvider = this.confirmedProvider.bind(this);
+    this.deleteHandler = this.deleteHandler.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getProviders();
+  }
+
+  onChangeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  searchAgain() {
+    //forces page reload
+    window.location.reload();
+  }
+
+  editHandler = e => {};
+
+  deleteHandler(id) {
+    this.props.removeProvider(id);
+    this.searchAgain();
   }
 
   onSearchHandler() {
@@ -41,24 +62,20 @@ class Provider extends Component {
       .then(response => {
         if (response.data.status !== "ZERO_RESULTS") {
           this.setState({
-            providers: response.data,
+            //providers: response.data,
             responseName: response.data.candidates[0].name,
             responseAddress: response.data.candidates[0].formatted_address,
             responseId: response.data.candidates[0].id,
             responseReference: response.data.candidates[0].reference
           });
-          console.log(this.state.providers);
+          // console.log(this.state.providers);
         } else {
           this.setState({
-            providers: response.data,
+            //providers: response.data,
             responseName: "No Providers Found"
           });
         }
       });
-
-    //change this call if hospital not to pull from better doctors, possibly yelp search for phone
-    //hospital search returns random worker photo
-    //also need to account for null doctor response
     axios
       .get(
         `https://api.betterdoctor.com/2016-03-01/doctors?name=${
@@ -83,17 +100,14 @@ class Provider extends Component {
       });
   }
 
-  onChangeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  searchAgain() {
-    //forces page reload
-    window.location.reload();
-  }
-
   confirmedProvider() {
-    console.log(this.state.responseName);
+    this.props.addProvider({
+      name: this.state.responseName,
+      specialty: this.state.bdPracticeName,
+      address: this.state.responseAddress
+    });
+    //window.location.reload();
+    //console.log(this.state.responseName);
     // axios
     //   .get(
     //     `https://api.betterdoctor.com/2016-03-01/doctors?name=${
@@ -117,6 +131,30 @@ class Provider extends Component {
   }
 
   render() {
+    console.log("test1");
+    const { providers, isLoading } = this.props;
+    let providerArray = isLoading ? (
+      <p>Loading...</p>
+    ) : (
+      providers.map((element, index) => {
+        console.log("test2");
+        return (
+          <div className="providerDiv" key={index}>
+            <div className="editable">{element.name}</div>
+            <p>{element.specialty}</p>
+            <p>{element.address}</p>
+            <p>{element.city}</p>
+            <p>{element.state}</p>
+            <p>{element.zip}</p>
+            <button onClick={() => this.editHandler}>Edit</button>
+            <button onClick={() => this.deleteHandler(element.id)}>
+              Delete
+            </button>
+          </div>
+        );
+      })
+    );
+
     return (
       <div className="provider">
         <Nav />
@@ -218,6 +256,9 @@ class Provider extends Component {
           Provider not found?
           <br />
           <button>Add Provider Manually</button>
+          <br />
+          <br />
+          {providerArray}
         </div>
         <Link to="/dashboard">
           <button>Exit</button>
@@ -227,4 +268,13 @@ class Provider extends Component {
   }
 }
 
-export default Provider;
+function mapStateToProps(state) {
+  return {
+    providers: state.providers
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { removeProvider, addProvider, getProviders }
+)(Provider);
