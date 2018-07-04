@@ -76,28 +76,30 @@ class Provider extends Component {
           });
         }
       });
-    axios
-      .get(
-        `https://api.betterdoctor.com/2016-03-01/doctors?name=${
-          this.state.providerSearchName
-        }&location=${this.state.value}&skip=0&limit=10&user_key=${
-          process.env.REACT_APP_api_key2
-        }`
-      )
-      .then(response => {
-        console.log(response);
-        if (response.data.data.length !== 0) {
-          this.setState({
-            bdPhoto: response.data.data[0].profile.image_url,
-            bdPhone: response.data.data[0].practices[0].phones[0].number,
-            bdPracticeName: response.data.data[0].practices[0].name
-          });
-        } else {
-          this.setState({
-            responseName: this.state.providerSearchName
-          });
-        }
-      });
+    if (this.state.suffix === "MD") {
+      axios
+        .get(
+          `https://api.betterdoctor.com/2016-03-01/doctors?name=${
+            this.state.providerSearchName
+          }&location=${this.state.value}&skip=0&limit=10&user_key=${
+            process.env.REACT_APP_api_key2
+          }`
+        )
+        .then(response => {
+          console.log(response);
+          if (response.data.data.length !== 0) {
+            this.setState({
+              bdPhoto: response.data.data[0].profile.image_url,
+              bdPhone: response.data.data[0].practices[0].phones[0].number,
+              bdPracticeName: response.data.data[0].practices[0].name
+            });
+            // } else {
+            //   this.setState({
+            //     responseName: this.state.providerSearchName
+            //   });
+          }
+        });
+    }
   }
 
   confirmedProvider() {
@@ -131,13 +133,11 @@ class Provider extends Component {
   }
 
   render() {
-    console.log("test1");
     const { providers, isLoading } = this.props;
     let providerArray = isLoading ? (
       <p>Loading...</p>
     ) : (
       providers.map((element, index) => {
-        console.log("test2");
         return (
           <div className="providerDiv" key={index}>
             <div className="editable">{element.name}</div>
