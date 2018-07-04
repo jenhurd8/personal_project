@@ -37,9 +37,11 @@ module.exports = {
 
   addProvider: (req, res, next) => {
     let db = req.app.get("db");
-    const { name, specialty, address, city, state, zip } = req.body;
+    //const { name, specialty, address, city, state, zip } = req.body;
+    const { name, specialty, address, photo, phone } = req.body;
 
-    db.addProvider([name, specialty, address, city, state, zip])
+    //db.addProvider([name, specialty, address, city, state, zip])
+    db.addProvider([name, specialty, address, photo, phone])
       .then(() => res.sendStatus(200))
       .catch(err => {
         res.status(500).send({

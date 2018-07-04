@@ -1,14 +1,16 @@
-input {
-  width: 30vw;
+.inputs {
+  background-color: lightblue;
 }
 .provider {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.providerArray {
-  /* display: flex;
-  align-items: flex-end; */
+.providerDiv {
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+  background-color: lightgrey;
 }
 h1 {
   font-weight: bold;

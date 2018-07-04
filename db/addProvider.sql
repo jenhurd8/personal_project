@@ -1,7 +1,7 @@
 INSERT INTO providers
-    (name, specialty, address, city, state, zip)
+    (name, specialty, address, photo, phone)
 VALUES
-    ($1, $2, $3, $4, $5, $6);
+    ($1, $2, $3, $4, $5);
 
 SELECT *
 FROM providers;

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Provider.css";
 import Nav from "../../component/Nav/Nav.js";
-//import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import { removeProvider, addProvider, getProviders } from "../../redux/reducer";
@@ -68,8 +67,8 @@ class Provider extends Component {
           this.setState({
             responseName: response.data.candidates[0].name,
             responseAddress: response.data.candidates[0].formatted_address,
-            responseId: response.data.candidates[0].place_id,
-            responseReference: response.data.candidates[0].reference
+            responseId: response.data.candidates[0].place_id
+            //responseReference: response.data.candidates[0].reference
           });
           axios
             .get(
@@ -100,7 +99,6 @@ class Provider extends Component {
           }`
         )
         .then(response => {
-          console.log(response);
           if (response.data.data.length !== 0) {
             this.setState({
               bdPhoto: response.data.data[0].profile.image_url,
@@ -116,9 +114,11 @@ class Provider extends Component {
     this.props.addProvider({
       name: this.state.responseName,
       specialty: this.state.bdPracticeName,
-      address: this.state.responseAddress
+      address: this.state.responseAddress,
+      photo: this.state.bdPhoto,
+      phone: this.state.bdPhone
     });
-    //window.location.reload();
+    window.location.reload();
   }
 
   render() {
@@ -129,12 +129,19 @@ class Provider extends Component {
       providers.map((element, index) => {
         return (
           <div className="providerDiv" key={index}>
-            <div className="eachProvider">{element.name}</div>
-            <p>{element.specialty}</p>
-            <p>{element.address}</p>
             <button onClick={() => this.deleteHandler(element.id)}>
               Delete
             </button>
+            <div className="drData">
+              <p>{element.name}</p>
+              <br />
+              <p>Practice Name: {element.specialty}</p>
+              <p>{element.address}</p>
+              <p>Phone: {element.phone}</p>
+            </div>
+            <div className="drPhoto">
+              <img src={element.photo} alt="provider" />
+            </div>
           </div>
         );
       })
@@ -147,7 +154,6 @@ class Provider extends Component {
           <div className="inputs">
             Add a doctor or health care provider here:
             <br />
-            Provide all three inputs for more accurate results.
             <br />
             <br />
             Provider Name:
@@ -230,25 +236,29 @@ class Provider extends Component {
             >
               Click to Search for Provider
             </button>
+            <button onClick={this.searchAgain}>Search Again</button>
             <br />
             <p>{this.state.responseName}</p>
             <p>{this.state.responseAddress}</p>
-            <p>{this.state.bdPracticeName}</p>
             <p>{this.state.bdPhone}</p>
+            <p>{this.state.bdPracticeName}</p>
             <img src={this.state.bdPhoto} alt="provider" />
             <br />
-            <button onClick={this.searchAgain}>Search Again</button>
+            <button onClick={this.confirmedProvider}>
+              Confirm Provider and Add to List
+            </button>
             <br />
             <br />
             Provider not found?
             <br />
             <br />
-            <button onClick={this.showEditMenu}>Add or Edit Provider</button>
+            <button onClick={this.showEditMenu}>
+              Add New or Edit Listed Provider
+            </button>
             {this.state.showEditMenu && (
               <div className="editMenu">
                 <div>
                   <p>Change Provider Name:</p>
-                  <p>{this.state.responseName}</p>
                   <input
                     name="responseName"
                     type="text"
@@ -257,7 +267,6 @@ class Provider extends Component {
                 </div>
                 <div>
                   <p>Change Provider Address:</p>
-                  <p>{this.state.responseAddress}</p>
                   <input
                     name="responseAddress"
                     type="text"
@@ -266,7 +275,6 @@ class Provider extends Component {
                 </div>
                 <div>
                   <p>Change Provider Phone:</p>
-                  <p>{this.state.bdPhone}</p>
                   <input
                     name="bdPhone"
                     type="text"
@@ -275,7 +283,6 @@ class Provider extends Component {
                 </div>
                 <div>
                   <p>Change Practice Name:</p>
-                  <p>{this.state.bdPracticeName}</p>
                   <input
                     name="bdPracticeName"
                     type="text"
@@ -294,9 +301,6 @@ class Provider extends Component {
               </div>
             )}
             <br />
-            <button onClick={this.confirmedProvider}>
-              Confirm Provider and Add to List
-            </button>
             <br />
           </div>
           <div className="providerArray">
