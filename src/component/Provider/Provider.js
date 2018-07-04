@@ -20,13 +20,16 @@ class Provider extends Component {
       bdPhoto:
         "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_200/v1530567672/computer-desk-doctor-48604_exuiyj.jpg",
       bdPhone: null,
-      bdPracticeName: ""
+      bdPracticeName: "",
+      showEditMenu: false
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
     this.searchAgain = this.searchAgain.bind(this);
     this.confirmedProvider = this.confirmedProvider.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
+    this.showEditMenu = this.showEditMenu.bind(this);
+    this.responseNameChangeHandler = this.responseNameChangeHandler.bind(this);
   }
 
   componentDidMount() {
@@ -37,12 +40,24 @@ class Provider extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  responseNameChangeHandler(val) {
+    this.setState({ responseName: val });
+  }
+
   searchAgain() {
     //forces page reload
     window.location.reload();
   }
 
-  editHandler = e => {};
+  // editHandler(val) {
+  //   // editHandler = e => {
+  //   //   this.setState({ [e.target.name]: e.target.value });
+  //   this.setState({ responseName: val });
+  // }
+
+  showEditMenu() {
+    this.setState({ showEditMenu: !this.state.showEditMenu });
+  }
 
   deleteHandler(id) {
     this.props.removeProvider(id);
@@ -93,10 +108,6 @@ class Provider extends Component {
               bdPhone: response.data.data[0].practices[0].phones[0].number,
               bdPracticeName: response.data.data[0].practices[0].name
             });
-            // } else {
-            //   this.setState({
-            //     responseName: this.state.providerSearchName
-            //   });
           }
         });
     }
@@ -109,27 +120,6 @@ class Provider extends Component {
       address: this.state.responseAddress
     });
     //window.location.reload();
-    //console.log(this.state.responseName);
-    // axios
-    //   .get(
-    //     `https://api.betterdoctor.com/2016-03-01/doctors?name=${
-    //       this.state.providerSearchName
-    //     }&location=${this.state.value}&skip=0&limit=10&user_key=${
-    //       process.env.REACT_APP_api_key2
-    //     }`
-    //   )
-    //   .then(response => {
-    //     this.setState({
-    //       bdPhoto: response.data.data[0].profile.image_url,
-    //       bdPhone: response.data.data[0].practices[0].phones[0].number,
-    //       bdPracticeName: response.data.data[0].practices[0].name
-    //     });
-    //     console.log(
-    //       this.state.bdImage,
-    //       this.state.bdPhone,
-    //       this.state.bdPracticeName
-    //     );
-    //   });
   }
 
   render() {
@@ -146,6 +136,7 @@ class Provider extends Component {
             <p>{element.city}</p>
             <p>{element.state}</p>
             <p>{element.zip}</p>
+
             <button onClick={() => this.editHandler}>Edit</button>
             <button onClick={() => this.deleteHandler(element.id)}>
               Delete
@@ -257,6 +248,16 @@ class Provider extends Component {
           <br />
           <button>Add Provider Manually</button>
           <br />
+          <button onClick={this.showEditMenu}>Toggle Edit</button>
+          {this.state.showEditMenu && (
+            <div>
+              <input
+                onChange={e => this.responseNameChangeHandler(e.target.value)}
+                type="text"
+              />
+              <p>{this.state.responseName}</p>
+            </div>
+          )}
           <br />
           {providerArray}
         </div>
