@@ -54,7 +54,7 @@ class Family extends Component {
           <div className="familyMember" key={index}>
             <p>{element.name}</p>
             <p>{element.image}</p>
-            <p>{element.dob}</p>
+            <p>{element.dob.slice(0, 10)}</p>
             <p>{element.themecolor}</p>
             <button onClick={() => this.editHandler}>Edit</button>
             <button onClick={() => this.deleteHandler(element.id)}>

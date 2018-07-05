@@ -1,11 +1,28 @@
 .visit {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 .visits {
-  width: 30vw;
-  height: 12vh;
+  width: 80vw;
+  height: 30vh;
   background-color: lightpink;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+}
+.person {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 10px;
+}
+.visitDetails {
+  margin: 10vw;
+}
+.dr {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   margin: 10px;
 }

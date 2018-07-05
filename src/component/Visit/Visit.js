@@ -3,7 +3,12 @@ import "./Visit.css";
 import { Component } from "react";
 import Nav from "../../component/Nav/Nav.js";
 import { connect } from "react-redux";
-import { getVisits, getFamily, getProviders } from "../../redux/reducer";
+import {
+  getVisits,
+  getFamily,
+  getProviders,
+  removeVisit
+} from "../../redux/reducer";
 
 class Visit extends Component {
   constructor() {
@@ -14,7 +19,7 @@ class Visit extends Component {
       rx: ""
     };
     // this.onChangeHandler = this.onChangeHandler.bind(this);
-    // this.deleteHandler = this.deleteHandler.bind(this);
+    this.deleteHandler = this.deleteHandler.bind(this);
   }
 
   componentDidMount() {
@@ -23,8 +28,12 @@ class Visit extends Component {
     this.props.getProviders();
   }
 
+  deleteHandler(id) {
+    this.props.removeVisit(id);
+  }
+
   render() {
-    const { visits, isLoading, family } = this.props;
+    const { visits, isLoading } = this.props;
 
     console.log(visits);
 
@@ -34,18 +43,27 @@ class Visit extends Component {
       visits.map((element, index) => {
         return (
           <div className="visits" key={index}>
-            <p>{visits[index].familyname}</p>
-            <p>{visits[index].dob}</p>
-
-            <p>{element.family_id}</p>
-            <p>{element.providers_id}</p>
-            <p>{element.date}</p>
-            <p>{element.details}</p>
-            <p>{element.rx}</p>
+            <div className="person">
+              <p>{visits[index].image}</p>
+              <p>{visits[index].familyname}</p>
+              <p>{visits[index].dob.slice(0, 10)}</p>
+            </div>
+            <div className="visitDetails">
+              Visit Details:
+              <p>{element.details}</p>
+              <p>{element.rx}</p>
+            </div>
+            <div className="dr">
+              <img src={visits[index].photo} alt="provider" />
+              <p>{visits[index].providersname}</p>
+              <p>{visits[index].phone}</p>
+              <p>{visits[index].address}</p>
+            </div>
+            <button onClick={() => this.deleteHandler(visits[index].visitid)}>
+              Delete
+            </button>
             {/* <button onClick={() => this.editHandler}>Edit</button>
-            <button onClick={() => this.deleteHandler(element.id)}> 
-          Delete
-            </button>*/}
+             */}
           </div>
         );
       })
@@ -72,5 +90,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getVisits, getFamily, getProviders }
+  { getVisits, getFamily, getProviders, removeVisit }
 )(Visit);

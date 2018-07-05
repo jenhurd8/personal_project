@@ -30,6 +30,7 @@ app.post("/api/providers", controller.addProvider);
 app.delete("/api/providers/:id", controller.deleteProvider);
 
 app.get("/api/visits", controller.getVisits);
+app.delete("/api/visits/:id", controller.deleteVisit);
 //app.post("/api/providers", controller.addProvider);
 //app.delete("/api/providers/:id", controller.deleteProvider);
 
