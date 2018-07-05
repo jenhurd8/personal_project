@@ -29,6 +29,10 @@ app.get("/api/providers", controller.getProviders);
 app.post("/api/providers", controller.addProvider);
 app.delete("/api/providers/:id", controller.deleteProvider);
 
+app.get("/api/visits", controller.getVisits);
+//app.post("/api/providers", controller.addProvider);
+//app.delete("/api/providers/:id", controller.deleteProvider);
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

@@ -1,0 +1,11 @@
+.visit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.visits {
+  width: 30vw;
+  height: 12vh;
+  background-color: lightpink;
+  margin: 10px;
+}

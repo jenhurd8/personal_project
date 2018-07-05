@@ -67,5 +67,13 @@ module.exports = {
         return res.status(200).send(providers);
       });
     });
+  },
+
+  getVisits: (req, res, next) => {
+    let db = req.app.get("db");
+
+    db.getVisits().then(visits => {
+      return res.status(200).send(visits);
+    });
   }
 };
