@@ -1,13 +1,87 @@
 const express = require("express");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const massive = require("massive");
 require("dotenv").config();
 const cors = require("cors");
 const controller = require("./controller");
+const passport = require("passport");
+const Auth0Strategy = require("passport-auth0");
 
 const app = express();
+
+app.use(
+  session({
+    secret: "s3cr3t c0d3",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
 app.use(bodyParser.json());
 app.use(cors());
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(
+  new Auth0Strategy(
+    {
+      domain: process.env.DOMAIN,
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: "/login",
+      scope: "openid email profile"
+    },
+    function(accessToken, refreshToken, extraParams, profile, done) {
+      console.log({ profile });
+      console.log(profile.emails);
+      //db
+      app
+        .get("db")
+        .getUserByEmail([profile.emails[0].value])
+        .then(response => {
+          if (!response[0]) {
+            app
+              .get("db")
+              .addUser([
+                profile.displayName,
+                profile.id,
+                profile.user_id,
+                profile.emails[0].value,
+                profile.picture,
+                profile._json.email_verified
+              ])
+              .then(response => done(null, response[0]))
+              .catch(err => console.log(err));
+          } else {
+            app
+              .get("db")
+              .updateVerificationStatus([
+                profile.emails[0].value,
+                profile._json.email_verified
+              ])
+              .then(res => {
+                return done(null, response[0]);
+              })
+              .catch(err => console.log(err));
+          }
+        });
+
+      return done(null, profile);
+    }
+  )
+);
+
+passport.serializeUser((user, done) => done(user));
+passport.deserializeUser((user, done) => done(user));
+
+app.get(
+  "/login",
+  passport.authenticate("auth0", {
+    successRedirect: process.env.REACT_APP_DEV_HOST,
+    failureRedirect: "/login"
+  })
+);
 
 massive(process.env.CONNECTION_STRING)
   .then(dbInstance => {
@@ -20,10 +94,6 @@ const port = 3001;
 app.get("/api/family", controller.getFamily);
 app.post("/api/family", controller.addFamily);
 app.delete("/api/family/:id", controller.deleteFamily);
-//put is adding items that do not yet exist --- axios#put(url[, data[, config]])
-//app.put("/api/family/:id", controller.putFamily);
-//patch is changing existing data --- axios#patch(url[, data[, config]])
-//app.patch("/api/family/:id", controller.patchFamily);
 
 app.get("/api/providers", controller.getProviders);
 app.post("/api/providers", controller.addProvider);
@@ -33,7 +103,6 @@ app.put("/api/providers/:id", controller.updateProvider);
 app.get("/api/visits", controller.getVisits);
 app.delete("/api/visits/:id", controller.deleteVisit);
 app.post("/api/visits", controller.addVisit);
-//app.delete("/api/providers/:id", controller.deleteProvider);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
