@@ -28,10 +28,11 @@ app.delete("/api/family/:id", controller.deleteFamily);
 app.get("/api/providers", controller.getProviders);
 app.post("/api/providers", controller.addProvider);
 app.delete("/api/providers/:id", controller.deleteProvider);
+app.put("/api/providers/:id", controller.updateProvider);
 
 app.get("/api/visits", controller.getVisits);
 app.delete("/api/visits/:id", controller.deleteVisit);
-//app.post("/api/providers", controller.addProvider);
+app.post("/api/visits", controller.addVisit);
 //app.delete("/api/providers/:id", controller.deleteProvider);
 
 app.listen(port, () => {

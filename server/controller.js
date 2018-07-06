@@ -37,10 +37,8 @@ module.exports = {
 
   addProvider: (req, res, next) => {
     let db = req.app.get("db");
-    //const { name, specialty, address, city, state, zip } = req.body;
     const { name, specialty, address, photo, phone } = req.body;
 
-    //db.addProvider([name, specialty, address, city, state, zip])
     db.addProvider([name, specialty, address, photo, phone])
       .then(() => res.sendStatus(200))
       .catch(err => {
@@ -69,6 +67,35 @@ module.exports = {
     });
   },
 
+  updateProvider: (req, res, next) => {
+    let db = req.app.get("db");
+    let { name, specialty, address, photo, phone } = req.body;
+    db.providers
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          name,
+          specialty,
+          address,
+          photo,
+          phone
+        }
+
+        // { name },
+        // { specialty },
+        // { address },
+        // { photo },
+        // { phone }
+      )
+      .then(() => {
+        db.getProviders().then(providers => {
+          return res.status(200).send(providers);
+        });
+      });
+  },
+
   getVisits: (req, res, next) => {
     let db = req.app.get("db");
 
@@ -85,5 +112,19 @@ module.exports = {
         return res.status(200).send(visits);
       });
     });
+  },
+
+  addVisit: (req, res, next) => {
+    let db = req.app.get("db");
+    const { family_id, providers_id, date, details, rx, email } = req.body;
+
+    db.addVisit([family_id, providers_id, date, details, rx, email])
+      .then(() => res.sendStatus(200))
+      .catch(err => {
+        res.status(500).send({
+          errorMessage: "error!"
+        });
+        console.log(err);
+      });
   }
 };

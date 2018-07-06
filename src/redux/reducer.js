@@ -10,6 +10,7 @@ const REMOVE_PROVIDER = "REMOVE_PROVIDER";
 
 const GET_VISITS = "GET_VISITS";
 const REMOVE_VISIT = "REMOVE_VISIT";
+const ADD_VISIT = "ADD_VISIT";
 
 export function getFamily() {
   return {
@@ -64,6 +65,13 @@ export function removeVisit(id) {
   return {
     type: REMOVE_VISIT,
     payload: axios.delete(`/api/visits/${id}`)
+  };
+}
+
+export function addVisit(obj) {
+  return {
+    type: ADD_VISIT,
+    payload: axios.post("/api/visits/", obj)
   };
 }
 
@@ -141,6 +149,17 @@ export default function reducer(state = initialState, action) {
       return { ...state, isLoading: false, visits: action.payload.data };
     case "REMOVE_VISIT_REJECTED":
       return { ...state, isLoading: false, error: action.payload };
+
+    case "ADD_VISIT_PENDING":
+      return { ...state, isLoading: true };
+    case "ADD_VISIT_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        visits: [...state.visits, action.payload.data]
+      };
+    case "ADD_VISIT_REJECTED":
+      return { ...state, isLoading: true, error: action.payload };
 
     default:
       return state;
