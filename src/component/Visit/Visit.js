@@ -39,57 +39,6 @@ class Visit extends Component {
   };
 
   render() {
-    const { visits, isLoading, providers, family } = this.props;
-
-    let visitsArray = isLoading ? (
-      <p>Loading...</p>
-    ) : (
-      visits.map((element, index) => {
-        return (
-          <div className="visits" key={index}>
-            <div className="person">
-              <p>{visits[index].image}</p>
-              <p>{visits[index].familyname}</p>
-              <p>{visits[index].dob.slice(0, 10)}</p>
-            </div>
-            <div className="visitDetails">
-              Visit Details:
-              <p>{element.details}</p>
-              <p>{element.rx}</p>
-            </div>
-            <div className="dr">
-              <img src={visits[index].photo} alt="provider" />
-              <p>{visits[index].providersname}</p>
-              <p>{visits[index].phone}</p>
-              <p>{visits[index].address}</p>
-            </div>
-            <button onClick={() => this.deleteHandler(visits[index].visitid)}>
-              Delete
-            </button>
-          </div>
-        );
-      })
-    );
-
-    // let providersArray = isLoading ? (
-    //   <p>Loading...</p>
-    // ) : (
-    //   providers.map((element, index) => {
-    //     return (
-    //       <div className="providers" key={index}>provider
-    //       </div>
-    //       )
-    //       }
-
-    // let familyArray = isLoading ? (
-    //   <p>Loading...</p>
-    // ) : (
-    //   this.props.family.map((element, index) => {
-    //     return (
-    //       <div className="family" key={index}>family</div>
-    //   )
-    //   }
-
     return (
       <div>
         <Nav />
@@ -101,8 +50,8 @@ class Visit extends Component {
           <option value="Hospital">Hospital</option>
           <option value="Urgent Care">Urgent Care</option>
         </select>
-        <div className="visit" />
-        {visitsArray}
+        {/* <div className="visit" />
+        {visitsArray} */}
       </div>
     );
   }
