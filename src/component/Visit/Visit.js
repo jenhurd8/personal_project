@@ -20,7 +20,6 @@ class Visit extends Component {
       drSelected: "",
       patientSelected: ""
     };
-    this.deleteHandler = this.deleteHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
   }
 
@@ -30,15 +29,17 @@ class Visit extends Component {
     this.props.getProviders();
   }
 
-  deleteHandler(id) {
-    this.props.removeVisit(id);
-  }
-
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
+    //if not null?
+
+    let providersDropDown = this.props.providers.map((element, index) => (
+      <p>{element.name}</p>
+    ));
+
     return (
       <div>
         <Nav />
@@ -50,8 +51,7 @@ class Visit extends Component {
           <option value="Hospital">Hospital</option>
           <option value="Urgent Care">Urgent Care</option>
         </select>
-        {/* <div className="visit" />
-        {visitsArray} */}
+        {providersDropDown}
       </div>
     );
   }
