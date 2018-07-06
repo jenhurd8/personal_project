@@ -18,6 +18,12 @@ app.use(
   })
 );
 
+massive(process.env.CONNECTION_STRING)
+  .then(dbInstance => {
+    app.set("db", dbInstance);
+  })
+  .catch(err => console.log(err));
+
 app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
@@ -33,13 +39,11 @@ passport.use(
       scope: "openid email profile"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
-      console.log({ profile });
-      console.log(profile.emails);
-      //db
       app
         .get("db")
         .getUserByEmail([profile.emails[0].value])
         .then(response => {
+          console.log(response);
           if (!response[0]) {
             app
               .get("db")
@@ -48,46 +52,29 @@ passport.use(
                 profile.id,
                 profile.user_id,
                 profile.emails[0].value,
-                profile.picture,
-                profile._json.email_verified
+                profile.picture
               ])
               .then(response => done(null, response[0]))
               .catch(err => console.log(err));
           } else {
-            app
-              .get("db")
-              .updateVerificationStatus([
-                profile.emails[0].value,
-                profile._json.email_verified
-              ])
-              .then(res => {
-                return done(null, response[0]);
-              })
-              .catch(err => console.log(err));
+            return done(null, response[0]);
           }
         });
-
-      return done(null, profile);
     }
   )
 );
 
-passport.serializeUser((user, done) => done(user));
-passport.deserializeUser((user, done) => done(user));
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
 
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    successRedirect: process.env.REACT_APP_DEV_HOST,
+    successRedirect: "http://localhost:3000/",
+    // successRedirect: process.env.REACT_APP_DEV_HOST,
     failureRedirect: "/login"
   })
 );
-
-massive(process.env.CONNECTION_STRING)
-  .then(dbInstance => {
-    app.set("db", dbInstance);
-  })
-  .catch(err => console.log(err));
 
 const port = 3001;
 

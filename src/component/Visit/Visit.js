@@ -16,10 +16,12 @@ class Visit extends Component {
     this.state = {
       date: "",
       details: "",
-      rx: ""
+      rx: "",
+      drSelected: "",
+      patientSelected: ""
     };
-    // this.onChangeHandler = this.onChangeHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
   }
 
   componentDidMount() {
@@ -32,8 +34,12 @@ class Visit extends Component {
     this.props.removeVisit(id);
   }
 
+  onChangeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
-    const { visits, isLoading } = this.props;
+    const { visits, isLoading, providers, family } = this.props;
 
     let visitsArray = isLoading ? (
       <p>Loading...</p>
@@ -60,16 +66,41 @@ class Visit extends Component {
             <button onClick={() => this.deleteHandler(visits[index].visitid)}>
               Delete
             </button>
-            {/* <button onClick={() => this.editHandler}>Edit</button>
-             */}
           </div>
         );
       })
     );
 
+    // let providersArray = isLoading ? (
+    //   <p>Loading...</p>
+    // ) : (
+    //   providers.map((element, index) => {
+    //     return (
+    //       <div className="providers" key={index}>provider
+    //       </div>
+    //       )
+    //       }
+
+    // let familyArray = isLoading ? (
+    //   <p>Loading...</p>
+    // ) : (
+    //   this.props.family.map((element, index) => {
+    //     return (
+    //       <div className="family" key={index}>family</div>
+    //   )
+    //   }
+
     return (
       <div>
         <Nav />
+        <p>Log a New Visit</p>
+        <select name="suffix" onChange={this.onChangeHandler}>
+          <option value="">Select Provider</option>
+          <option value="MD">Doctor</option>
+          <option value="PA">Physician Assistant</option>
+          <option value="Hospital">Hospital</option>
+          <option value="Urgent Care">Urgent Care</option>
+        </select>
         <div className="visit" />
         {visitsArray}
       </div>
