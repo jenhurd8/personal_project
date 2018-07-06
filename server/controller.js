@@ -36,6 +36,7 @@ module.exports = {
   },
 
   addProvider: (req, res, next) => {
+    console.log(req.body);
     let db = req.app.get("db");
     const { name, specialty, address, photo, phone } = req.body;
 
@@ -82,12 +83,6 @@ module.exports = {
           photo,
           phone
         }
-
-        // { name },
-        // { specialty },
-        // { address },
-        // { photo },
-        // { phone }
       )
       .then(() => {
         db.getProviders().then(providers => {

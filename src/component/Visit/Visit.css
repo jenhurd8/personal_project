@@ -4,8 +4,8 @@
   justify-content: space-evenly;
 }
 .visits {
-  width: 80vw;
-  height: 30vh;
+  width: 40vw;
+  height: 40vh;
   background-color: lightpink;
   margin: 10px;
   display: flex;

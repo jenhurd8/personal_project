@@ -7,6 +7,7 @@ const REMOVE_FAMILY = "REMOVE_FAMILY";
 const GET_PROVIDERS = "GET_PROVIDERS";
 const ADD_PROVIDER = "ADD_PROVIDER";
 const REMOVE_PROVIDER = "REMOVE_PROVIDER";
+const UPDATE_PROVIDER = "UPDATE_PROVIDER";
 
 const GET_VISITS = "GET_VISITS";
 const REMOVE_VISIT = "REMOVE_VISIT";
@@ -51,6 +52,13 @@ export function addProvider(obj) {
   return {
     type: ADD_PROVIDER,
     payload: axios.post("/api/providers/", obj)
+  };
+}
+
+export function updateProvider(id, obj) {
+  return {
+    type: UPDATE_PROVIDER,
+    payload: axios.put(`/api/providers/${id}`)
   };
 }
 
@@ -126,6 +134,19 @@ export default function reducer(state = initialState, action) {
         isLoading: false,
         providers: [...state.providers, action.payload.data]
       };
+
+    case "UPDATE_PROVIDER_REJECTED":
+      return { ...state, isLoading: true, error: action.payload };
+
+    case "UPDATE_PROVIDER_PENDING":
+      return { ...state, isLoading: true };
+    case "UPDATE_PROVIDER_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        providers: [...state.providers, action.payload.data]
+      };
+
     case "ADD_PROVIDER_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
 

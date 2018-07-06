@@ -3,7 +3,12 @@ import "./Provider.css";
 import Nav from "../../component/Nav/Nav.js";
 import axios from "axios";
 import { connect } from "react-redux";
-import { removeProvider, addProvider, getProviders } from "../../redux/reducer";
+import {
+  removeProvider,
+  addProvider,
+  getProviders,
+  updateProvider
+} from "../../redux/reducer";
 
 class Provider extends Component {
   constructor() {
@@ -15,7 +20,6 @@ class Provider extends Component {
       responseName: "",
       responseAddress: "",
       responseId: "",
-      responseReference: "",
       bdPhoto:
         "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_200/v1530567672/computer-desk-doctor-48604_exuiyj.jpg",
       bdPhone: null,
@@ -28,6 +32,7 @@ class Provider extends Component {
     this.confirmedProvider = this.confirmedProvider.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.showEditMenu = this.showEditMenu.bind(this);
+    this.updateProvider = this.updateProvider.bind(this);
   }
 
   componentDidMount() {
@@ -68,7 +73,6 @@ class Provider extends Component {
             responseName: response.data.candidates[0].name,
             responseAddress: response.data.candidates[0].formatted_address,
             responseId: response.data.candidates[0].place_id
-            //responseReference: response.data.candidates[0].reference
           });
           axios
             .get(
@@ -109,14 +113,25 @@ class Provider extends Component {
         });
     }
   }
-
+  //name, specialty, address, photo, phone
   confirmedProvider() {
     this.props.addProvider({
-      name: this.state.responseName,
-      specialty: this.state.bdPracticeName,
-      address: this.state.responseAddress,
-      photo: this.state.bdPhoto,
-      phone: this.state.bdPhone
+      name: this.state.responseName && this.state.responseName,
+      specialty: this.state.bdPracticeName && this.state.bdPracticeName,
+      address: this.state.responseAddress && this.state.responseAddress,
+      photo: this.state.bdPhoto && this.state.bdPhoto,
+      phone: this.state.bdPhone && this.state.bdPhone
+    });
+    window.location.reload();
+  }
+
+  updateProvider(id) {
+    this.props.updateProvider(id, {
+      name: "name",
+      specialty: "specialty",
+      address: "address",
+      photo: "photo",
+      phone: "phone"
     });
     window.location.reload();
   }
@@ -141,6 +156,9 @@ class Provider extends Component {
             </div>
             <div className="drPhoto">
               <img src={element.photo} alt="provider" />
+              <button onClick={() => this.updateProvider(element.id)}>
+                Update Listed Provider
+              </button>
             </div>
           </div>
         );
@@ -322,5 +340,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { removeProvider, addProvider, getProviders }
+  { removeProvider, addProvider, getProviders, updateProvider }
 )(Provider);

@@ -35,8 +35,6 @@ class Visit extends Component {
   render() {
     const { visits, isLoading } = this.props;
 
-    console.log(visits);
-
     let visitsArray = isLoading ? (
       <p>Loading...</p>
     ) : (
