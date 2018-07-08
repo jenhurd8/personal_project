@@ -34,12 +34,6 @@ class Visit extends Component {
   };
 
   render() {
-    //if not null?
-
-    let providersDropDown = this.props.providers.map((element, index) => (
-      <p>{element.name}</p>
-    ));
-
     return (
       <div>
         <Nav />
@@ -51,7 +45,6 @@ class Visit extends Component {
           <option value="Hospital">Hospital</option>
           <option value="Urgent Care">Urgent Care</option>
         </select>
-        {providersDropDown}
       </div>
     );
   }
