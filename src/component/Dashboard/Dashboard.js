@@ -47,7 +47,7 @@ class Dashboard extends Component {
     ) : (
       visits.map((element, index) => {
         console.log(visits);
-        if (visits[index].visitemail == "@gmail.com") {
+        if (visits[index].visitemail === "@gmail.com") {
           return (
             <div className="visits" key={index}>
               <div className="person">
