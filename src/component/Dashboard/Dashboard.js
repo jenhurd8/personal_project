@@ -47,31 +47,32 @@ class Dashboard extends Component {
     ) : (
       visits.map((element, index) => {
         console.log(visits);
-        if (visits[index].visitemail === "@gmail.com") {
-          return (
-            <div className="visits" key={index}>
-              <div className="person">
-                <p>{visits[index].image}</p>
-                <p>{visits[index].familyname}</p>
-                <p>{visits[index].dob.slice(0, 10)}</p>
-              </div>
-              <div className="visitDetails">
-                Visit Details:
-                <p>{element.details}</p>
-                <p>{element.rx}</p>
-              </div>
-              <div className="dr">
-                <img src={visits[index].photo} alt="provider" />
-                <p>{visits[index].providersname}</p>
-                <p>{visits[index].phone}</p>
-                <p>{visits[index].address}</p>
-              </div>
-              <button onClick={() => this.deleteHandler(visits[index].visitid)}>
-                Delete
-              </button>
+        //turn this back on when linked to logged in persons emai
+        //if (visits[index].visitemail === "@gmail.com") {
+        return (
+          <div className="visits" key={index}>
+            <div className="person">
+              <p>{visits[index].image}</p>
+              <p>{visits[index].familyname}</p>
+              <p>{visits[index].dob.slice(0, 10)}</p>
             </div>
-          );
-        }
+            <div className="visitDetails">
+              Visit Details:
+              <p>{element.details}</p>
+              <p>{element.rx}</p>
+            </div>
+            <div className="dr">
+              <img src={visits[index].photo} alt="provider" />
+              <p>{visits[index].providersname}</p>
+              <p>{visits[index].phone}</p>
+              <p>{visits[index].address}</p>
+            </div>
+            <button onClick={() => this.deleteHandler(visits[index].visitid)}>
+              Delete
+            </button>
+          </div>
+        );
+        //  }
       })
     );
 

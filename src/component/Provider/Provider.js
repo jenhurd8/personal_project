@@ -24,7 +24,8 @@ class Provider extends Component {
         "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_200/v1530567672/computer-desk-doctor-48604_exuiyj.jpg",
       bdPhone: null,
       bdPracticeName: "",
-      showEditMenu: false
+      showEditMenu: false,
+      editProvider: false
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
@@ -33,6 +34,7 @@ class Provider extends Component {
     this.deleteHandler = this.deleteHandler.bind(this);
     this.showEditMenu = this.showEditMenu.bind(this);
     this.updateProvider = this.updateProvider.bind(this);
+    this.editProvider = this.editProvider.bind(this);
   }
 
   componentDidMount() {
@@ -50,6 +52,10 @@ class Provider extends Component {
 
   showEditMenu() {
     this.setState({ showEditMenu: !this.state.showEditMenu });
+  }
+
+  editProvider() {
+    this.setState({ editProvider: !this.state.editProvider });
   }
 
   deleteHandler(id) {
@@ -158,7 +164,8 @@ class Provider extends Component {
             <div className="drPhoto">
               <img src={element.photo} alt="provider" />
               <button onClick={() => this.updateProvider(element.id)}>
-                Update Listed Provider
+                Update Listed Provider - needs to be linked to dropdowns,
+                currently makes null
               </button>
             </div>
           </div>

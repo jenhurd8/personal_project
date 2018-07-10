@@ -7,7 +7,7 @@ import {
   getVisits,
   getFamily,
   getProviders,
-  removeVisit
+  addVisit
 } from "../../redux/reducer";
 
 class Visit extends Component {
@@ -23,7 +23,7 @@ class Visit extends Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.selectDrHandler = this.selectDrHandler.bind(this);
     this.selectPatientHandler = this.selectPatientHandler.bind(this);
-    //this.chosenDr = this.chosenDr.bind(this);
+    this.addVisit = this.addVisit.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +52,19 @@ class Visit extends Component {
     console.log(this.state.patientSelected);
   }
 
+  addVisit(patient, dr, date, details, rx, email) {
+    this.props.addVisit({
+      family_id: patient,
+      providers_id: dr,
+      date: date,
+      details: details,
+      rx: rx,
+      email: email
+    });
+    alert("Visit has been added to your dashboard");
+    window.location.reload();
+  }
+
   render() {
     const { providers, family } = this.props;
 
@@ -65,7 +78,26 @@ class Visit extends Component {
           </p>
         );
       }
+      return;
     });
+
+    //come back to this and fix using filter and map to avoid nonreturn error above
+    //need to filter and then map matched item**
+    // let chosenDr = providers.filter(
+    //   (provider => this.state.drSelected === provider.id).map(element => (
+    //     <p>{element.name}</p>
+    //   ))
+
+    // .map((provider, i) => (
+    //   <p>
+    //     {provider.name}
+    //     {provider.photo}
+    //     {provider.address}
+    //   </p>
+    // ))
+    //
+
+    console.log(chosenDr);
 
     let chosenFamily = family.map((familyMember, i) => {
       if (this.state.patientSelected === familyMember.id) {
@@ -77,6 +109,7 @@ class Visit extends Component {
           </p>
         );
       }
+      return;
     });
 
     let providersArray = providers.map((provider, i) => {
@@ -105,6 +138,7 @@ class Visit extends Component {
         <p>Log a New Visit</p>
         <p>Select your Provider</p>
         {providersArray}
+        <p>Select your Family Member</p>
         {familyArray}
         <div className="visitBox">
           {chosenDr}
@@ -135,7 +169,20 @@ class Visit extends Component {
             type="text"
             onChange={this.onChangeHandler}
           />
-          <br />
+          <button
+            onClick={() =>
+              this.addVisit(
+                this.state.patientSelected,
+                this.state.drSelected,
+                this.state.date,
+                this.state.details,
+                this.state.rx,
+                this.state.email
+              )
+            }
+          >
+            Add Visit
+          </button>
         </div>
       </div>
     );
@@ -153,5 +200,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getVisits, getFamily, getProviders, removeVisit }
+  { getVisits, getFamily, getProviders, addVisit }
 )(Visit);
