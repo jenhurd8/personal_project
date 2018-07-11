@@ -3,7 +3,12 @@ import "./Family.css";
 import Nav from "../../component/Nav/Nav.js";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { removeFamily, addFamily, getFamily } from "../../redux/reducer";
+import {
+  removeFamily,
+  addFamily,
+  getFamily,
+  updateFamily
+} from "../../redux/reducer";
 
 class Family extends Component {
   constructor() {
@@ -12,12 +17,14 @@ class Family extends Component {
       name: "",
       dob: "",
       image: "",
-      color: "Red"
+      color: "Red",
+      showEditMenu: false
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
-    this.editHandler = this.editHandler.bind(this);
+    //this.editHandler = this.editHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
+    this.showEditMenu = this.showEditMenu.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +34,10 @@ class Family extends Component {
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  showEditMenu() {
+    this.setState({ showEditMenu: !this.state.showEditMenu });
+  }
 
   onSubmitHandler = e => {
     this.props.addFamily({
@@ -38,10 +49,20 @@ class Family extends Component {
     window.location.reload();
   };
 
-  editHandler = e => {};
+  //editHandler = e => {};
 
   deleteHandler(id) {
     this.props.removeFamily(id);
+  }
+
+  updateFamily(id) {
+    this.props.update(id, {
+      name: this.state.name,
+      image: this.state.image,
+      dob: this.state.dob,
+      themecolor: this.state.color
+    });
+    window.location.reload();
   }
 
   render() {
@@ -59,56 +80,46 @@ class Family extends Component {
             <p>{element.image}</p>
             <p>{element.dob.slice(0, 10)}</p>
             <p>{element.themecolor}</p>
-            <button onClick={() => this.editHandler}>Edit Person</button>
-
-            {/* <button onClick={this.editPerson}>Edit Person</button>
-              {this.state.editPerson && (
-                <div className="editMenu">
+            <button onClick={this.showEditMenu}>Edit Person</button>
+            {this.state.showEditMenu && (
+              <div className="editMenu">
+                <div>
+                  <p>Change Person Name:</p>
+                  <input
+                    name="name"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                  />
                   <div>
-                    <p>Change Person Name:</p>
+                    <p>Change Person Date of Birth:</p>
                     <input
-                      name="name"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                    <div>
-                      <p>Change Person Picture:</p>
-                      <input
-                        name="specialty"
-                        type="text"
-                        onChange={this.onChangeHandler}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <p>Change Provider Address:</p>
-                    <input
-                      name="address"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                  </div>
-                  <div>
-                    <p>Change Provider Image:</p>
-                    <input
-                      name="photo"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                  </div>
-                  <div>
-                    <p>Change Provider Phone:</p>
-                    <input
-                      name="phone"
-                      type="text"
+                      name="dob"
+                      type="date"
                       onChange={this.onChangeHandler}
                     />
                   </div>
                 </div>
-              )}
-              <button onClick={() => this.updateProvider(element.id)}>
-                Submit Changes
-              </button> */}
+                <div>
+                  <p>Change Person Image:</p>
+                  <input
+                    name="image"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                  />
+                </div>
+                <div>
+                  <p>Change Person Theme Color:</p>
+                  <input
+                    name="color"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                  />
+                </div>
+              </div>
+            )}
+            <button onClick={() => this.updateFamily(element.id)}>
+              Submit Changes
+            </button>
           </div>
         );
       })
@@ -182,5 +193,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { removeFamily, addFamily, getFamily }
+  { removeFamily, addFamily, getFamily, updateFamily }
 )(Family);
