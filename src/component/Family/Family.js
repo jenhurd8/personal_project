@@ -52,14 +52,63 @@ class Family extends Component {
       family.map((element, index) => {
         return (
           <div className="familyMember" key={index}>
+            <button onClick={() => this.deleteHandler(element.id)}>
+              Delete
+            </button>
             <p>{element.name}</p>
             <p>{element.image}</p>
             <p>{element.dob.slice(0, 10)}</p>
             <p>{element.themecolor}</p>
-            <button onClick={() => this.editHandler}>Edit</button>
-            <button onClick={() => this.deleteHandler(element.id)}>
-              Delete
-            </button>
+            <button onClick={() => this.editHandler}>Edit Person</button>
+
+            {/* <button onClick={this.editPerson}>Edit Person</button>
+              {this.state.editPerson && (
+                <div className="editMenu">
+                  <div>
+                    <p>Change Person Name:</p>
+                    <input
+                      name="name"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                    <div>
+                      <p>Change Person Picture:</p>
+                      <input
+                        name="specialty"
+                        type="text"
+                        onChange={this.onChangeHandler}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <p>Change Provider Address:</p>
+                    <input
+                      name="address"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                  </div>
+                  <div>
+                    <p>Change Provider Image:</p>
+                    <input
+                      name="photo"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                  </div>
+                  <div>
+                    <p>Change Provider Phone:</p>
+                    <input
+                      name="phone"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                  </div>
+                </div>
+              )}
+              <button onClick={() => this.updateProvider(element.id)}>
+                Submit Changes
+              </button> */}
           </div>
         );
       })

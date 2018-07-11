@@ -3,6 +3,7 @@ import axios from "axios";
 const GET_FAMILY = "GET_FAMILY";
 const ADD_FAMILY = "ADD_FAMILY";
 const REMOVE_FAMILY = "REMOVE_FAMILY";
+const UPDATE_FAMILY = "UPDATE_FAMILY";
 
 const GET_PROVIDERS = "GET_PROVIDERS";
 const ADD_PROVIDER = "ADD_PROVIDER";
@@ -31,6 +32,13 @@ export function addFamily(obj) {
   return {
     type: ADD_FAMILY,
     payload: axios.post("/api/family/", obj)
+  };
+}
+
+export function updateFamily(id, obj) {
+  return {
+    type: UPDATE_FAMILY,
+    payload: axios.put(`/api/family/${id}`, obj)
   };
 }
 
@@ -118,6 +126,18 @@ export default function reducer(state = initialState, action) {
       return { ...state, isLoading: false, family: action.payload.data };
     case "REMOVE_FAMILY_REJECTED":
       return { ...state, isLoading: false, error: action.payload };
+
+    case "UPDATE_FAMILY_REJECTED":
+      return { ...state, isLoading: true, error: action.payload };
+
+    case "UPDATE_FAMILY_PENDING":
+      return { ...state, isLoading: true };
+    case "UPDATE_FAMILY_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        family: [...state.family, action.payload.data]
+      };
 
     case "GET_PROVIDERS_PENDING":
       return { ...state, isLoading: true };

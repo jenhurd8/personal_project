@@ -35,6 +35,30 @@ module.exports = {
     });
   },
 
+  updateFamily: (req, res, next) => {
+    console.log(req.body);
+    let db = req.app.get("db");
+    let { name, image, dob, themecolor, email } = req.body;
+    db.family
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          name,
+          image,
+          dob,
+          themecolor,
+          email
+        }
+      )
+      .then(() => {
+        db.getFamily().then(family => {
+          return res.status(200).send(family);
+        });
+      });
+  },
+
   addProvider: (req, res, next) => {
     console.log(req.body);
     let db = req.app.get("db");

@@ -81,6 +81,7 @@ const port = 3001;
 app.get("/api/family", controller.getFamily);
 app.post("/api/family", controller.addFamily);
 app.delete("/api/family/:id", controller.deleteFamily);
+app.put("/api/family/:id", controller.updateFamily);
 
 app.get("/api/providers", controller.getProviders);
 app.post("/api/providers", controller.addProvider);
