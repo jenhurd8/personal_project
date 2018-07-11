@@ -69,8 +69,9 @@ module.exports = {
   },
 
   updateProvider: (req, res, next) => {
+    console.log(req.body);
     let db = req.app.get("db");
-    let { name, specialty, address, photo, phone } = req.body;
+    let { name, specialty, address, photo, phone, email } = req.body;
     db.providers
       .update(
         {
@@ -81,7 +82,8 @@ module.exports = {
           specialty,
           address,
           photo,
-          phone
+          phone,
+          email
         }
       )
       .then(() => {

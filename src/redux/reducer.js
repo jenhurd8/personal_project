@@ -58,7 +58,7 @@ export function addProvider(obj) {
 export function updateProvider(id, obj) {
   return {
     type: UPDATE_PROVIDER,
-    payload: axios.put(`/api/providers/${id}`)
+    payload: axios.put(`/api/providers/${id}`, obj)
   };
 }
 

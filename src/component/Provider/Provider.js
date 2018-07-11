@@ -25,7 +25,13 @@ class Provider extends Component {
       bdPhone: null,
       bdPracticeName: "",
       showEditMenu: false,
-      editProvider: false
+      editProviderMenu: false,
+      name: "test",
+      specialty: "test",
+      address: "test",
+      photo: "test",
+      phone: "123",
+      email: "test"
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
@@ -34,7 +40,7 @@ class Provider extends Component {
     this.deleteHandler = this.deleteHandler.bind(this);
     this.showEditMenu = this.showEditMenu.bind(this);
     this.updateProvider = this.updateProvider.bind(this);
-    this.editProvider = this.editProvider.bind(this);
+    this.editProviderMenu = this.editProviderMenu.bind(this);
   }
 
   componentDidMount() {
@@ -54,8 +60,8 @@ class Provider extends Component {
     this.setState({ showEditMenu: !this.state.showEditMenu });
   }
 
-  editProvider() {
-    this.setState({ editProvider: !this.state.editProvider });
+  editProviderMenu() {
+    this.setState({ editProviderMenu: !this.state.editProviderMenu });
   }
 
   deleteHandler(id) {
@@ -134,11 +140,12 @@ class Provider extends Component {
 
   updateProvider(id) {
     this.props.updateProvider(id, {
-      name: "name",
-      specialty: "specialty",
-      address: "address",
-      photo: "photo",
-      phone: "phone"
+      name: this.state.name,
+      specialty: this.state.specialty,
+      address: this.state.address,
+      photo: this.state.photo,
+      phone: this.state.phone,
+      email: this.state.email
     });
     window.location.reload();
   }
@@ -163,9 +170,54 @@ class Provider extends Component {
             </div>
             <div className="drPhoto">
               <img src={element.photo} alt="provider" />
+
+              <button onClick={this.editProviderMenu}>Edit Provider</button>
+              {this.state.editProviderMenu && (
+                <div className="editMenu">
+                  <div>
+                    <p>Change Provider Name:</p>
+                    <input
+                      name="name"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                    <div>
+                      <p>Change Practice Name:</p>
+                      <input
+                        name="specialty"
+                        type="text"
+                        onChange={this.onChangeHandler}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <p>Change Provider Address:</p>
+                    <input
+                      name="address"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                  </div>
+                  <div>
+                    <p>Change Provider Image:</p>
+                    <input
+                      name="photo"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                  </div>
+                  <div>
+                    <p>Change Provider Phone:</p>
+                    <input
+                      name="phone"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                  </div>
+                </div>
+              )}
               <button onClick={() => this.updateProvider(element.id)}>
-                Update Listed Provider - needs to be linked to dropdowns,
-                currently makes null
+                Submit Changes
               </button>
             </div>
           </div>
@@ -278,9 +330,7 @@ class Provider extends Component {
             Provider not found?
             <br />
             <br />
-            <button onClick={this.showEditMenu}>
-              Add New or Edit Listed Provider
-            </button>
+            <button onClick={this.showEditMenu}>Add A New Provider</button>
             {this.state.showEditMenu && (
               <div className="editMenu">
                 <div>

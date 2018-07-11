@@ -2,6 +2,7 @@ import React from "react";
 import "./Visit.css";
 import { Component } from "react";
 import Nav from "../../component/Nav/Nav.js";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   getVisits,
@@ -37,19 +38,15 @@ class Visit extends Component {
   };
 
   selectDrHandler(dr) {
-    this.setState(
-      {
-        drSelected: dr
-      },
-      console.log(this.state.drSelected)
-    );
+    this.setState({
+      drSelected: dr
+    });
   }
 
   selectPatientHandler(patient) {
     this.setState({
       patientSelected: patient
     });
-    console.log(this.state.patientSelected);
   }
 
   addVisit(patient, dr, date, details, rx, email) {
@@ -62,7 +59,6 @@ class Visit extends Component {
       email: email
     });
     alert("Visit has been added to your dashboard");
-    window.location.reload();
   }
 
   render() {
@@ -169,20 +165,22 @@ class Visit extends Component {
             type="text"
             onChange={this.onChangeHandler}
           />
-          <button
-            onClick={() =>
-              this.addVisit(
-                this.state.patientSelected,
-                this.state.drSelected,
-                this.state.date,
-                this.state.details,
-                this.state.rx,
-                this.state.email
-              )
-            }
-          >
-            Add Visit
-          </button>
+          <Link to="/dashboard">
+            <button
+              onClick={() =>
+                this.addVisit(
+                  this.state.patientSelected,
+                  this.state.drSelected,
+                  this.state.date,
+                  this.state.details,
+                  this.state.rx,
+                  this.state.email
+                )
+              }
+            >
+              Add Visit
+            </button>
+          </Link>
         </div>
       </div>
     );
