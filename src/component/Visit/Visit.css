@@ -4,9 +4,9 @@
   justify-content: space-evenly;
 }
 .visits {
-  width: 40vw;
+  width: 50vw;
   height: 40vh;
-  background-color: lightpink;
+  background-color: lightgreen;
   margin: 10px;
   display: flex;
   flex-direction: row;

@@ -56,7 +56,7 @@ class Family extends Component {
   }
 
   updateFamily(id) {
-    this.props.update(id, {
+    this.props.updateFamily(id, {
       name: this.state.name,
       image: this.state.image,
       dob: this.state.dob,
@@ -77,7 +77,8 @@ class Family extends Component {
               Delete
             </button>
             <p>{element.name}</p>
-            <p>{element.image}</p>
+            {/* <p>{element.image}</p> */}
+            <img src={element.image} alt="person" />
             <p>{element.dob.slice(0, 10)}</p>
             <p>{element.themecolor}</p>
             <button onClick={this.showEditMenu}>Edit Person</button>

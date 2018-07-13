@@ -165,6 +165,7 @@ class Visit extends Component {
             type="text"
             onChange={this.onChangeHandler}
           />
+          {/* redirect is giving dob.slice error before refresh*/}
           <Link to="/dashboard">
             <button
               onClick={() =>

@@ -1,14 +1,18 @@
+.inputs {
+  padding: 50px;
+}
 .family {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.inputs {
-  padding: 50px;
-}
 .familyMember {
   width: 30vw;
-  height: 12vh;
+  height: 30vh;
   background-color: aqua;
   margin: 10px;
+}
+.img {
+  height: 200px;
+  width: 200px;
 }

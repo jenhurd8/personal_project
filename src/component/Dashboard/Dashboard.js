@@ -52,12 +52,14 @@ class Dashboard extends Component {
         return (
           <div className="visits" key={index}>
             <div className="person">
-              <p>{visits[index].image}</p>
+              {/* <p>{visits[index].image}</p> */}
+              <img src={visits[index].image} alt="person" />
               <p>{visits[index].familyname}</p>
-              <p>{visits[index].dob.slice(0, 10)}</p>
+              <p>{visits[index].dob && visits[index].dob.slice(0, 10)}</p>
             </div>
             <div className="visitDetails">
               Visit Details:
+              <p>{element.date && element.date.slice(0, 10)}</p>
               <p>{element.details}</p>
               <p>{element.rx}</p>
             </div>
