@@ -119,6 +119,18 @@ class Provider extends Component {
                     }
                   });
               }
+              if (this.state.suffix === "Urgent Care") {
+                this.setState({
+                  bdPhoto:
+                    "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_150/v1531601624/urgent-160140_1280_ew6omg.png"
+                });
+              }
+              if (this.state.suffix === "Hospital") {
+                this.setState({
+                  bdPhoto:
+                    "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_200/v1531601637/hospital-1636334_1920_cu7vox.jpg"
+                });
+              }
             });
         } else {
           this.setState({

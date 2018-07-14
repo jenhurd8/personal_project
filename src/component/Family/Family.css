@@ -7,7 +7,9 @@
   justify-content: space-evenly;
 }
 .familyMember {
-  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  width: 50vw;
   height: 30vh;
   background-color: aqua;
   margin: 10px;

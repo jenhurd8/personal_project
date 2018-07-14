@@ -73,54 +73,57 @@ class Family extends Component {
       family.map((element, index) => {
         return (
           <div className="familyMember" key={index}>
-            <button onClick={() => this.deleteHandler(element.id)}>
-              Delete
-            </button>
-            <p>{element.name}</p>
-            {/* <p>{element.image}</p> */}
-            <img src={element.image} alt="person" />
-            <p>{element.dob.slice(0, 10)}</p>
-            <p>{element.themecolor}</p>
-            <button onClick={this.showEditMenu}>Edit Person</button>
-            {this.state.showEditMenu && (
-              <div className="editMenu">
-                <div>
-                  <p>Change Person Name:</p>
-                  <input
-                    name="name"
-                    type="text"
-                    onChange={this.onChangeHandler}
-                  />
+            <div className="left">
+              <button onClick={() => this.deleteHandler(element.id)}>
+                Delete
+              </button>
+              <p>{element.name}</p>
+              <img src={element.image} alt="person" />
+              <p>{element.dob.slice(0, 10)}</p>
+              <p>{element.themecolor}</p>
+            </div>
+            <div className="right">
+              <button onClick={this.showEditMenu}>Edit Person</button>
+              {this.state.showEditMenu && (
+                <div className="editMenu">
                   <div>
-                    <p>Change Person Date of Birth:</p>
+                    <p>Change Person Name:</p>
                     <input
-                      name="dob"
-                      type="date"
+                      name="name"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                    <div>
+                      <p>Change Person Date of Birth:</p>
+                      <input
+                        name="dob"
+                        type="date"
+                        onChange={this.onChangeHandler}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <p>Change Person Image:</p>
+                    <input
+                      name="image"
+                      type="text"
                       onChange={this.onChangeHandler}
                     />
                   </div>
+                  <div>
+                    <p>Change Person Theme Color:</p>
+                    <input
+                      name="color"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                  </div>
+                  <button onClick={() => this.updateFamily(element.id)}>
+                    Submit Changes
+                  </button>
                 </div>
-                <div>
-                  <p>Change Person Image:</p>
-                  <input
-                    name="image"
-                    type="text"
-                    onChange={this.onChangeHandler}
-                  />
-                </div>
-                <div>
-                  <p>Change Person Theme Color:</p>
-                  <input
-                    name="color"
-                    type="text"
-                    onChange={this.onChangeHandler}
-                  />
-                </div>
-              </div>
-            )}
-            <button onClick={() => this.updateFamily(element.id)}>
-              Submit Changes
-            </button>
+              )}
+            </div>
           </div>
         );
       })
