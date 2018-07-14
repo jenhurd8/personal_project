@@ -9,6 +9,7 @@ import {
   getProviders,
   updateProvider
 } from "../../redux/reducer";
+import ToggleDisplay from "react-toggle-display";
 
 class Provider extends Component {
   constructor() {
@@ -170,56 +171,55 @@ class Provider extends Component {
             </div>
             <div className="drPhoto">
               <img src={element.photo} alt="provider" />
-
-              <button onClick={this.editProviderMenu}>Edit Provider</button>
-              {this.state.editProviderMenu && (
-                <div className="editMenu">
+            </div>
+            <button onClick={this.editProviderMenu}>Edit Provider</button>
+            {this.state.editProviderMenu && (
+              <div className="editMenu">
+                <div>
+                  <p>Change Provider Name:</p>
+                  <input
+                    name="name"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                  />
                   <div>
-                    <p>Change Provider Name:</p>
+                    <p>Change Practice Name:</p>
                     <input
-                      name="name"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                    <div>
-                      <p>Change Practice Name:</p>
-                      <input
-                        name="specialty"
-                        type="text"
-                        onChange={this.onChangeHandler}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <p>Change Provider Address:</p>
-                    <input
-                      name="address"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                  </div>
-                  <div>
-                    <p>Change Provider Image:</p>
-                    <input
-                      name="photo"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                  </div>
-                  <div>
-                    <p>Change Provider Phone:</p>
-                    <input
-                      name="phone"
+                      name="specialty"
                       type="text"
                       onChange={this.onChangeHandler}
                     />
                   </div>
                 </div>
-              )}
-              <button onClick={() => this.updateProvider(element.id)}>
-                Submit Changes
-              </button>
-            </div>
+                <div>
+                  <p>Change Provider Address:</p>
+                  <input
+                    name="address"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                  />
+                </div>
+                <div>
+                  <p>Change Provider Image:</p>
+                  <input
+                    name="photo"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                  />
+                </div>
+                <div>
+                  <p>Change Provider Phone:</p>
+                  <input
+                    name="phone"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                  />
+                </div>
+                <button onClick={() => this.updateProvider(element.id)}>
+                  Submit Changes
+                </button>
+              </div>
+            )}
           </div>
         );
       })
@@ -331,7 +331,8 @@ class Provider extends Component {
             <br />
             <br />
             <button onClick={this.showEditMenu}>Add A New Provider</button>
-            {this.state.showEditMenu && (
+            <ToggleDisplay if={this.state.showEditMenu}>
+              {/* {this.state.showEditMenu && ( */}
               <div className="editMenu">
                 <div>
                   <p>Change Provider Name:</p>
@@ -375,7 +376,8 @@ class Provider extends Component {
                 />
               </div> */}
               </div>
-            )}
+              {/* )} */}
+            </ToggleDisplay>
             <br />
             <br />
           </div>
