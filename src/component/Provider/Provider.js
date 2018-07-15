@@ -7,7 +7,12 @@ import {
   removeProvider,
   addProvider,
   getProviders,
-  updateProvider
+  updateProvider,
+  updateProviderName,
+  updateProviderPracticeName,
+  updateProviderAddress,
+  updateProviderPhone,
+  updateProviderPhoto
 } from "../../redux/reducer";
 import ToggleDisplay from "react-toggle-display";
 
@@ -163,6 +168,43 @@ class Provider extends Component {
     window.location.reload();
   }
 
+  updateProviderName(id) {
+    this.props.updateProviderName(id, {
+      name: this.state.name
+    });
+    window.location.reload();
+  }
+
+  updateProviderPracticeName(id) {
+    this.props.updateProviderPracticeName(id, {
+      specialty: this.state.specialty
+    });
+    window.location.reload();
+  }
+
+  updateProviderAddress(id) {
+    this.props.updateProviderAddress(id, {
+      address: this.state.address
+    });
+    window.location.reload();
+  }
+
+  updateProviderPhoto(id) {
+    this.props.updateProviderPhoto(id, {
+      photo: this.state.photo
+    });
+    window.location.reload();
+  }
+
+  updateProviderPhone(id) {
+    console.log(this.state.phone);
+    console.log(id);
+    this.props.updateProviderPhone(id, {
+      phone: this.state.phone
+    });
+    window.location.reload();
+  }
+
   render() {
     const { providers, isLoading } = this.props;
     let providerArray = isLoading ? (
@@ -188,36 +230,54 @@ class Provider extends Component {
             {this.state.editProviderMenu && (
               <div className="editMenu">
                 <div>
-                  <p>Change Provider Name:</p>
+                  <p>New Provider Name:</p>
                   <input
                     name="name"
                     type="text"
                     onChange={this.onChangeHandler}
                   />
+                  <button onClick={() => this.updateProviderName(element.id)}>
+                    Submit
+                  </button>
                   <div>
-                    <p>Change Practice Name:</p>
+                    <p>New Practice Name:</p>
                     <input
                       name="specialty"
                       type="text"
                       onChange={this.onChangeHandler}
                     />
+                    <button
+                      onClick={() =>
+                        this.updateProviderPracticeName(element.id)
+                      }
+                    >
+                      Submit
+                    </button>
                   </div>
                 </div>
                 <div>
-                  <p>Change Provider Address:</p>
+                  <p>New Address:</p>
                   <input
                     name="address"
                     type="text"
                     onChange={this.onChangeHandler}
                   />
+                  <button
+                    onClick={() => this.updateProviderAddress(element.id)}
+                  >
+                    Submit
+                  </button>
                 </div>
                 <div>
-                  <p>Change Provider Image:</p>
+                  <p>Change Provider Photo:</p>
                   <input
                     name="photo"
                     type="text"
                     onChange={this.onChangeHandler}
                   />
+                  <button onClick={() => this.updateProviderPhoto(element.id)}>
+                    Submit
+                  </button>
                 </div>
                 <div>
                   <p>Change Provider Phone:</p>
@@ -226,10 +286,13 @@ class Provider extends Component {
                     type="text"
                     onChange={this.onChangeHandler}
                   />
+                  <button onClick={() => this.updateProviderPhone(element.id)}>
+                    Submit
+                  </button>
                 </div>
-                <button onClick={() => this.updateProvider(element.id)}>
+                {/* <button onClick={() => this.updateProvider(element.id)}>
                   Submit Changes
-                </button>
+                </button> */}
               </div>
             )}
           </div>
@@ -412,5 +475,15 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { removeProvider, addProvider, getProviders, updateProvider }
+  {
+    removeProvider,
+    addProvider,
+    getProviders,
+    updateProvider,
+    updateProviderName,
+    updateProviderPracticeName,
+    updateProviderAddress,
+    updateProviderPhone,
+    updateProviderPhoto
+  }
 )(Provider);

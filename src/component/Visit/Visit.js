@@ -165,7 +165,7 @@ class Visit extends Component {
             type="text"
             onChange={this.onChangeHandler}
           />
-          {/* redirect is giving dob.slice error before refresh*/}
+          {/* redirect is giving dob.slice error and not showing update after refresh*/}
           <Link to="/dashboard">
             <button
               onClick={() =>
@@ -199,5 +199,10 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getVisits, getFamily, getProviders, addVisit }
+  {
+    getVisits,
+    getFamily,
+    getProviders,
+    addVisit
+  }
 )(Visit);

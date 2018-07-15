@@ -82,15 +82,27 @@ app.get("/api/family", controller.getFamily);
 app.post("/api/family", controller.addFamily);
 app.delete("/api/family/:id", controller.deleteFamily);
 app.put("/api/family/:id", controller.updateFamily);
+app.put("/api/familyName/:id", controller.updateFamilyName);
+app.put("/api/familyImage/:id", controller.updateFamilyImage);
+app.put("/api/familyDob/:id", controller.updateFamilyDob);
+app.put("/api/familyColor/:id", controller.updateFamilyColor);
 
 app.get("/api/providers", controller.getProviders);
 app.post("/api/providers", controller.addProvider);
 app.delete("/api/providers/:id", controller.deleteProvider);
 app.put("/api/providers/:id", controller.updateProvider);
+app.put("/api/providerName/:id", controller.updateProviderName);
+app.put("/api/providerPracticeName/:id", controller.updateProviderPracticeName);
+app.put("/api/providerAddress/:id", controller.updateProviderAddress);
+app.put("/api/providerPhoto/:id", controller.updateProviderPhoto);
+app.put("/api/providerPhone/:id", controller.updateProviderPhone);
 
 app.get("/api/visits", controller.getVisits);
 app.delete("/api/visits/:id", controller.deleteVisit);
 app.post("/api/visits", controller.addVisit);
+app.put("/api/visitDate/:id", controller.updateVisitDate);
+app.put("/api/visitDetails/:id", controller.updateVisitDetails);
+app.put("/api/visitRx/:id", controller.updateVisitRx);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

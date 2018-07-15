@@ -59,6 +59,82 @@ module.exports = {
       });
   },
 
+  updateFamilyName: (req, res, next) => {
+    let db = req.app.get("db");
+    let { name } = req.body;
+    db.family
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          name
+        }
+      )
+      .then(() => {
+        db.getFamily().then(family => {
+          return res.status(200).send(family);
+        });
+      });
+  },
+
+  updateFamilyImage: (req, res, next) => {
+    let db = req.app.get("db");
+    let { image } = req.body;
+    db.family
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          image
+        }
+      )
+      .then(() => {
+        db.getFamily().then(family => {
+          return res.status(200).send(family);
+        });
+      });
+  },
+
+  updateFamilyDob: (req, res, next) => {
+    let db = req.app.get("db");
+    let { dob } = req.body;
+    db.family
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          dob
+        }
+      )
+      .then(() => {
+        db.getFamily().then(family => {
+          return res.status(200).send(family);
+        });
+      });
+  },
+
+  updateFamilyColor: (req, res, next) => {
+    let db = req.app.get("db");
+    let { color } = req.body;
+    db.family
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          themecolor: color
+        }
+      )
+      .then(() => {
+        db.getFamily().then(family => {
+          return res.status(200).send(family);
+        });
+      });
+  },
+
   addProvider: (req, res, next) => {
     console.log(req.body);
     let db = req.app.get("db");
@@ -117,6 +193,101 @@ module.exports = {
       });
   },
 
+  updateProviderName: (req, res, next) => {
+    let db = req.app.get("db");
+    let { name } = req.body;
+    db.providers
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          name
+        }
+      )
+      .then(() => {
+        db.getProviders().then(providers => {
+          return res.status(200).send(providers);
+        });
+      });
+  },
+
+  updateProviderPracticeName: (req, res, next) => {
+    let db = req.app.get("db");
+    let { specialty } = req.body;
+    db.providers
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          specialty
+        }
+      )
+      .then(() => {
+        db.getProviders().then(providers => {
+          return res.status(200).send(providers);
+        });
+      });
+  },
+
+  updateProviderAddress: (req, res, next) => {
+    let db = req.app.get("db");
+    let { address } = req.body;
+    db.providers
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          address
+        }
+      )
+      .then(() => {
+        db.getProviders().then(providers => {
+          return res.status(200).send(providers);
+        });
+      });
+  },
+
+  updateProviderPhoto: (req, res, next) => {
+    let db = req.app.get("db");
+    let { photo } = req.body;
+    db.providers
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          photo
+        }
+      )
+      .then(() => {
+        db.getProviders().then(providers => {
+          return res.status(200).send(providers);
+        });
+      });
+  },
+
+  updateProviderPhone: (req, res, next) => {
+    let db = req.app.get("db");
+    let { phone } = req.body;
+    db.providers
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          phone
+        }
+      )
+      .then(() => {
+        db.getProviders().then(providers => {
+          return res.status(200).send(providers);
+        });
+      });
+  },
+
   getVisits: (req, res, next) => {
     let db = req.app.get("db");
 
@@ -146,6 +317,61 @@ module.exports = {
           errorMessage: "error!"
         });
         console.log(err);
+      });
+  },
+
+  updateVisitDate: (req, res, next) => {
+    let db = req.app.get("db");
+    let { date } = req.body;
+    db.visits
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          date
+        }
+      )
+      .then(() => {
+        db.getVisits().then(visits => {
+          return res.status(200).send(visits);
+        });
+      });
+  },
+  updateVisitDetails: (req, res, next) => {
+    let db = req.app.get("db");
+    let { details } = req.body;
+    db.visits
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          details
+        }
+      )
+      .then(() => {
+        db.getVisits().then(visits => {
+          return res.status(200).send(visits);
+        });
+      });
+  },
+  updateVisitRx: (req, res, next) => {
+    let db = req.app.get("db");
+    let { rx } = req.body;
+    db.visits
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          rx
+        }
+      )
+      .then(() => {
+        db.getVisits().then(visits => {
+          return res.status(200).send(visits);
+        });
       });
   }
 };

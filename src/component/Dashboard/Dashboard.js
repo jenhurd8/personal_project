@@ -8,7 +8,10 @@ import {
   getVisits,
   getFamily,
   getProviders,
-  removeVisit
+  removeVisit,
+  updateVisitDate,
+  updateVisitDetails,
+  updateVisitRx
 } from "../../redux/reducer";
 
 class Dashboard extends Component {
@@ -40,7 +43,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { visits, isLoading, providers, family } = this.props;
+    const { visits, isLoading } = this.props;
 
     let visitsArray = isLoading ? (
       <p>Loading...</p>
@@ -52,7 +55,6 @@ class Dashboard extends Component {
         return (
           <div className="visits" key={index}>
             <div className="person">
-              {/* <p>{visits[index].image}</p> */}
               <img src={visits[index].image} alt="person" />
               <p>{visits[index].familyname}</p>
               <p>{visits[index].dob && visits[index].dob.slice(0, 10)}</p>
@@ -62,6 +64,50 @@ class Dashboard extends Component {
               <p>{element.date && element.date.slice(0, 10)}</p>
               <p>{element.details}</p>
               <p>{element.rx}</p>
+              <button onClick={this.showEditMenu}>Edit Visit</button>
+              {this.state.showEditMenu && (
+                <div className="editMenu">
+                  <div>
+                    <div>
+                      <p>Date of Visit:</p>
+                      <input
+                        name="date"
+                        type="date"
+                        onChange={this.onChangeHandler}
+                      />
+                      <button onClick={() => this.updateVisitDate(element.id)}>
+                        Submit
+                      </button>
+                    </div>
+
+                    <div>
+                      <p>Updated Visit Details:</p>
+                      <input
+                        name="details"
+                        type="text"
+                        onChange={this.onChangeHandler}
+                      />
+                      <button
+                        onClick={() => this.updateVisitDetails(element.id)}
+                      >
+                        Submit
+                      </button>
+                    </div>
+
+                    <div>
+                      <p>Update Prescriptions:</p>
+                      <input
+                        name="rx"
+                        type="text"
+                        onChange={this.onChangeHandler}
+                      />
+                      <button onClick={() => this.updateVisitRx(element.id)}>
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             <div className="dr">
               <img src={visits[index].photo} alt="provider" />
@@ -78,17 +124,17 @@ class Dashboard extends Component {
       })
     );
 
-    let providersArray = isLoading ? (
-      <p>Loading...</p>
-    ) : (
-      providers.map((element, index) => {
-        return (
-          <div className="providers" key={index}>
-            provider
-          </div>
-        );
-      })
-    );
+    // let providersArray = isLoading ? (
+    //   <p>Loading...</p>
+    // ) : (
+    //   providers.map((element, index) => {
+    //     return (
+    //       <div className="providers" key={index}>
+    //         provider
+    //       </div>
+    //     );
+    //   })
+    // );
 
     return (
       <div>
@@ -126,5 +172,13 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getVisits, getFamily, getProviders, removeVisit }
+  {
+    getVisits,
+    getFamily,
+    getProviders,
+    removeVisit,
+    updateVisitDate,
+    updateVisitDetails,
+    updateVisitRx
+  }
 )(Dashboard);
