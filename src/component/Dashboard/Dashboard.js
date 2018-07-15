@@ -22,10 +22,15 @@ class Dashboard extends Component {
       details: "",
       rx: "",
       drSelected: "",
-      patientSelected: ""
+      patientSelected: "",
+      showEditMenu: false
     };
     this.deleteHandler = this.deleteHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.showEditMenu = this.showEditMenu.bind(this);
+    this.updateVisitDate = this.updateVisitDate.bind(this);
+    this.updateVisitDetails = this.updateVisitDetails.bind(this);
+    this.updateVisitRx = this.updateVisitRx.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +47,31 @@ class Dashboard extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  showEditMenu() {
+    this.setState({ showEditMenu: !this.state.showEditMenu });
+  }
+
+  updateVisitDate(id) {
+    this.props.updateVisitDate(id, {
+      date: this.state.date
+    });
+    window.location.reload();
+  }
+
+  updateVisitDetails(id) {
+    this.props.updateVisitDetails(id, {
+      details: this.state.details
+    });
+    window.location.reload();
+  }
+
+  updateVisitRx(id) {
+    this.props.updateVisitRx(id, {
+      rx: this.state.rx
+    });
+    window.location.reload();
+  }
+
   render() {
     const { visits, isLoading } = this.props;
 
@@ -50,6 +80,9 @@ class Dashboard extends Component {
     ) : (
       visits.map((element, index) => {
         console.log(visits);
+        console.log(visits[0].details);
+        console.log(visits[0].rx);
+        // console.log(element);
         //turn this back on when linked to logged in persons emai
         //if (visits[index].visitemail === "@gmail.com") {
         return (
@@ -75,7 +108,11 @@ class Dashboard extends Component {
                         type="date"
                         onChange={this.onChangeHandler}
                       />
-                      <button onClick={() => this.updateVisitDate(element.id)}>
+                      <button
+                        onClick={() =>
+                          this.updateVisitDate(visits[index].visitid)
+                        }
+                      >
                         Submit
                       </button>
                     </div>
@@ -88,7 +125,9 @@ class Dashboard extends Component {
                         onChange={this.onChangeHandler}
                       />
                       <button
-                        onClick={() => this.updateVisitDetails(element.id)}
+                        onClick={() =>
+                          this.updateVisitDetails(visits[index].visitid)
+                        }
                       >
                         Submit
                       </button>
@@ -101,7 +140,11 @@ class Dashboard extends Component {
                         type="text"
                         onChange={this.onChangeHandler}
                       />
-                      <button onClick={() => this.updateVisitRx(element.id)}>
+                      <button
+                        onClick={() =>
+                          this.updateVisitRx(visits[index].visitid)
+                        }
+                      >
                         Submit
                       </button>
                     </div>

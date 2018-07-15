@@ -19,11 +19,15 @@ class Visit extends Component {
       details: "",
       rx: "",
       drSelected: "",
-      patientSelected: ""
+      patientSelected: "",
+      chosenFamily: [],
+      chosenDr: []
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.selectDrHandler = this.selectDrHandler.bind(this);
     this.selectPatientHandler = this.selectPatientHandler.bind(this);
+    this.selectDrHandler2 = this.selectDrHandler2.bind(this);
+    this.selectPatientHandler2 = this.selectPatientHandler2.bind(this);
     this.addVisit = this.addVisit.bind(this);
   }
 
@@ -37,22 +41,58 @@ class Visit extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  selectDrHandler(dr) {
+  selectDrHandler2(dr) {
     this.setState({
       drSelected: dr
     });
   }
 
-  selectPatientHandler(patient) {
+  selectDrHandler(dr) {
+    this.selectDrHandler2(dr);
+    this.setState({
+      chosenDr: this.props.providers
+        .filter(doctor => dr === doctor.id)
+        .map(item => {
+          return (
+            <div>
+              <p>{item.name}</p>
+              <img src={item.photo} alt="doctor" />
+            </div>
+          );
+        })
+    });
+
+    console.log(this.state.drSelected);
+  }
+
+  selectPatientHandler2(patient) {
     this.setState({
       patientSelected: patient
     });
   }
 
-  addVisit(patient, dr, date, details, rx, email) {
+  selectPatientHandler(patient) {
+    this.selectPatientHandler2(patient);
+    this.setState({
+      chosenFamily: this.props.family
+        .filter(person => patient === person.id)
+        .map(item => {
+          return (
+            <div>
+              <p>{item.name}</p>
+              <img src={item.image} alt="person" />
+            </div>
+          );
+        })
+    });
+
+    console.log(this.state.chosenFamily);
+  }
+
+  addVisit(date, details, rx, email) {
     this.props.addVisit({
-      family_id: patient,
-      providers_id: dr,
+      family_id: this.state.patientSelected,
+      providers_id: this.state.drSelected,
       date: date,
       details: details,
       rx: rx,
@@ -63,50 +103,6 @@ class Visit extends Component {
 
   render() {
     const { providers, family } = this.props;
-
-    let chosenDr = providers.map((provider, i) => {
-      if (this.state.drSelected === provider.id) {
-        return (
-          <p>
-            {provider.name}
-            {provider.photo}
-            {provider.address}
-          </p>
-        );
-      }
-      return;
-    });
-
-    //come back to this and fix using filter and map to avoid nonreturn error above
-    //need to filter and then map matched item**
-    // let chosenDr = providers.filter(
-    //   (provider => this.state.drSelected === provider.id).map(element => (
-    //     <p>{element.name}</p>
-    //   ))
-
-    // .map((provider, i) => (
-    //   <p>
-    //     {provider.name}
-    //     {provider.photo}
-    //     {provider.address}
-    //   </p>
-    // ))
-    //
-
-    console.log(chosenDr);
-
-    let chosenFamily = family.map((familyMember, i) => {
-      if (this.state.patientSelected === familyMember.id) {
-        return (
-          <p>
-            {familyMember.name}
-            {familyMember.photo}
-            {familyMember.dob}
-          </p>
-        );
-      }
-      return;
-    });
 
     let providersArray = providers.map((provider, i) => {
       return (
@@ -137,16 +133,11 @@ class Visit extends Component {
         <p>Select your Family Member</p>
         {familyArray}
         <div className="visitBox">
-          {chosenDr}
-          {chosenFamily}
+          {this.state.chosenDr}
+          {this.state.chosenFamily}
           <br />
           Visit Date:
-          <input
-            name="date"
-            // placeholder="date"
-            type="date"
-            onChange={this.onChangeHandler}
-          />
+          <input name="date" type="date" onChange={this.onChangeHandler} />
           <br />
           <br />
           Visit Details:
@@ -170,8 +161,6 @@ class Visit extends Component {
             <button
               onClick={() =>
                 this.addVisit(
-                  this.state.patientSelected,
-                  this.state.drSelected,
                   this.state.date,
                   this.state.details,
                   this.state.rx,
