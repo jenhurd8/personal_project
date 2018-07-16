@@ -77,8 +77,13 @@ app.get(
 );
 
 app.get("/logout", (req, res) => {
-  req.logOut();
-  res.redirect("/");
+  req.session.destroy();
+  //res.redirect("http://localhost:3000/landing");
+  res.redirect("/landing");
+});
+
+app.get("/api/user", (req, res) => {
+  res.status(200).send(req.session.passport.user);
 });
 
 const port = 3001;

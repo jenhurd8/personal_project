@@ -27,6 +27,12 @@ const UPDATE_VISIT_DETAILS = "UPDATE_VISIT_DETAILS";
 const UPDATE_VISIT_RX = "UPDATE_VISIT_RX";
 const UPDATE_VISIT_BALANCE = "UPDATE_VISIT_BALANCE";
 
+const GET_USER = "GET_USER";
+const GET_USERS_ID = "GET_USERS_ID";
+const GET_USERS_EMAIL = "GET_USERS_EMAIL";
+const GET_USERS_DISPLAYNAME = "GET_USERS_DISPLAYNAME";
+const GET_USERS_PICTURE = "GET_USERS_PICTURE";
+
 export function getFamily() {
   return {
     type: GET_FAMILY,
@@ -195,16 +201,52 @@ export function updateVisitBalance(id, balance) {
   };
 }
 
+export function getUser() {
+  return {
+    type: GET_USER,
+    payload: axios.get("/api/user/")
+  };
+}
+
+export function getUsersId(id) {
+  return {
+    type: GET_USERS_ID,
+    payload: id
+  };
+}
+
+export function getUsersEmail(email) {
+  return {
+    type: GET_USERS_EMAIL,
+    payload: email
+  };
+}
+
+export function getUsersDisplayName(displayname) {
+  return {
+    type: GET_USERS_DISPLAYNAME,
+    payload: displayname
+  };
+}
+
+export function getUsersPicture(picture) {
+  return {
+    type: GET_USERS_PICTURE,
+    payload: picture
+  };
+}
+
 const initialState = {
   family: [],
   providers: [],
   visits: [],
+  users: [],
   isLoading: false,
   error: ""
 };
 
 export default function reducer(state = initialState, action) {
-  console.log(action.payload);
+  // toggle to see what passes through reducer: console.log(action.payload);
   switch (action.type) {
     case "GET_FAMILY_PENDING":
       return { ...state, isLoading: true };
@@ -459,6 +501,41 @@ export default function reducer(state = initialState, action) {
         isLoading: false,
         visits: [...state.visits, action.payload.data]
       };
+
+    case "GET_USER_PENDING":
+      return { ...state, isLoading: true };
+    case "GET_USER_FULFILLED":
+      return { ...state, isLoading: false, users: action.payload.data };
+    case "GET_USER_REJECTED":
+      return { ...state, isLoading: false, error: action.payload };
+
+    case "GET_USERS_ID_PENDING":
+      return { ...state, isLoading: true };
+    case "GET_USERS_ID_FULFILLED":
+      return { ...state, isLoading: false, users: action.payload.data };
+    case "GET_USERS_ID_REJECTED":
+      return { ...state, isLoading: false, error: action.payload };
+
+    case "GET_USERS_EMAIL_PENDING":
+      return { ...state, isLoading: true };
+    case "GET_USERS_EMAIL_FULFILLED":
+      return { ...state, isLoading: false, users: action.payload.data };
+    case "GET_USERS_EMAIL_REJECTED":
+      return { ...state, isLoading: false, error: action.payload };
+
+    case "GET_USERS_DISPLAYNAME_PENDING":
+      return { ...state, isLoading: true };
+    case "GET_USERS_DISPLAYNAME_FULFILLED":
+      return { ...state, isLoading: false, users: action.payload.data };
+    case "GET_USERS_DISPLAYNAME_REJECTED":
+      return { ...state, isLoading: false, error: action.payload };
+
+    case "GET_USERS_PICTURE_PENDING":
+      return { ...state, isLoading: true };
+    case "GET_USERS_PICTURE_FULFILLED":
+      return { ...state, isLoading: false, users: action.payload.data };
+    case "GET_USERS_PICTURE_REJECTED":
+      return { ...state, isLoading: false, error: action.payload };
 
     default:
       return state;

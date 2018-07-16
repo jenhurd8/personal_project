@@ -102,6 +102,7 @@ class Family extends Component {
     ) : (
       family.map((element, index) => {
         return (
+          // <FamilyMember />
           <div className="familyMember" key={index}>
             <div className="left">
               <button onClick={() => this.deleteHandler(element.id)}>
