@@ -308,9 +308,17 @@ module.exports = {
 
   addVisit: (req, res, next) => {
     let db = req.app.get("db");
-    const { family_id, providers_id, date, details, rx, email } = req.body;
+    const {
+      family_id,
+      providers_id,
+      date,
+      details,
+      rx,
+      email,
+      balance
+    } = req.body;
 
-    db.addVisit([family_id, providers_id, date, details, rx, email])
+    db.addVisit([family_id, providers_id, date, details, rx, email, balance])
       .then(() => res.sendStatus(200))
       .catch(err => {
         res.status(500).send({
@@ -366,6 +374,25 @@ module.exports = {
         },
         {
           rx
+        }
+      )
+      .then(() => {
+        db.getVisits().then(visits => {
+          return res.status(200).send(visits);
+        });
+      });
+  },
+
+  updateVisitBalance: (req, res, next) => {
+    let db = req.app.get("db");
+    let { balance } = req.body;
+    db.visits
+      .update(
+        {
+          id: req.params.id
+        },
+        {
+          balance
         }
       )
       .then(() => {

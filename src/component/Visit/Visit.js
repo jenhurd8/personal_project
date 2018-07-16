@@ -18,6 +18,7 @@ class Visit extends Component {
       date: "",
       details: "",
       rx: "",
+      balance: 0,
       drSelected: "",
       patientSelected: "",
       chosenFamily: [],
@@ -89,14 +90,15 @@ class Visit extends Component {
     console.log(this.state.chosenFamily);
   }
 
-  addVisit(date, details, rx, email) {
+  addVisit(date, details, rx, email, balance) {
     this.props.addVisit({
       family_id: this.state.patientSelected,
       providers_id: this.state.drSelected,
       date: date,
       details: details,
       rx: rx,
-      email: email
+      email: email,
+      balance: balance
     });
     alert("Visit has been added to your dashboard");
   }
@@ -156,6 +158,13 @@ class Visit extends Component {
             type="text"
             onChange={this.onChangeHandler}
           />
+          Balance:
+          <input
+            name="balance"
+            placeholder="Balance"
+            type="number"
+            onChange={this.onChangeHandler}
+          />
           {/* redirect is giving dob.slice error and not showing update after refresh*/}
           <Link to="/dashboard">
             <button
@@ -164,7 +173,8 @@ class Visit extends Component {
                   this.state.date,
                   this.state.details,
                   this.state.rx,
-                  this.state.email
+                  this.state.email,
+                  this.state.balance
                 )
               }
             >

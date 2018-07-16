@@ -70,11 +70,16 @@ passport.deserializeUser((user, done) => done(null, user));
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    successRedirect: "http://localhost:3000/",
+    successRedirect: "http://localhost:3000/#/dashboard",
     // successRedirect: process.env.REACT_APP_DEV_HOST,
     failureRedirect: "/login"
   })
 );
+
+app.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/");
+});
 
 const port = 3001;
 
@@ -103,6 +108,7 @@ app.post("/api/visits", controller.addVisit);
 app.put("/api/visitDate/:id", controller.updateVisitDate);
 app.put("/api/visitDetails/:id", controller.updateVisitDetails);
 app.put("/api/visitRx/:id", controller.updateVisitRx);
+app.put("/api/visitBalance/:id", controller.updateVisitBalance);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

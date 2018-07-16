@@ -25,6 +25,7 @@ const ADD_VISIT = "ADD_VISIT";
 const UPDATE_VISIT_DATE = "UPDATE_VISIT_DATE";
 const UPDATE_VISIT_DETAILS = "UPDATE_VISIT_DETAILS";
 const UPDATE_VISIT_RX = "UPDATE_VISIT_RX";
+const UPDATE_VISIT_BALANCE = "UPDATE_VISIT_BALANCE";
 
 export function getFamily() {
   return {
@@ -184,6 +185,13 @@ export function updateVisitRx(id, rx) {
   return {
     type: UPDATE_VISIT_RX,
     payload: axios.put(`/api/visitRx/${id}`, rx)
+  };
+}
+
+export function updateVisitBalance(id, balance) {
+  return {
+    type: UPDATE_VISIT_BALANCE,
+    payload: axios.put(`/api/visitBalance/${id}`, balance)
   };
 }
 
@@ -435,6 +443,17 @@ export default function reducer(state = initialState, action) {
     case "UPDATE_VISIT_RX_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_VISIT_RX_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        visits: [...state.visits, action.payload.data]
+      };
+
+    case "UPDATE_VISIT_BALANCE_REJECTED":
+      return { ...state, isLoading: true, error: action.payload };
+    case "UPDATE_VISIT_BALANCE_PENDING":
+      return { ...state, isLoading: true };
+    case "UPDATE_VISIT_BALANCE_FULFILLED":
       return {
         ...state,
         isLoading: false,

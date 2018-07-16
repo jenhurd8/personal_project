@@ -226,7 +226,7 @@ class Provider extends Component {
             <div className="drPhoto">
               <img src={element.photo} alt="provider" />
             </div>
-            <button onClick={this.editProviderMenu}>Edit Provider</button>
+            {/* <button onClick={this.editProviderMenu}>Edit Provider</button> */}
             {this.state.editProviderMenu && (
               <div className="editMenu">
                 <div>
@@ -458,6 +458,7 @@ class Provider extends Component {
           </div>
           <div className="providerArray">
             <h1>Your Provider List</h1>
+            <button onClick={this.editProviderMenu}>Edit Provider Menu</button>
             <br />
             {providerArray}
           </div>

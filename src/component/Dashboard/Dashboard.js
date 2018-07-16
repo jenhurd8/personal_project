@@ -11,7 +11,8 @@ import {
   removeVisit,
   updateVisitDate,
   updateVisitDetails,
-  updateVisitRx
+  updateVisitRx,
+  updateVisitBalance
 } from "../../redux/reducer";
 
 class Dashboard extends Component {
@@ -21,6 +22,7 @@ class Dashboard extends Component {
       date: "",
       details: "",
       rx: "",
+      balance: 0,
       drSelected: "",
       patientSelected: "",
       showEditMenu: false
@@ -31,6 +33,7 @@ class Dashboard extends Component {
     this.updateVisitDate = this.updateVisitDate.bind(this);
     this.updateVisitDetails = this.updateVisitDetails.bind(this);
     this.updateVisitRx = this.updateVisitRx.bind(this);
+    this.updateVisitBalance = this.updateVisitBalance.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +75,13 @@ class Dashboard extends Component {
     window.location.reload();
   }
 
+  updateVisitBalance(id) {
+    this.props.updateVisitBalance(id, {
+      balance: this.state.balance
+    });
+    window.location.reload();
+  }
+
   render() {
     const { visits, isLoading } = this.props;
 
@@ -79,11 +89,11 @@ class Dashboard extends Component {
       <p>Loading...</p>
     ) : (
       visits.map((element, index) => {
-        console.log(visits);
-        console.log(visits[0].details);
-        console.log(visits[0].rx);
+        // console.log(visits);
+        // console.log(visits[0].details);
+        // console.log(visits[0].rx);
         // console.log(element);
-        //turn this back on when linked to logged in persons emai
+        //turn this back on when linked to logged in persons email
         //if (visits[index].visitemail === "@gmail.com") {
         return (
           <div className="visits" key={index}>
@@ -97,61 +107,77 @@ class Dashboard extends Component {
               <p>{element.date && element.date.slice(0, 10)}</p>
               <p>{element.details}</p>
               <p>{element.rx}</p>
+              <p>${element.balance}</p>
               <button onClick={this.showEditMenu}>Edit Visit</button>
-              {this.state.showEditMenu && (
-                <div className="editMenu">
+            </div>
+
+            {this.state.showEditMenu && (
+              <div className="editMenu">
+                <div>
                   <div>
-                    <div>
-                      <p>Date of Visit:</p>
-                      <input
-                        name="date"
-                        type="date"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button
-                        onClick={() =>
-                          this.updateVisitDate(visits[index].visitid)
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
+                    <p>Date of Visit:</p>
+                    <input
+                      name="date"
+                      type="date"
+                      onChange={this.onChangeHandler}
+                    />
+                    <button
+                      onClick={() =>
+                        this.updateVisitDate(visits[index].visitid)
+                      }
+                    >
+                      Submit
+                    </button>
+                  </div>
 
-                    <div>
-                      <p>Updated Visit Details:</p>
-                      <input
-                        name="details"
-                        type="text"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button
-                        onClick={() =>
-                          this.updateVisitDetails(visits[index].visitid)
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
+                  <div>
+                    <p>Updated Visit Details:</p>
+                    <input
+                      name="details"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                    <button
+                      onClick={() =>
+                        this.updateVisitDetails(visits[index].visitid)
+                      }
+                    >
+                      Submit
+                    </button>
+                  </div>
 
-                    <div>
-                      <p>Update Prescriptions:</p>
-                      <input
-                        name="rx"
-                        type="text"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button
-                        onClick={() =>
-                          this.updateVisitRx(visits[index].visitid)
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
+                  <div>
+                    <p>Update Prescriptions:</p>
+                    <input
+                      name="rx"
+                      type="text"
+                      onChange={this.onChangeHandler}
+                    />
+                    <button
+                      onClick={() => this.updateVisitRx(visits[index].visitid)}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                  <div>
+                    <p>Update Visit Balance:</p>
+                    <input
+                      name="balance"
+                      type="number"
+                      onChange={this.onChangeHandler}
+                    />
+                    <button
+                      onClick={() =>
+                        this.updateVisitBalance(visits[index].visitid)
+                      }
+                    >
+                      Submit
+                    </button>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+
             <div className="dr">
               <img src={visits[index].photo} alt="provider" />
               <p>{visits[index].providersname}</p>
@@ -166,18 +192,6 @@ class Dashboard extends Component {
         //  }
       })
     );
-
-    // let providersArray = isLoading ? (
-    //   <p>Loading...</p>
-    // ) : (
-    //   providers.map((element, index) => {
-    //     return (
-    //       <div className="providers" key={index}>
-    //         provider
-    //       </div>
-    //     );
-    //   })
-    // );
 
     return (
       <div>
@@ -222,6 +236,7 @@ export default connect(
     removeVisit,
     updateVisitDate,
     updateVisitDetails,
-    updateVisitRx
+    updateVisitRx,
+    updateVisitBalance
   }
 )(Dashboard);

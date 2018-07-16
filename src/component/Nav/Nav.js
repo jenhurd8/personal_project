@@ -22,7 +22,8 @@ export default class Nav extends Component {
             <Link to="/visit">Log a Visit</Link>
           </div>
           <div className="menuItems">
-            <Link to="/">Exit -- Add login/logout</Link>
+            <a href="http://localhost:3001/login">Login</a>
+            <a href="http://localhost:3000/#/dashboard">Log out</a>
           </div>
         </div>
       </div>
