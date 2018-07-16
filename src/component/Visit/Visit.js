@@ -106,7 +106,7 @@ class Visit extends Component {
 
     let providersArray = providers.map((provider, i) => {
       return (
-        <div>
+        <div key={i}>
           <button onClick={() => this.selectDrHandler(provider.id)}>
             {provider.name}
           </button>
@@ -116,7 +116,7 @@ class Visit extends Component {
 
     let familyArray = family.map((family, i) => {
       return (
-        <div>
+        <div key={i}>
           <button onClick={() => this.selectPatientHandler(family.id)}>
             {family.name}
           </button>

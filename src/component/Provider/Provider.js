@@ -4,6 +4,7 @@ import Nav from "../../component/Nav/Nav.js";
 import axios from "axios";
 import { connect } from "react-redux";
 import {
+  getVisits,
   removeProvider,
   addProvider,
   getProviders,
@@ -51,6 +52,7 @@ class Provider extends Component {
 
   componentDidMount() {
     this.props.getProviders();
+    this.props.getVisits();
   }
 
   onChangeHandler = e => {
@@ -197,8 +199,6 @@ class Provider extends Component {
   }
 
   updateProviderPhone(id) {
-    console.log(this.state.phone);
-    console.log(id);
     this.props.updateProviderPhone(id, {
       phone: this.state.phone
     });
@@ -469,13 +469,15 @@ class Provider extends Component {
 
 function mapStateToProps(state) {
   return {
-    providers: state.providers
+    providers: state.providers,
+    visits: state.visits
   };
 }
 
 export default connect(
   mapStateToProps,
   {
+    getVisits,
     removeProvider,
     addProvider,
     getProviders,
