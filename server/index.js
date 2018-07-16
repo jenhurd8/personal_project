@@ -71,15 +71,13 @@ app.get(
   "/login",
   passport.authenticate("auth0", {
     successRedirect: "http://localhost:3000/#/dashboard",
-    // successRedirect: process.env.REACT_APP_DEV_HOST,
     failureRedirect: "/login"
   })
 );
 
 app.get("/logout", (req, res) => {
   req.session.destroy();
-  //res.redirect("http://localhost:3000/landing");
-  res.redirect("/landing");
+  res.redirect("http://localhost:3000/landing");
 });
 
 app.get("/api/user", (req, res) => {

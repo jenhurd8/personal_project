@@ -15,3 +15,8 @@
 a {
   text-decoration: none;
 }
+#imgPic {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}

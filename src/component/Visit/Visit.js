@@ -8,7 +8,8 @@ import {
   getVisits,
   getFamily,
   getProviders,
-  addVisit
+  addVisit,
+  getUser
 } from "../../redux/reducer";
 
 class Visit extends Component {
@@ -19,6 +20,7 @@ class Visit extends Component {
       details: "",
       rx: "",
       balance: 0,
+      email: "",
       drSelected: "",
       patientSelected: "",
       chosenFamily: [],
@@ -36,6 +38,11 @@ class Visit extends Component {
     this.props.getVisits();
     this.props.getFamily();
     this.props.getProviders();
+    this.props.getUser().then(result => {
+      this.setState({
+        email: result.value.data.email
+      });
+    });
   }
 
   onChangeHandler = e => {
@@ -53,9 +60,9 @@ class Visit extends Component {
     this.setState({
       chosenDr: this.props.providers
         .filter(doctor => dr === doctor.id)
-        .map(item => {
+        .map((item, i) => {
           return (
-            <div>
+            <div key={i}>
               <p>{item.name}</p>
               <img src={item.photo} alt="doctor" />
             </div>
@@ -107,23 +114,27 @@ class Visit extends Component {
     const { providers, family } = this.props;
 
     let providersArray = providers.map((provider, i) => {
-      return (
-        <div key={i}>
-          <button onClick={() => this.selectDrHandler(provider.id)}>
-            {provider.name}
-          </button>
-        </div>
-      );
+      if (provider.email === this.state.email) {
+        return (
+          <div key={i}>
+            <button onClick={() => this.selectDrHandler(provider.id)}>
+              {provider.name}
+            </button>
+          </div>
+        );
+      }
     });
 
     let familyArray = family.map((family, i) => {
-      return (
-        <div key={i}>
-          <button onClick={() => this.selectPatientHandler(family.id)}>
-            {family.name}
-          </button>
-        </div>
-      );
+      if (family.email === this.state.email) {
+        return (
+          <div key={i}>
+            <button onClick={() => this.selectPatientHandler(family.id)}>
+              {family.name}
+            </button>
+          </div>
+        );
+      }
     });
 
     return (
@@ -192,7 +203,8 @@ function mapStateToProps(state) {
     family: state.family,
     visits: state.visits,
     providers: state.providers,
-    loading: state.loading
+    loading: state.loading,
+    users: state.users
   };
 }
 
@@ -202,6 +214,7 @@ export default connect(
     getVisits,
     getFamily,
     getProviders,
-    addVisit
+    addVisit,
+    getUser
   }
 )(Visit);

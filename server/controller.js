@@ -1,9 +1,9 @@
 module.exports = {
   addFamily: (req, res, next) => {
     let db = req.app.get("db");
-    const { name, image, dob, themecolor } = req.body;
+    const { name, image, dob, themecolor, email } = req.body;
 
-    db.addFamily([name, image, dob, themecolor])
+    db.addFamily([name, image, dob, themecolor, email])
       .then(family => {
         db.getFamily().then(family => {
           return res.status(200).send(family);
@@ -138,9 +138,9 @@ module.exports = {
   addProvider: (req, res, next) => {
     console.log(req.body);
     let db = req.app.get("db");
-    const { name, specialty, address, photo, phone } = req.body;
+    const { name, specialty, address, photo, phone, email } = req.body;
 
-    db.addProvider([name, specialty, address, photo, phone])
+    db.addProvider([name, specialty, address, photo, phone, email])
       .then(() => res.sendStatus(200))
       .catch(err => {
         res.status(500).send({

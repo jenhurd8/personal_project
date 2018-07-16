@@ -12,7 +12,8 @@ import {
   updateVisitDate,
   updateVisitDetails,
   updateVisitRx,
-  updateVisitBalance
+  updateVisitBalance,
+  getUser
 } from "../../redux/reducer";
 
 class Dashboard extends Component {
@@ -23,6 +24,7 @@ class Dashboard extends Component {
       details: "",
       rx: "",
       balance: 0,
+      email: "",
       drSelected: "",
       patientSelected: "",
       showEditMenu: false
@@ -40,6 +42,11 @@ class Dashboard extends Component {
     this.props.getVisits();
     this.props.getFamily();
     this.props.getProviders();
+    this.props.getUser().then(result => {
+      this.setState({
+        email: result.value.data.email
+      });
+    });
   }
 
   deleteHandler(id) {
@@ -89,107 +96,110 @@ class Dashboard extends Component {
       <p>Loading...</p>
     ) : (
       visits.map((element, index) => {
-        // console.log(visits);
-        // console.log(visits[0].details);
+        console.log(visits);
+        console.log("visit email:" + visits[index].visitemail);
+        console.log("state email:" + this.state.email);
         // console.log(visits[0].rx);
         // console.log(element);
         //turn this back on when linked to logged in persons email
-        //if (visits[index].visitemail === "@gmail.com") {
-        return (
-          <div className="visits" key={index}>
-            <div className="person">
-              <img src={visits[index].image} alt="person" />
-              <p>{visits[index].familyname}</p>
-              <p>{visits[index].dob && visits[index].dob.slice(0, 10)}</p>
-            </div>
-            <div className="visitDetails">
-              Visit Details:
-              <p>{element.date && element.date.slice(0, 10)}</p>
-              <p>{element.details}</p>
-              <p>{element.rx}</p>
-              <p>${element.balance}</p>
-              <button onClick={this.showEditMenu}>Edit Visit</button>
-            </div>
+        if (visits[index].visitemail === this.state.email) {
+          return (
+            <div className="visits" key={index}>
+              <div className="person">
+                <img src={visits[index].image} alt="person" />
+                <p>{visits[index].familyname}</p>
+                <p>{visits[index].dob && visits[index].dob.slice(0, 10)}</p>
+              </div>
+              <div className="visitDetails">
+                Visit Details:
+                <p>{element.date && element.date.slice(0, 10)}</p>
+                <p>{element.details}</p>
+                <p>{element.rx}</p>
+                <p>${element.balance}</p>
+                <button onClick={this.showEditMenu}>Edit Visit</button>
+              </div>
 
-            {this.state.showEditMenu && (
-              <div className="editMenu">
-                <div>
+              {this.state.showEditMenu && (
+                <div className="editMenu">
                   <div>
-                    <p>Date of Visit:</p>
-                    <input
-                      name="date"
-                      type="date"
-                      onChange={this.onChangeHandler}
-                    />
-                    <button
-                      onClick={() =>
-                        this.updateVisitDate(visits[index].visitid)
-                      }
-                    >
-                      Submit
-                    </button>
-                  </div>
+                    <div>
+                      <p>Date of Visit:</p>
+                      <input
+                        name="date"
+                        type="date"
+                        onChange={this.onChangeHandler}
+                      />
+                      <button
+                        onClick={() =>
+                          this.updateVisitDate(visits[index].visitid)
+                        }
+                      >
+                        Submit
+                      </button>
+                    </div>
 
-                  <div>
-                    <p>Updated Visit Details:</p>
-                    <input
-                      name="details"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                    <button
-                      onClick={() =>
-                        this.updateVisitDetails(visits[index].visitid)
-                      }
-                    >
-                      Submit
-                    </button>
-                  </div>
+                    <div>
+                      <p>Updated Visit Details:</p>
+                      <input
+                        name="details"
+                        type="text"
+                        onChange={this.onChangeHandler}
+                      />
+                      <button
+                        onClick={() =>
+                          this.updateVisitDetails(visits[index].visitid)
+                        }
+                      >
+                        Submit
+                      </button>
+                    </div>
 
-                  <div>
-                    <p>Update Prescriptions:</p>
-                    <input
-                      name="rx"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                    <button
-                      onClick={() => this.updateVisitRx(visits[index].visitid)}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                  <div>
-                    <p>Update Visit Balance:</p>
-                    <input
-                      name="balance"
-                      type="number"
-                      onChange={this.onChangeHandler}
-                    />
-                    <button
-                      onClick={() =>
-                        this.updateVisitBalance(visits[index].visitid)
-                      }
-                    >
-                      Submit
-                    </button>
+                    <div>
+                      <p>Update Prescriptions:</p>
+                      <input
+                        name="rx"
+                        type="text"
+                        onChange={this.onChangeHandler}
+                      />
+                      <button
+                        onClick={() =>
+                          this.updateVisitRx(visits[index].visitid)
+                        }
+                      >
+                        Submit
+                      </button>
+                    </div>
+                    <div>
+                      <p>Update Visit Balance:</p>
+                      <input
+                        name="balance"
+                        type="number"
+                        onChange={this.onChangeHandler}
+                      />
+                      <button
+                        onClick={() =>
+                          this.updateVisitBalance(visits[index].visitid)
+                        }
+                      >
+                        Submit
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div className="dr">
-              <img src={visits[index].photo} alt="provider" />
-              <p>{visits[index].providersname}</p>
-              <p>{visits[index].phone}</p>
-              <p>{visits[index].address}</p>
+              <div className="dr">
+                <img src={visits[index].photo} alt="provider" />
+                <p>{visits[index].providersname}</p>
+                <p>{visits[index].phone}</p>
+                <p>{visits[index].address}</p>
+              </div>
+              <button onClick={() => this.deleteHandler(visits[index].visitid)}>
+                Delete
+              </button>
             </div>
-            <button onClick={() => this.deleteHandler(visits[index].visitid)}>
-              Delete
-            </button>
-          </div>
-        );
-        //  }
+          );
+        }
       })
     );
 
@@ -223,7 +233,8 @@ function mapStateToProps(state) {
     family: state.family,
     visits: state.visits,
     providers: state.providers,
-    loading: state.loading
+    loading: state.loading,
+    user: state.user
   };
 }
 
@@ -237,6 +248,7 @@ export default connect(
     updateVisitDate,
     updateVisitDetails,
     updateVisitRx,
-    updateVisitBalance
+    updateVisitBalance,
+    getUser
   }
 )(Dashboard);

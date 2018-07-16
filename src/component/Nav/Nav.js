@@ -34,20 +34,20 @@ class Nav extends Component {
     this.props
       .getUser()
       .then(result => {
-        console.log(result);
-        console.log(result.value.data.id);
+        // console.log(result);
+        // console.log(result.value.data.id);
         this.setState({
           id: result.value.data.id,
           email: result.value.data.email,
           displayname: result.value.data.displayname,
           picture: result.value.data.picture
         });
-        console.log(
-          this.state.id,
-          this.state.email,
-          this.state.displayname,
-          this.state.picture
-        );
+        // console.log(
+        //   this.state.id,
+        //   this.state.email,
+        //   this.state.displayname,
+        //   this.state.picture
+        // );
       })
       .catch(err => {
         console.log(err);
@@ -56,15 +56,28 @@ class Nav extends Component {
   }
 
   loggedIn() {
-    if (true) {
-      return <p>test</p>;
-      // <a href="http://localhost:3000/#/dashboard">Log out</a>;
+    if (this.state.email.length > 1) {
+      return (
+        <div>
+          <a href="http://localhost:3001/logout" onClick={() => this.logOut}>
+            Log out
+          </a>
+          Welcome {this.state.displayname}!
+          <img id="imgPic" src={this.state.picture} alt="person" />
+        </div>
+      );
     } else {
       return <a href="http://localhost:3001/login">Login</a>;
     }
   }
 
-  logOut() {}
+  logOut() {
+    this.setState({
+      email: ""
+    });
+    console.log(this.state.email);
+    // "http://localhost:3000/landing"
+  }
 
   render() {
     // console.log(this.props.getUserid);
@@ -84,15 +97,7 @@ class Nav extends Component {
           <div className="menuItems">
             <Link to="/visit">Log a Visit</Link>
           </div>
-          {/* <div className="menuItems">{this.loggedIn}</div> */}
-          <div className="menuItems">
-            <a href="http://localhost:3001/login">Log in</a>
-          </div>
-          <Link to="/logout">
-            <div className="menuItems">
-              <button>Log out</button>
-            </div>
-          </Link>
+          {this.loggedIn()}
         </div>
       </div>
     );
