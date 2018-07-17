@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Family.css";
 import Nav from "../../component/Nav/Nav.js";
+import FamilyMember from "./FamilyMember";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -30,6 +31,10 @@ class Family extends Component {
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.showEditMenu = this.showEditMenu.bind(this);
+    this.updateFamilyName = this.updateFamilyName.bind(this);
+    this.updateFamilyDob = this.updateFamilyDob.bind(this);
+    this.updateFamilyImage = this.updateFamilyImage.bind(this);
+    this.updateFamilyColor = this.updateFamilyColor.bind(this);
   }
 
   componentDidMount() {
@@ -113,9 +118,23 @@ class Family extends Component {
       family.map((element, index) => {
         if (element.email === this.state.email) {
           return (
-            // <FamilyMember name={}/>
-            <div className="familyMember" key={index}>
-              <div className="left">
+            //  <div className="familyMember" key={index}>
+            <FamilyMember
+              name={element.name}
+              id={element.id}
+              key={index}
+              image={element.image}
+              dob={element.dob.slice(0, 10)}
+              themecolor={element.themecolor}
+              deleteHandler={this.deleteHandler}
+              onChangeHandler={this.onChangeHandler}
+              updateFamilyName={this.updateFamilyName}
+              updateFamilyDob={this.updateFamilyDob}
+              updateFamilyImage={this.updateFamilyImage}
+              updateFamilyColor={this.updateFamilyColor}
+              selectColor={this.state.color}
+            />
+            /* <div className="left">
                 <button onClick={() => this.deleteHandler(element.id)}>
                   Delete
                 </button>
@@ -185,13 +204,10 @@ class Family extends Component {
                         </button>
                       </div>
                     </div>
-                    {/* <button onClick={() => this.updateFamily(element.id)}>
-                    Submit Changes
-                  </button> */}
                   </div>
                 )}
               </div>
-            </div>
+            </div> */
           );
         }
       })
@@ -248,7 +264,7 @@ class Family extends Component {
               <button>Cancel</button>
             </Link>
           </div>
-
+          {/* <FamilyMember /> */}
           <div className="familyArray">{familyArray}</div>
         </div>
       </div>

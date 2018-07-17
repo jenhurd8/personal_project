@@ -1,0 +1,33 @@
+/* .inputs {
+    padding: 50px;
+  }
+  .family {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .familyMember {
+    display: flex;
+    flex-direction: row;
+    width: 50vw;
+    height: 30vh;
+    background-color: aqua;
+    margin: 10px;
+  }
+  .img {
+    height: 200px;
+    width: 200px;
+  } */
+
+.familyMember {
+  display: flex;
+  flex-direction: row;
+  width: 50vw;
+  height: 30vh;
+  background-color: aqua;
+  margin: 10px;
+}
+.img {
+  height: 200px;
+  width: 200px;
+}
