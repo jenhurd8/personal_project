@@ -358,10 +358,9 @@ class Provider extends Component {
             <br />
             <button onClick={this.showEditMenu}>Add A New Provider</button>
             <ToggleDisplay if={this.state.showEditMenu}>
-              {/* {this.state.showEditMenu && ( */}
               <div className="editMenu">
                 <div>
-                  <p>Change Provider Name:</p>
+                  <p>New Provider Name:</p>
                   <input
                     name="responseName"
                     type="text"
@@ -369,7 +368,7 @@ class Provider extends Component {
                   />
                 </div>
                 <div>
-                  <p>Change Provider Address:</p>
+                  <p>New Provider Address:</p>
                   <input
                     name="responseAddress"
                     type="text"
@@ -377,7 +376,7 @@ class Provider extends Component {
                   />
                 </div>
                 <div>
-                  <p>Change Provider Phone:</p>
+                  <p>New Provider Phone:</p>
                   <input
                     name="bdPhone"
                     type="text"
@@ -385,24 +384,25 @@ class Provider extends Component {
                   />
                 </div>
                 <div>
-                  <p>Change Practice Name:</p>
+                  <p>New Practice Name:</p>
                   <input
                     name="bdPracticeName"
                     type="text"
                     onChange={this.onChangeHandler}
                   />
                 </div>
-                {/* <div>
-                <p>Change Provider Image:</p>
-                <p>{this.state.bdPhoto}</p>
-                <input
-                  name="bdPhoto"
-                  type="text"
-                  onChange={this.onChangeHandler}
-                />
-              </div> */}
+                <div>
+                  <p>Add a Provider Image:</p>
+                  <input
+                    name="bdPhoto"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                  />
+                </div>
+                <button onClick={this.confirmedProvider}>
+                  Submit New Provider
+                </button>
               </div>
-              {/* )} */}
             </ToggleDisplay>
             <br />
             <br />

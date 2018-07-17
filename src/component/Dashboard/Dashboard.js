@@ -1,6 +1,7 @@
 import React from "react";
 import "./Dashboard.css";
 import { Component } from "react";
+import DashboardDetail from "./DashboardDetail";
 import Nav from "../../component/Nav/Nav.js";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -104,12 +105,7 @@ class Dashboard extends Component {
       <p>Loading...</p>
     ) : (
       visits.map((element, index) => {
-        console.log(visits);
-        console.log("visit email: " + visits[index].visitemail);
-        console.log("state email from props: " + this.state.email);
-        // console.log(visits[0].rx);
-        // console.log(element);
-        //turn this back on when linked to logged in persons email
+        let dashboardVisitId = visits[index].visitid;
         if (visits[index].visitemail === this.state.email) {
           return (
             <div className="visits" key={index}>
@@ -119,82 +115,19 @@ class Dashboard extends Component {
                 <p>{visits[index].dob && visits[index].dob.slice(0, 10)}</p>
               </div>
               <div className="visitDetails">
-                Visit Details:
-                <p>{element.date && element.date.slice(0, 10)}</p>
-                <p>{element.details}</p>
-                <p>{element.rx}</p>
-                <p>${element.balance}</p>
-                <button onClick={this.showEditMenu}>Edit Visit</button>
+                <DashboardDetail
+                  date={element.date.slice(0, 10)}
+                  details={element.details}
+                  rx={element.rx}
+                  balance={element.balance}
+                  visitId={dashboardVisitId}
+                  onChangeHandler={this.onChangeHandler}
+                  updateVisitDate={this.updateVisitDate}
+                  updateVisitBalance={this.updateVisitBalance}
+                  updateVisitDetails={this.updateVisitDetails}
+                  updateVisitRx={this.updateVisitRx}
+                />
               </div>
-
-              {this.state.showEditMenu && (
-                <div className="editMenu">
-                  <div>
-                    <div>
-                      <p>Date of Visit:</p>
-                      <input
-                        name="date"
-                        type="date"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button
-                        onClick={() =>
-                          this.updateVisitDate(visits[index].visitid)
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
-
-                    <div>
-                      <p>Updated Visit Details:</p>
-                      <input
-                        name="details"
-                        type="text"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button
-                        onClick={() =>
-                          this.updateVisitDetails(visits[index].visitid)
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
-
-                    <div>
-                      <p>Update Prescriptions:</p>
-                      <input
-                        name="rx"
-                        type="text"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button
-                        onClick={() =>
-                          this.updateVisitRx(visits[index].visitid)
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
-                    <div>
-                      <p>Update Visit Balance:</p>
-                      <input
-                        name="balance"
-                        type="number"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button
-                        onClick={() =>
-                          this.updateVisitBalance(visits[index].visitid)
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               <div className="dr">
                 <img src={visits[index].photo} alt="provider" />
