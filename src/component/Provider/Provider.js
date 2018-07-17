@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Provider.css";
 import Nav from "../../component/Nav/Nav.js";
 import axios from "axios";
+import ProviderOne from "./ProviderOne";
 import { connect } from "react-redux";
 import {
   getVisits,
@@ -49,6 +50,13 @@ class Provider extends Component {
     this.showEditMenu = this.showEditMenu.bind(this);
     this.updateProvider = this.updateProvider.bind(this);
     this.editProviderMenu = this.editProviderMenu.bind(this);
+    this.updateProviderName = this.updateProviderName.bind(this);
+    this.updateProviderAddress = this.updateProviderAddress.bind(this);
+    this.updateProviderPhone = this.updateProviderPhone.bind(this);
+    this.updateProviderPracticeName = this.updateProviderPracticeName.bind(
+      this
+    );
+    this.updateProviderPhoto = this.updateProviderPhoto.bind(this);
   }
 
   componentDidMount() {
@@ -221,92 +229,22 @@ class Provider extends Component {
         if (element.email === this.state.email) {
           return (
             <div className="providerDiv" key={index}>
-              <button onClick={() => this.deleteHandler(element.id)}>
-                Delete
-              </button>
-              <div className="drData">
-                <p>{element.name}</p>
-                <br />
-                <p>Practice Name: {element.specialty}</p>
-                <p>{element.address}</p>
-                <p>Phone: {element.phone}</p>
-              </div>
-              <div className="drPhoto">
-                <img src={element.photo} alt="provider" />
-              </div>
-              {/* <button onClick={this.editProviderMenu}>Edit Provider</button> */}
-              {this.state.editProviderMenu && (
-                <div className="editMenu">
-                  <div>
-                    <p>New Provider Name:</p>
-                    <input
-                      name="name"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                    <button onClick={() => this.updateProviderName(element.id)}>
-                      Submit
-                    </button>
-                    <div>
-                      <p>New Practice Name:</p>
-                      <input
-                        name="specialty"
-                        type="text"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button
-                        onClick={() =>
-                          this.updateProviderPracticeName(element.id)
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-                  <div>
-                    <p>New Address:</p>
-                    <input
-                      name="address"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                    <button
-                      onClick={() => this.updateProviderAddress(element.id)}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                  <div>
-                    <p>Change Provider Photo:</p>
-                    <input
-                      name="photo"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                    <button
-                      onClick={() => this.updateProviderPhoto(element.id)}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                  <div>
-                    <p>Change Provider Phone:</p>
-                    <input
-                      name="phone"
-                      type="text"
-                      onChange={this.onChangeHandler}
-                    />
-                    <button
-                      onClick={() => this.updateProviderPhone(element.id)}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                  {/* <button onClick={() => this.updateProvider(element.id)}>
-                  Submit Changes
-                </button> */}
-                </div>
-              )}
+              <ProviderOne
+                key={index}
+                id={element.id}
+                name={element.name}
+                specialty={element.specialty}
+                address={element.address}
+                phone={element.phone}
+                photo={element.photo}
+                onChangeHandler={this.onChangeHandler}
+                deleteHandler={this.deleteHandler}
+                updateProviderName={this.updateProviderName}
+                updateProviderPracticeName={this.updateProviderPracticeName}
+                updateProviderAddress={this.updateProviderAddress}
+                updateProviderPhoto={this.updateProviderPhoto}
+                updateProviderPhone={this.updateProviderPhone}
+              />
             </div>
           );
         }

@@ -118,7 +118,6 @@ class Family extends Component {
       family.map((element, index) => {
         if (element.email === this.state.email) {
           return (
-            //  <div className="familyMember" key={index}>
             <FamilyMember
               name={element.name}
               id={element.id}
@@ -134,80 +133,6 @@ class Family extends Component {
               updateFamilyColor={this.updateFamilyColor}
               selectColor={this.state.color}
             />
-            /* <div className="left">
-                <button onClick={() => this.deleteHandler(element.id)}>
-                  Delete
-                </button>
-                <p>{element.name}</p>
-                <img src={element.image} alt="person" />
-
-                <p>{element.dob.slice(0, 10)}</p>
-                <p>{element.themecolor}</p>
-              </div>
-              <div className="right">
-                <button onClick={this.showEditMenu}>Edit Family Member</button>
-                {this.state.showEditMenu && (
-                  <div className="editMenu">
-                    <div>
-                      <p>Name:</p>
-                      <input
-                        name="name"
-                        type="text"
-                        onChange={this.onChangeHandler}
-                      />
-                      <button onClick={() => this.updateFamilyName(element.id)}>
-                        Submit
-                      </button>
-                      <div>
-                        <p>Date of Birth:</p>
-                        <input
-                          name="dob"
-                          type="date"
-                          onChange={this.onChangeHandler}
-                        />
-                        <button
-                          onClick={() => this.updateFamilyDob(element.id)}
-                        >
-                          Submit
-                        </button>
-                      </div>
-
-                      <div>
-                        <p>Image URL:</p>
-                        <input
-                          name="image"
-                          type="text"
-                          onChange={this.onChangeHandler}
-                        />
-                        <button
-                          onClick={() => this.updateFamilyImage(element.id)}
-                        >
-                          Submit
-                        </button>
-                      </div>
-
-                      <div>
-                        <p>Theme Color:</p>
-                        <select
-                          value={this.state.color}
-                          name="color"
-                          onChange={this.onChangeHandler}
-                        >
-                          <option color="red">Red</option>
-                          <option color="blue">Blue</option>
-                          <option color="yelow">Yellow</option>
-                        </select>
-                        <button
-                          onClick={() => this.updateFamilyColor(element.id)}
-                        >
-                          Submit
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div> */
           );
         }
       })
@@ -264,7 +189,6 @@ class Family extends Component {
               <button>Cancel</button>
             </Link>
           </div>
-          {/* <FamilyMember /> */}
           <div className="familyArray">{familyArray}</div>
         </div>
       </div>
