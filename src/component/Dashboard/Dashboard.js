@@ -36,6 +36,7 @@ class Dashboard extends Component {
     this.updateVisitDetails = this.updateVisitDetails.bind(this);
     this.updateVisitRx = this.updateVisitRx.bind(this);
     this.updateVisitBalance = this.updateVisitBalance.bind(this);
+    this.isLoggedIn = this.isLoggedIn.bind(this);
   }
 
   componentDidMount() {
@@ -89,6 +90,13 @@ class Dashboard extends Component {
     window.location.reload();
   }
 
+  isLoggedIn() {
+    console.log(this.state.email);
+    if (!this.state.email) {
+      return <p>Warning! You are not logged in, your data will not be saved</p>;
+    }
+  }
+
   render() {
     const { visits, isLoading } = this.props;
 
@@ -97,8 +105,8 @@ class Dashboard extends Component {
     ) : (
       visits.map((element, index) => {
         console.log(visits);
-        console.log("visit email:" + visits[index].visitemail);
-        console.log("state email:" + this.state.email);
+        console.log("visit email: " + visits[index].visitemail);
+        console.log("state email from props: " + this.state.email);
         // console.log(visits[0].rx);
         // console.log(element);
         //turn this back on when linked to logged in persons email
@@ -212,6 +220,8 @@ class Dashboard extends Component {
           <p>
             Welcome! Add a family member and healthcare provider to get started.
           </p>
+          <br />
+          {this.isLoggedIn()}
           <div className="buttonDiv">
             <Link to="/family">
               <button>Add a family member</button>

@@ -9,7 +9,8 @@ import {
   getUsersEmail,
   getUsersDisplayName,
   getUsersPicture,
-  getUser
+  getUser,
+  deleteUser
 } from "../../redux/reducer";
 
 class Nav extends Component {
@@ -72,10 +73,11 @@ class Nav extends Component {
   }
 
   logOut() {
-    this.setState({
-      email: ""
-    });
-    console.log(this.state.email);
+    // this.setState({
+    //   email: ""
+    // });
+    this.props.deleteUser().then(console.log(this.state.email));
+    //console.log();
     // "http://localhost:3000/landing"
   }
 
@@ -118,6 +120,7 @@ export default connect(
     getUsersEmail,
     getUsersDisplayName,
     getUsersPicture,
-    getUser
+    getUser,
+    deleteUser
   }
 )(Nav);

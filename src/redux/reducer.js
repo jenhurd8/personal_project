@@ -32,6 +32,7 @@ const GET_USERS_ID = "GET_USERS_ID";
 const GET_USERS_EMAIL = "GET_USERS_EMAIL";
 const GET_USERS_DISPLAYNAME = "GET_USERS_DISPLAYNAME";
 const GET_USERS_PICTURE = "GET_USERS_PICTURE";
+const DELETE_USER = "DELETE_USER";
 
 export function getFamily() {
   return {
@@ -236,6 +237,13 @@ export function getUsersPicture(picture) {
   };
 }
 
+export function deleteUser() {
+  return {
+    type: DELETE_USER,
+    payload: axios.delete(`/api/user/0`)
+  };
+}
+
 const initialState = {
   family: [],
   providers: [],
@@ -246,7 +254,8 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  // toggle to see what passes through reducer: console.log(action.payload);
+  // toggle to see what passes through reducer:
+  console.log(action.payload);
   switch (action.type) {
     case "GET_FAMILY_PENDING":
       return { ...state, isLoading: true };
@@ -535,6 +544,13 @@ export default function reducer(state = initialState, action) {
     case "GET_USERS_PICTURE_FULFILLED":
       return { ...state, isLoading: false, users: action.payload.data };
     case "GET_USERS_PICTURE_REJECTED":
+      return { ...state, isLoading: false, error: action.payload };
+
+    case "REMOVE_USER_PENDING":
+      return { ...state, isLoading: true };
+    case "REMOVE_USER_FULFILLED":
+      return { ...state, isLoading: false, user: action.payload.data };
+    case "REMOVE_USER_REJECTED":
       return { ...state, isLoading: false, error: action.payload };
 
     default:

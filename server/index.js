@@ -76,13 +76,24 @@ app.get(
 );
 
 app.get("/logout", (req, res) => {
+  console.log("destroyed");
+  // res.redirect(`https://${process.env.DOMAIN}/v2/logout`);
+  req.logout();
   req.session.destroy();
-  res.redirect("http://localhost:3000/landing");
+  res.redirect(
+    `https://${
+      process.env.DOMAIN
+    }/v2/logout?federated&returnTo=http%3A%2F%2Flocalhost:3000/landing&client_id=${
+      process.env.CLIENT_ID
+    }`
+  );
 });
 
 app.get("/api/user", (req, res) => {
   res.status(200).send(req.session.passport.user);
 });
+
+//app.delete("/api/user/:id", controller.deleteUser);
 
 const port = 3001;
 
