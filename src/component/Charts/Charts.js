@@ -50,9 +50,7 @@ class Charts extends Component {
     // (data.labels = newVisits.map(visit => visit.date)),
     //   (data.datasets[0].data = newVisits.map(visit => visit.balance));
 
-    this.setState({});
-
-    this.state.lodashResult = _.reduce(
+    let lodashResult = _.reduce(
       newVisits,
       function(result, value, key) {
         result[value.date] = result[value.date] || 0;
@@ -61,12 +59,17 @@ class Charts extends Component {
       },
       {}
     );
+    console.log(lodashResult);
 
-    //this.barMaker2();
-    //console.log(this.state.lodashResult);
+    let newLo = Object.entries(lodashResult).map(([key, value]) => ({
+      key,
+      value
+    }));
+    console.log(newLo);
   }
 
   barMaker2() {
+    console.log("test");
     // var keys = this.state.lodashResult.map(function(el) {
     //   return Object.keys(el)[0];
     // });
@@ -74,12 +77,10 @@ class Charts extends Component {
   }
 
   render() {
-    console.log(this.props.visits);
-
-    console.log("years" + data.labels);
-    console.log("balances" + data.datasets[0].data);
-
-    //this.barMaker();
+    // console.log(this.props.visits);
+    // console.log("years" + data.labels);
+    // console.log("balances" + data.datasets[0].data);
+    this.barMaker();
 
     return (
       <div>
