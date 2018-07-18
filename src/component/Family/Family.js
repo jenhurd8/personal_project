@@ -115,8 +115,10 @@ class Family extends Component {
     let familyArray = isLoading ? (
       <p>Loading...</p>
     ) : (
-      family.map((element, index) => {
-        if (element.email === this.state.email) {
+      family
+        .filter(family => family.email === this.state.email)
+        .map((element, index) => {
+          // if (element.email === this.state.email) {
           return (
             <FamilyMember
               name={element.name}
@@ -134,8 +136,8 @@ class Family extends Component {
               selectColor={this.state.color}
             />
           );
-        }
-      })
+          //  }
+        })
     );
 
     return (

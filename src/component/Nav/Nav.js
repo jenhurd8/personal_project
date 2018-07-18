@@ -2,7 +2,6 @@ import React from "react";
 import "./Nav.css";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-//import axios from "axios";
 import { connect } from "react-redux";
 import {
   getUsersId,
@@ -22,38 +21,24 @@ class Nav extends Component {
       displayname: "",
       picture: ""
     };
-    //this.onChangeHandler = this.onChangeHandler.bind(this);
     this.loggedIn = this.loggedIn.bind(this);
     this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount() {
-    // axios.get("/api/user").then(function(response) {
-    //   console.log("axios: " + response.data.id);
-    //   console.log("axios: " + response.data.displayname);
-    // });
     this.props
       .getUser()
       .then(result => {
-        // console.log(result);
-        // console.log(result.value.data.id);
         this.setState({
           id: result.value.data.id,
           email: result.value.data.email,
           displayname: result.value.data.displayname,
           picture: result.value.data.picture
         });
-        // console.log(
-        //   this.state.id,
-        //   this.state.email,
-        //   this.state.displayname,
-        //   this.state.picture
-        // );
       })
       .catch(err => {
         console.log(err);
       });
-    // console.log(this.props.getUser);
   }
 
   loggedIn() {
@@ -73,19 +58,15 @@ class Nav extends Component {
   }
 
   logOut() {
-    // this.setState({
-    //   email: ""
-    // });
     this.props.deleteUser().then(console.log(this.state.email));
-    //console.log();
-    // "http://localhost:3000/landing"
   }
 
   render() {
-    // console.log(this.props.getUserid);
     return (
       <div className="nav">
-        <div className="logo">My Health</div>
+        <div className="logo">
+          <Link to="/">My Health</Link>
+        </div>
         <div className="menu">
           <div className="menuItems">
             <Link to="/dashboard">Dashboard</Link>
@@ -98,6 +79,9 @@ class Nav extends Component {
           </div>
           <div className="menuItems">
             <Link to="/visit">Log a Visit</Link>
+          </div>
+          <div className="menuItems">
+            <Link to="/charts">Health Data</Link>
           </div>
           {this.loggedIn()}
         </div>

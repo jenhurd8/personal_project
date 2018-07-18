@@ -1,0 +1,11 @@
+.charts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.bar {
+  margin: 20px;
+}
+.doughnut {
+  margin: 20px;
+}

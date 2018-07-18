@@ -14,7 +14,6 @@ export default class DashboardDetail extends Component {
   }
 
   render() {
-    console.log("dashboard details id: " + this.props.visitId);
     return (
       <div>
         <div>

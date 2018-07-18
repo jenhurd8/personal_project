@@ -225,8 +225,10 @@ class Provider extends Component {
     let providerArray = isLoading ? (
       <p>Loading...</p>
     ) : (
-      providers.map((element, index) => {
-        if (element.email === this.state.email) {
+      providers
+        .filter(provider => provider.email === this.state.email)
+        .map((element, index) => {
+          //if (element.email === this.state.email) {
           return (
             <div className="providerDiv" key={index}>
               <ProviderOne
@@ -247,8 +249,8 @@ class Provider extends Component {
               />
             </div>
           );
-        }
-      })
+          // }
+        })
     );
 
     return (

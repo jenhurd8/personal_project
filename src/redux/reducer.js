@@ -255,7 +255,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   // toggle to see what passes through reducer:
-  console.log(action.payload);
+  //console.log(action.payload);
   switch (action.type) {
     case "GET_FAMILY_PENDING":
       return { ...state, isLoading: true };

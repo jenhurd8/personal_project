@@ -111,22 +111,29 @@ class Visit extends Component {
   }
 
   render() {
-    const { providers, family } = this.props;
+    const { providers, family, isLoading } = this.props;
+    let providersArray = isLoading ? (
+      <p>Loading...</p>
+    ) : (
+      providers
+        .filter(provider => provider.email === this.state.email)
+        .map((provider, i) => {
+          // if (provider.email === this.state.email) {
+          return (
+            <div key={i}>
+              <button onClick={() => this.selectDrHandler(provider.id)}>
+                {provider.name}
+              </button>
+            </div>
+          );
+          // }
+        })
+    );
 
-    let providersArray = providers.map((provider, i) => {
-      if (provider.email === this.state.email) {
-        return (
-          <div key={i}>
-            <button onClick={() => this.selectDrHandler(provider.id)}>
-              {provider.name}
-            </button>
-          </div>
-        );
-      }
-    });
-
-    let familyArray = family.map((family, i) => {
-      if (family.email === this.state.email) {
+    let familyArray = family
+      .filter(family => family.email === this.state.email)
+      .map((family, i) => {
+        // if (family.email === this.state.email) {
         return (
           <div key={i}>
             <button onClick={() => this.selectPatientHandler(family.id)}>
@@ -134,8 +141,8 @@ class Visit extends Component {
             </button>
           </div>
         );
-      }
-    });
+        // }
+      });
 
     return (
       <div>

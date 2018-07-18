@@ -28,7 +28,8 @@ class Dashboard extends Component {
       email: "",
       drSelected: "",
       patientSelected: "",
-      showEditMenu: false
+      showEditMenu: false,
+      filter: ""
     };
     this.deleteHandler = this.deleteHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -92,7 +93,6 @@ class Dashboard extends Component {
   }
 
   isLoggedIn() {
-    console.log(this.state.email);
     if (!this.state.email) {
       return <p>Warning! You are not logged in, your data will not be saved</p>;
     }
@@ -100,48 +100,56 @@ class Dashboard extends Component {
 
   render() {
     const { visits, isLoading } = this.props;
+    // console.log(visits);
 
     let visitsArray = isLoading ? (
       <p>Loading...</p>
     ) : (
-      visits.map((element, index) => {
-        let dashboardVisitId = visits[index].visitid;
-        if (visits[index].visitemail === this.state.email) {
-          return (
-            <div className="visits" key={index}>
-              <div className="person">
-                <img src={visits[index].image} alt="person" />
-                <p>{visits[index].familyname}</p>
-                <p>{visits[index].dob && visits[index].dob.slice(0, 10)}</p>
-              </div>
-              <div className="visitDetails">
-                <DashboardDetail
-                  date={element.date.slice(0, 10)}
-                  details={element.details}
-                  rx={element.rx}
-                  balance={element.balance}
-                  visitId={dashboardVisitId}
-                  onChangeHandler={this.onChangeHandler}
-                  updateVisitDate={this.updateVisitDate}
-                  updateVisitBalance={this.updateVisitBalance}
-                  updateVisitDetails={this.updateVisitDetails}
-                  updateVisitRx={this.updateVisitRx}
-                />
-              </div>
+      visits
+        //.filter(item => item.email === this.state.email)
+        .map((element, index) => {
+          //console.log("email: " + this.state.email);
+          //console.log("visit email: " + visits[index].email);
+          let dashboardVisitId = visits[index].visitid;
 
-              <div className="dr">
-                <img src={visits[index].photo} alt="provider" />
-                <p>{visits[index].providersname}</p>
-                <p>{visits[index].phone}</p>
-                <p>{visits[index].address}</p>
+          if (visits[index].visitemail === this.state.email) {
+            return (
+              <div className="visits" key={index}>
+                <div className="person">
+                  <img src={visits[index].image} alt="person" />
+                  <p>{visits[index].familyname}</p>
+                  <p>{visits[index].dob && visits[index].dob.slice(0, 10)}</p>
+                </div>
+                <div className="visitDetails">
+                  <DashboardDetail
+                    date={element.date.slice(0, 10)}
+                    details={element.details}
+                    rx={element.rx}
+                    balance={element.balance}
+                    visitId={dashboardVisitId}
+                    onChangeHandler={this.onChangeHandler}
+                    updateVisitDate={this.updateVisitDate}
+                    updateVisitBalance={this.updateVisitBalance}
+                    updateVisitDetails={this.updateVisitDetails}
+                    updateVisitRx={this.updateVisitRx}
+                  />
+                </div>
+
+                <div className="dr">
+                  <img src={visits[index].photo} alt="provider" />
+                  <p>{visits[index].providersname}</p>
+                  <p>{visits[index].phone}</p>
+                  <p>{visits[index].address}</p>
+                </div>
+                <button
+                  onClick={() => this.deleteHandler(visits[index].visitid)}
+                >
+                  Delete
+                </button>
               </div>
-              <button onClick={() => this.deleteHandler(visits[index].visitid)}>
-                Delete
-              </button>
-            </div>
-          );
-        }
-      })
+            );
+          }
+        })
     );
 
     return (
