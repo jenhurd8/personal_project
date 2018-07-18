@@ -84,9 +84,9 @@ class Visit extends Component {
     this.setState({
       chosenFamily: this.props.family
         .filter(person => patient === person.id)
-        .map(item => {
+        .map((item, key) => {
           return (
-            <div>
+            <div key={key}>
               <p>{item.name}</p>
               <img src={item.image} alt="person" />
             </div>
