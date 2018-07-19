@@ -15,6 +15,22 @@ import {
   updateFamilyImage,
   getUser
 } from "../../redux/reducer";
+import Button from "@material-ui/core/Button";
+import { createMuiTheme } from "@material-ui/core/styles";
+//import blue from "@material-ui/core/colors/blue";
+import purple from "@material-ui/core/colors/purple";
+import green from "@material-ui/core/colors/green";
+import { withTheme } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: purple,
+    secondary: green
+  },
+  status: {
+    danger: "orange"
+  }
+});
 
 class Family extends Component {
   constructor() {
@@ -38,12 +54,12 @@ class Family extends Component {
   }
 
   componentDidMount() {
-    this.props.getFamily();
     this.props.getUser().then(result => {
       this.setState({
         email: result.value.data.email
       });
     });
+    this.props.getFamily();
   }
 
   onChangeHandler = e => {
@@ -118,7 +134,6 @@ class Family extends Component {
       family
         .filter(family => family.email === this.state.email)
         .map((element, index) => {
-          // if (element.email === this.state.email) {
           return (
             <FamilyMember
               name={element.name}
@@ -136,7 +151,6 @@ class Family extends Component {
               selectColor={this.state.color}
             />
           );
-          //  }
         })
     );
 
@@ -183,13 +197,28 @@ class Family extends Component {
               <option color="yelow">Yellow</option>
             </select> */}
             <br />
-            <button onClick={this.onSubmitHandler}>Submit</button>
+            {/* <button onClick={this.onSubmitHandler}>Submit</button> */}
+            <Button
+              variant="contained"
+              //color="primary"
+              onClick={this.onSubmitHandler}
+              style={{
+                background: "#64B5F6",
+                height: "10px",
+                width: "10px",
+                color: "white"
+              }}
+            >
+              Submit
+            </Button>
             <br />
             <br />
             <br />
-            <Link to="/dashboard">
-              <button>Cancel</button>
-            </Link>
+            {/* <Link to="/dashboard">
+              <Button variant="contained" color="primary">
+                Cancel
+              </Button>
+            </Link> */}
           </div>
           <div className="familyArray">{familyArray}</div>
         </div>

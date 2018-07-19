@@ -2,6 +2,7 @@ import React from "react";
 import "./Landing.css";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 class Landing extends Component {
   render() {
@@ -9,7 +10,9 @@ class Landing extends Component {
       <div className="landing">
         <h1 className="myHealth">My Health</h1>
         <Link to="/dashboard">
-          <button>Enter here</button>
+          <Button variant="contained" color="primary">
+            Enter here
+          </Button>
         </Link>
       </div>
     );

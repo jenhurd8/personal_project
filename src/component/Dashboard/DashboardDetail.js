@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./DashboardDetail.css";
+import Button from "@material-ui/core/Button";
 
 export default class DashboardDetail extends Component {
   constructor(props) {
@@ -23,7 +24,14 @@ export default class DashboardDetail extends Component {
           <p>{this.props.details}</p>
           <p>{this.props.rx}</p>
           <p>${this.props.balance}</p>
-          <button onClick={this.showEditMenu}>Edit Visit</button>
+          {/* <button onClick={this.showEditMenu}>Edit Visit</button> */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.showEditMenu}
+          >
+            Edit Visit
+          </Button>
         </div>
         <div>
           {this.state.showEditMenu && (

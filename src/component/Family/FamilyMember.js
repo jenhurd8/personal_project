@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
 
 export default class FamilyMember extends Component {
   constructor(props) {
@@ -17,16 +18,27 @@ export default class FamilyMember extends Component {
     return (
       <div className="familyMember" key={this.props.index}>
         <div className="left">
-          <button onClick={() => this.props.deleteHandler(this.props.id)}>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ background: "#64B5F6", height: "10px", width: "10px" }}
+            onClick={() => this.props.deleteHandler(this.props.id)}
+          >
             Delete
-          </button>
+          </Button>
           <p>{this.props.name}</p>
           <img src={this.props.image} alt="person" />
           <p>{this.props.dob}</p>
           <p>{this.props.themecolor}</p>
         </div>
         <div className="right">
-          <button onClick={this.showEditMenu}>Edit Family Member</button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.showEditMenu}
+          >
+            Edit Family Member
+          </Button>
           {this.state.showEditMenu && (
             <div className="editMenu">
               <div>
@@ -36,11 +48,13 @@ export default class FamilyMember extends Component {
                   type="text"
                   onChange={this.props.onChangeHandler}
                 />
-                <button
+                <Button
+                  variant="contained"
+                  color="primary"
                   onClick={() => this.props.updateFamilyName(this.props.id)}
                 >
                   Submit
-                </button>
+                </Button>
                 <div>
                   <p>Date of Birth:</p>
                   <input
@@ -48,11 +62,13 @@ export default class FamilyMember extends Component {
                     type="date"
                     onChange={this.props.onChangeHandler}
                   />
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
                     onClick={() => this.props.updateFamilyDob(this.props.id)}
                   >
                     Submit
-                  </button>
+                  </Button>
                 </div>
 
                 <div>
@@ -62,11 +78,13 @@ export default class FamilyMember extends Component {
                     type="text"
                     onChange={this.props.onChangeHandler}
                   />
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
                     onClick={() => this.props.updateFamilyImage(this.props.id)}
                   >
                     Submit
-                  </button>
+                  </Button>
                 </div>
 
                 <div>
@@ -80,11 +98,13 @@ export default class FamilyMember extends Component {
                     <option color="blue">Blue</option>
                     <option color="yelow">Yellow</option>
                   </select>
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
                     onClick={() => this.props.updateFamilyColor(this.props.id)}
                   >
                     Submit
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

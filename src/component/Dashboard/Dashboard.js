@@ -16,6 +16,7 @@ import {
   updateVisitBalance,
   getUser
 } from "../../redux/reducer";
+import Button from "@material-ui/core/Button";
 
 class Dashboard extends Component {
   constructor() {
@@ -145,11 +146,13 @@ class Dashboard extends Component {
                   <p>{visits[index].phone}</p>
                   <p>{visits[index].address}</p>
                 </div>
-                <button
+                <Button
+                  variant="contained"
+                  color="primary"
                   onClick={() => this.deleteHandler(visits[index].visitid)}
                 >
                   Delete
-                </button>
+                </Button>
               </div>
             );
           }
@@ -161,6 +164,8 @@ class Dashboard extends Component {
         <Nav />
         <div className="dashboard">
           <br />
+          {this.isLoggedIn()}
+          <br />
           <h1>
             Welcome to My Health! Easily track and save your family's healthcare
             history.
@@ -169,17 +174,23 @@ class Dashboard extends Component {
           <p>
             Step 1:{" "}
             <Link to="/family">
-              <button>Add a family member</button>
+              <Button variant="contained" color="primary">
+                Add a family member{" "}
+              </Button>
             </Link>{" "}
             <br /> <br />
             Step 2:{" "}
             <Link to="/provider">
-              <button>Add a healthcare provider</button>
+              <Button variant="contained" color="primary">
+                Add a healthcare provider{" "}
+              </Button>
             </Link>{" "}
             <br /> <br />
             Step 3:{" "}
             <Link to="/visit">
-              <button>Add a visit</button>
+              <Button variant="contained" color="primary">
+                Add a visit{" "}
+              </Button>
             </Link>{" "}
             <br /> <br />
             <p>
@@ -187,7 +198,7 @@ class Dashboard extends Component {
             </p>
           </p>
           <br />
-          {this.isLoggedIn()}
+
           <div className="buttonDiv" />
         </div>
         <div className="visit" />
