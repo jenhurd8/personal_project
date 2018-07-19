@@ -45,11 +45,18 @@ class Nav extends Component {
     if (this.state.email.length > 1) {
       return (
         <div>
-          <a href="http://localhost:3001/logout" onClick={() => this.logOut}>
-            Log out
-          </a>
-          Welcome {this.state.displayname}!
-          <img id="imgPic" src={this.state.picture} alt="person" />
+          <div>
+            Welcome {this.state.displayname}
+            {" ! "}
+            <img id="imgPic" src={this.state.picture} alt="person" />
+            <br />
+            <br />
+          </div>
+          <div>
+            <a href="http://localhost:3001/logout" onClick={() => this.logOut}>
+              Log out
+            </a>
+          </div>
         </div>
       );
     } else {
@@ -64,28 +71,28 @@ class Nav extends Component {
   render() {
     return (
       <div className="nav">
+        {/* <div className="menu"> */}
         <div className="logo">
           <Link to="/">My Health</Link>
         </div>
-        <div className="menu">
-          <div className="menuItems">
-            <Link to="/dashboard">Dashboard</Link>
-          </div>
-          <div className="menuItems">
-            <Link to="/family">Manage Family</Link>
-          </div>
-          <div className="menuItems">
-            <Link to="/provider">Manager Providers</Link>
-          </div>
-          <div className="menuItems">
-            <Link to="/visit">Log a Visit</Link>
-          </div>
-          <div className="menuItems">
-            <Link to="/charts">Health Data</Link>
-          </div>
-          {this.loggedIn()}
+        <div className="menuItems">
+          <Link to="/dashboard">Dashboard</Link>
         </div>
+        <div className="menuItems">
+          <Link to="/family">Manage Family</Link>
+        </div>
+        <div className="menuItems">
+          <Link to="/provider">Manager Providers</Link>
+        </div>
+        <div className="menuItems">
+          <Link to="/visit">Log a Visit</Link>
+        </div>
+        <div className="menuItems">
+          <Link to="/charts">Health Data</Link>
+        </div>
+        {this.loggedIn()}
       </div>
+      // </div>
     );
   }
 }

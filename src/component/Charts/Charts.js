@@ -13,12 +13,13 @@ const data = {
   datasets: [
     {
       label: "Cost per Year",
-      backgroundColor: "rgba(255,99,132,0.2)",
+      backgroundColor: ["#0082c8", "#46f0f0", "#911eb4", "#f032e6", "#008080"],
       borderColor: "rgba(255,99,132,1)",
       borderWidth: 1,
       hoverBackgroundColor: "rgba(255,99,132,0.4)",
       hoverBorderColor: "rgba(255,99,132,1)",
-      data: ""
+      data: "",
+      maintainAspectRatio: false
     }
   ]
 };
@@ -56,8 +57,6 @@ class Charts extends Component {
     console.log(this.state.email);
 
     newVisits = newVisits.filter(item => item.email === true);
-
-    console.log(newVisits);
 
     let lodashResult = _.reduce(
       newVisits,
@@ -100,8 +99,7 @@ class Charts extends Component {
             />
           </div>
           <div className="doughnut">
-            <h2>Pie Chart</h2>
-            <Doughnut data={data} />
+            <Doughnut data={data} height={400} />
           </div>
         </div>
       </div>

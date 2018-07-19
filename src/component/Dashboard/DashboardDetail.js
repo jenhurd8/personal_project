@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./DashboardDetail.css";
 
 export default class DashboardDetail extends Component {
   constructor(props) {

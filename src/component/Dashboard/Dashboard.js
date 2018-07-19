@@ -94,7 +94,11 @@ class Dashboard extends Component {
 
   isLoggedIn() {
     if (!this.state.email) {
-      return <p>Warning! You are not logged in, your data will not be saved</p>;
+      return (
+        <p id="warning">
+          Warning! You are not logged in, your data will not be saved
+        </p>
+      );
     }
   }
 
@@ -156,7 +160,6 @@ class Dashboard extends Component {
       <div>
         <Nav />
         <div className="dashboard">
-          <p> Dashboard</p>
           <br />
           <p>
             Welcome! Add a family member and healthcare provider to get started.

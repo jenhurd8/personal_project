@@ -1,22 +1,26 @@
 .nav {
   display: flex;
-  padding: 20px;
+  padding: 30px;
   justify-content: space-between;
+  background-color: #89cff0;
 }
-.logo {
-}
-.menu {
+/* .menu {
   display: flex;
   justify-content: space-between;
-}
-.menuItems {
+} */
+/* .menuItems {
   width: 15vw;
-}
+} */
 a {
   text-decoration: none;
+  color: white;
 }
 #imgPic {
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
+}
+.logo {
+  font-weight: bold;
+  font-size: 30px;
 }

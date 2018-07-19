@@ -118,7 +118,6 @@ class Visit extends Component {
       providers
         .filter(provider => provider.email === this.state.email)
         .map((provider, i) => {
-          // if (provider.email === this.state.email) {
           return (
             <div key={i}>
               <button onClick={() => this.selectDrHandler(provider.id)}>
@@ -126,14 +125,12 @@ class Visit extends Component {
               </button>
             </div>
           );
-          // }
         })
     );
 
     let familyArray = family
       .filter(family => family.email === this.state.email)
       .map((family, i) => {
-        // if (family.email === this.state.email) {
         return (
           <div key={i}>
             <button onClick={() => this.selectPatientHandler(family.id)}>
@@ -141,64 +138,65 @@ class Visit extends Component {
             </button>
           </div>
         );
-        // }
       });
 
     return (
       <div>
         <Nav />
-        <p>Log a New Visit</p>
-        <p>Select your Provider</p>
-        {providersArray}
-        <p>Select your Family Member</p>
-        {familyArray}
-        <div className="visitBox">
-          {this.state.chosenDr}
-          {this.state.chosenFamily}
-          <br />
-          Visit Date:
-          <input name="date" type="date" onChange={this.onChangeHandler} />
-          <br />
-          <br />
-          Visit Details:
-          <input
-            name="details"
-            placeholder="Details"
-            type="text"
-            onChange={this.onChangeHandler}
-          />
-          <br />
-          <br />
-          Prescriptions:
-          <input
-            name="rx"
-            placeholder="Prescriptions"
-            type="text"
-            onChange={this.onChangeHandler}
-          />
-          Balance:
-          <input
-            name="balance"
-            placeholder="Balance"
-            type="number"
-            onChange={this.onChangeHandler}
-          />
-          {/* redirect is giving dob.slice error and not showing update after refresh*/}
-          <Link to="/dashboard">
-            <button
-              onClick={() =>
-                this.addVisit(
-                  this.state.date,
-                  this.state.details,
-                  this.state.rx,
-                  this.state.email,
-                  this.state.balance
-                )
-              }
-            >
-              Add Visit
-            </button>
-          </Link>
+        <div className="visitBody">
+          <p>Log a New Visit</p>
+          <p>Select your Provider</p>
+          {providersArray}
+          <p>Select your Family Member</p>
+          {familyArray}
+          <div className="visitBox">
+            {this.state.chosenDr}
+            {this.state.chosenFamily}
+            <br />
+            Visit Date:
+            <input name="date" type="date" onChange={this.onChangeHandler} />
+            <br />
+            <br />
+            Visit Details:
+            <input
+              name="details"
+              placeholder="Details"
+              type="text"
+              onChange={this.onChangeHandler}
+            />
+            <br />
+            <br />
+            Prescriptions:
+            <input
+              name="rx"
+              placeholder="Prescriptions"
+              type="text"
+              onChange={this.onChangeHandler}
+            />
+            Balance:
+            <input
+              name="balance"
+              placeholder="Balance"
+              type="number"
+              onChange={this.onChangeHandler}
+            />
+            {/* redirect is giving dob.slice error and not showing update after refresh*/}
+            <Link to="/dashboard">
+              <button
+                onClick={() =>
+                  this.addVisit(
+                    this.state.date,
+                    this.state.details,
+                    this.state.rx,
+                    this.state.email,
+                    this.state.balance
+                  )
+                }
+              >
+                Add Visit
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     );

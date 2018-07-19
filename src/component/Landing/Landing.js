@@ -7,7 +7,7 @@ class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <h1>Landing</h1>
+        <h1 className="myHealth">My Health</h1>
         <Link to="/dashboard">
           <button>Enter here</button>
         </Link>

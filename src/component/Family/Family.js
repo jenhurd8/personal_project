@@ -126,7 +126,7 @@ class Family extends Component {
               key={index}
               image={element.image}
               dob={element.dob.slice(0, 10)}
-              themecolor={element.themecolor}
+              // themecolor={element.themecolor}
               deleteHandler={this.deleteHandler}
               onChangeHandler={this.onChangeHandler}
               updateFamilyName={this.updateFamilyName}
@@ -172,7 +172,7 @@ class Family extends Component {
               onChange={this.onChangeHandler}
             />
             <br />
-            Choose a theme color for this person:
+            {/* Choose a theme color for this person:
             <select
               value={this.state.color}
               name="color"
@@ -181,7 +181,7 @@ class Family extends Component {
               <option color="red">Red</option>
               <option color="blue">Blue</option>
               <option color="yelow">Yellow</option>
-            </select>
+            </select> */}
             <br />
             <button onClick={this.onSubmitHandler}>Submit</button>
             <br />

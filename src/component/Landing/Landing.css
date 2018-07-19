@@ -1,7 +1,8 @@
 .landing {
   height: 100vh;
   width: 100vw;
-  background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/v1528746062/MountainPic_zbiezm.jpg");
+  background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_1000/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,4 +12,7 @@
 button {
   color: white;
   background-color: blue;
+}
+.myHealth {
+  font-size: 100px;
 }
