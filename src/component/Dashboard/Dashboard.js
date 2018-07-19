@@ -161,19 +161,34 @@ class Dashboard extends Component {
         <Nav />
         <div className="dashboard">
           <br />
+          <h1>
+            Welcome to My Health! Easily track and save your family's healthcare
+            history.
+          </h1>
+          <br />
           <p>
-            Welcome! Add a family member and healthcare provider to get started.
+            Step 1:{" "}
+            <Link to="/family">
+              <button>Add a family member</button>
+            </Link>{" "}
+            <br /> <br />
+            Step 2:{" "}
+            <Link to="/provider">
+              <button>Add a healthcare provider</button>
+            </Link>{" "}
+            <br /> <br />
+            Step 3:{" "}
+            <Link to="/visit">
+              <button>Add a visit</button>
+            </Link>{" "}
+            <br /> <br />
+            <p>
+              Then, view all of your healthcare history here on your dashboard.
+            </p>
           </p>
           <br />
           {this.isLoggedIn()}
-          <div className="buttonDiv">
-            <Link to="/family">
-              <button>Add a family member</button>
-            </Link>
-            <Link to="/provider">
-              <button>Add a healthcare provider</button>
-            </Link>
-          </div>
+          <div className="buttonDiv" />
         </div>
         <div className="visit" />
         {visitsArray}

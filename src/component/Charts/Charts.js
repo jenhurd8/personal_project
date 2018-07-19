@@ -44,8 +44,6 @@ class Charts extends Component {
   }
 
   barMaker() {
-    console.log(this.props.visits);
-
     let newVisits = this.props.visits.map((element, index) => {
       return {
         date: element.date.slice(0, 4),
@@ -53,8 +51,6 @@ class Charts extends Component {
         balance: element.balance
       };
     });
-    console.log(newVisits);
-    console.log(this.state.email);
 
     newVisits = newVisits.filter(item => item.email === true);
 

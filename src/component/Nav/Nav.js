@@ -26,19 +26,29 @@ class Nav extends Component {
   }
 
   componentDidMount() {
-    this.props
-      .getUser()
-      .then(result => {
-        this.setState({
-          id: result.value.data.id,
-          email: result.value.data.email,
-          displayname: result.value.data.displayname,
-          picture: result.value.data.picture
+    console.log(this.props.users);
+    if (this.props.users.length === 0) {
+      this.props
+        .getUser()
+        .then(result => {
+          this.setState({
+            id: result.value.data.id,
+            email: result.value.data.email,
+            displayname: result.value.data.displayname,
+            picture: result.value.data.picture
+          });
+        })
+        .catch(err => {
+          console.log(err);
         });
-      })
-      .catch(err => {
-        console.log(err);
+    } else {
+      this.setState({
+        id: this.props.users.id,
+        email: this.props.users.email,
+        displayname: this.props.users.displayname,
+        picture: this.props.users.picture
       });
+    }
   }
 
   loggedIn() {
@@ -49,8 +59,6 @@ class Nav extends Component {
             Welcome {this.state.displayname}
             {" ! "}
             <img id="imgPic" src={this.state.picture} alt="person" />
-            <br />
-            <br />
           </div>
           <div>
             <a href="http://localhost:3001/logout" onClick={() => this.logOut}>
