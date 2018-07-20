@@ -87,7 +87,7 @@ export default class FamilyMember extends Component {
                   </Button>
                 </div>
 
-                <div>
+                {/* <div>
                   <p>Theme Color:</p>
                   <select
                     value={this.props.selectColor}
@@ -105,7 +105,7 @@ export default class FamilyMember extends Component {
                   >
                     Submit
                   </Button>
-                </div>
+                </div> */}
               </div>
             </div>
           )}

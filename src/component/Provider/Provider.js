@@ -18,6 +18,9 @@ import {
   getUser
 } from "../../redux/reducer";
 import ToggleDisplay from "react-toggle-display";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 class Provider extends Component {
   constructor() {
@@ -60,13 +63,13 @@ class Provider extends Component {
   }
 
   componentDidMount() {
-    this.props.getProviders();
-    this.props.getVisits();
     this.props.getUser().then(result => {
       this.setState({
         email: result.value.data.email
       });
     });
+    this.props.getProviders();
+    this.props.getVisits();
   }
 
   onChangeHandler = e => {
@@ -231,22 +234,37 @@ class Provider extends Component {
           //if (element.email === this.state.email) {
           return (
             <div className="providerDiv" key={index}>
-              <ProviderOne
-                key={index}
-                id={element.id}
-                name={element.name}
-                specialty={element.specialty}
-                address={element.address}
-                phone={element.phone}
-                photo={element.photo}
-                onChangeHandler={this.onChangeHandler}
-                deleteHandler={this.deleteHandler}
-                updateProviderName={this.updateProviderName}
-                updateProviderPracticeName={this.updateProviderPracticeName}
-                updateProviderAddress={this.updateProviderAddress}
-                updateProviderPhoto={this.updateProviderPhoto}
-                updateProviderPhone={this.updateProviderPhone}
-              />
+              <Grid container>
+                <Grid item sm>
+                  <Paper
+                    style={{
+                      padding: 20,
+                      marginTop: 10,
+                      marginBottom: 10,
+                      backgroundColor: "#BBDEFB"
+                    }}
+                  >
+                    <ProviderOne
+                      key={index}
+                      id={element.id}
+                      name={element.name}
+                      specialty={element.specialty}
+                      address={element.address}
+                      phone={element.phone}
+                      photo={element.photo}
+                      onChangeHandler={this.onChangeHandler}
+                      deleteHandler={this.deleteHandler}
+                      updateProviderName={this.updateProviderName}
+                      updateProviderPracticeName={
+                        this.updateProviderPracticeName
+                      }
+                      updateProviderAddress={this.updateProviderAddress}
+                      updateProviderPhoto={this.updateProviderPhoto}
+                      updateProviderPhone={this.updateProviderPhone}
+                    />
+                  </Paper>
+                </Grid>
+              </Grid>
             </div>
           );
           // }
@@ -335,14 +353,25 @@ class Provider extends Component {
               <option value="WY">Wyoming</option>
             </select>
             <br />
-            <button
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ background: "#64B5F6", height: "90px", width: "120px" }}
               onClick={() =>
                 this.onSearchHandler(this.state.providerSearchName)
               }
             >
               Click to Search for Provider
-            </button>
-            <button onClick={this.searchAgain}>Search Again</button>
+            </Button>
+            {"    "}
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ background: "#64B5F6", height: "90px", width: "120px" }}
+              onClick={this.searchAgain}
+            >
+              Search Again
+            </Button>
             <br />
             <p>{this.state.responseName}</p>
             <p>{this.state.responseAddress}</p>
@@ -350,15 +379,27 @@ class Provider extends Component {
             <p>{this.state.bdPracticeName}</p>
             <img src={this.state.bdPhoto} alt="provider" />
             <br />
-            <button onClick={this.confirmedProvider}>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ background: "#64B5F6", height: "90px", width: "120px" }}
+              onClick={this.confirmedProvider}
+            >
               Confirm Provider and Add to List
-            </button>
+            </Button>
             <br />
             <br />
             Provider not found?
             <br />
             <br />
-            <button onClick={this.showEditMenu}>Add A New Provider</button>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ background: "#64B5F6", height: "80px", width: "80px" }}
+              onClick={this.showEditMenu}
+            >
+              Add A New Provider
+            </Button>
             <ToggleDisplay if={this.state.showEditMenu}>
               <div className="editMenu">
                 <div>
@@ -401,9 +442,18 @@ class Provider extends Component {
                     onChange={this.onChangeHandler}
                   />
                 </div>
-                <button onClick={this.confirmedProvider}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{
+                    background: "#64B5F6",
+                    height: "80px",
+                    width: "80px"
+                  }}
+                  onClick={this.confirmedProvider}
+                >
                   Submit New Provider
-                </button>
+                </Button>
               </div>
             </ToggleDisplay>
             <br />
@@ -411,7 +461,7 @@ class Provider extends Component {
           </div>
           <div className="providerArray">
             <h1>Your Provider List</h1>
-            <button onClick={this.editProviderMenu}>Edit Provider Menu</button>
+            {/* <button onClick={this.editProviderMenu}>Edit Provider Menu</button> */}
             <br />
             {providerArray}
           </div>

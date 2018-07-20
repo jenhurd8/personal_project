@@ -1,33 +1,15 @@
-.visit {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.visits {
-  width: 50vw;
-  height: 40vh;
-  background-color: lightgreen;
-  margin: 10px;
+.visitBody {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
 }
-.person {
+h1 {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 10px;
+  justify-content: center;
 }
-.visitDetails {
-  margin: 10vw;
-}
-.dr {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 10px;
-}
-.visitDiv {
+.familyList,
+.visitBox,
+.providerList {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

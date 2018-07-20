@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Family.css";
 import Nav from "../../component/Nav/Nav.js";
 import FamilyMember from "./FamilyMember";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   removeFamily,
@@ -16,21 +16,8 @@ import {
   getUser
 } from "../../redux/reducer";
 import Button from "@material-ui/core/Button";
-import { createMuiTheme } from "@material-ui/core/styles";
-//import blue from "@material-ui/core/colors/blue";
-import purple from "@material-ui/core/colors/purple";
-import green from "@material-ui/core/colors/green";
-import { withTheme } from "@material-ui/core/styles";
-
-const theme = createMuiTheme({
-  palette: {
-    primary: purple,
-    secondary: green
-  },
-  status: {
-    danger: "orange"
-  }
-});
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 class Family extends Component {
   constructor() {
@@ -135,24 +122,56 @@ class Family extends Component {
         .filter(family => family.email === this.state.email)
         .map((element, index) => {
           return (
-            <FamilyMember
-              name={element.name}
-              id={element.id}
-              key={index}
-              image={element.image}
-              dob={element.dob.slice(0, 10)}
-              // themecolor={element.themecolor}
-              deleteHandler={this.deleteHandler}
-              onChangeHandler={this.onChangeHandler}
-              updateFamilyName={this.updateFamilyName}
-              updateFamilyDob={this.updateFamilyDob}
-              updateFamilyImage={this.updateFamilyImage}
-              updateFamilyColor={this.updateFamilyColor}
-              selectColor={this.state.color}
-            />
+            <div key={index}>
+              {/* <FamilyMember
+                name={element.name}
+                id={element.id}
+                key={index}
+                image={element.image}
+                dob={element.dob.slice(0, 10)}
+                // themecolor={element.themecolor}
+                deleteHandler={this.deleteHandler}
+                onChangeHandler={this.onChangeHandler}
+                updateFamilyName={this.updateFamilyName}
+                updateFamilyDob={this.updateFamilyDob}
+                updateFamilyImage={this.updateFamilyImage}
+                updateFamilyColor={this.updateFamilyColor}
+                selectColor={this.state.color}
+              /> */}
+              <Grid container>
+                <Grid item sm>
+                  <Paper
+                    style={{
+                      padding: 20,
+                      marginTop: 10,
+                      marginBottom: 10,
+                      backgroundColor: "#BBDEFB"
+                    }}
+                  >
+                    <FamilyMember
+                      name={element.name}
+                      id={element.id}
+                      // key={index}
+                      image={element.image}
+                      dob={element.dob.slice(0, 10)}
+                      // themecolor={element.themecolor}
+                      deleteHandler={this.deleteHandler}
+                      onChangeHandler={this.onChangeHandler}
+                      updateFamilyName={this.updateFamilyName}
+                      updateFamilyDob={this.updateFamilyDob}
+                      updateFamilyImage={this.updateFamilyImage}
+                      updateFamilyColor={this.updateFamilyColor}
+                      selectColor={this.state.color}
+                    />
+                  </Paper>
+                </Grid>
+              </Grid>
+            </div>
           );
         })
     );
+
+    //console.log(familyArray[0].name);
 
     return (
       <div>
@@ -214,11 +233,6 @@ class Family extends Component {
             <br />
             <br />
             <br />
-            {/* <Link to="/dashboard">
-              <Button variant="contained" color="primary">
-                Cancel
-              </Button>
-            </Link> */}
           </div>
           <div className="familyArray">{familyArray}</div>
         </div>

@@ -44,13 +44,20 @@ export default class DashboardDetail extends Component {
                     type="date"
                     onChange={this.props.onChangeHandler}
                   />
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{
+                      background: "#64B5F6",
+                      height: "50px",
+                      width: "80px"
+                    }}
                     onClick={() =>
                       this.props.updateVisitDate(this.props.visitId)
                     }
                   >
                     Submit
-                  </button>
+                  </Button>
                 </div>
 
                 <div>
@@ -60,13 +67,20 @@ export default class DashboardDetail extends Component {
                     type="text"
                     onChange={this.props.onChangeHandler}
                   />
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{
+                      background: "#64B5F6",
+                      height: "50px",
+                      width: "80px"
+                    }}
                     onClick={() =>
                       this.props.updateVisitDetails(this.props.visitId)
                     }
                   >
                     Submit
-                  </button>
+                  </Button>
                 </div>
 
                 <div>
@@ -76,11 +90,18 @@ export default class DashboardDetail extends Component {
                     type="text"
                     onChange={this.props.onChangeHandler}
                   />
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{
+                      background: "#64B5F6",
+                      height: "50px",
+                      width: "80px"
+                    }}
                     onClick={() => this.props.updateVisitRx(this.props.visitId)}
                   >
                     Submit
-                  </button>
+                  </Button>
                 </div>
                 <div>
                   <p>Update Visit Balance:</p>
@@ -89,13 +110,20 @@ export default class DashboardDetail extends Component {
                     type="number"
                     onChange={this.props.onChangeHandler}
                   />
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{
+                      background: "#64B5F6",
+                      height: "50px",
+                      width: "80px"
+                    }}
                     onClick={() =>
                       this.props.updateVisitBalance(this.props.visitId)
                     }
                   >
                     Submit
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

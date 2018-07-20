@@ -10,7 +10,7 @@
   margin: 15px;
   display: flex;
   flex-direction: row;
-  background-color: lightgrey;
+  /* background-color: lightgrey; */
 }
 h1 {
   font-weight: bold;

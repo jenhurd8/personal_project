@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
 
 export default class ProviderOne extends Component {
   constructor(props) {
@@ -16,9 +17,14 @@ export default class ProviderOne extends Component {
   render() {
     return (
       <div className="providerDiv" key={this.props.index}>
-        <button onClick={() => this.props.deleteHandler(this.props.id)}>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ background: "#64B5F6", height: "50px", width: "80px" }}
+          onClick={() => this.props.deleteHandler(this.props.id)}
+        >
           Delete
-        </button>
+        </Button>
         <div className="drData">
           <p>{this.props.name}</p>
           <br />
@@ -29,7 +35,14 @@ export default class ProviderOne extends Component {
         <div className="drPhoto">
           <img src={this.props.photo} alt="provider" />
         </div>
-        <button onClick={this.editProviderMenu}>Edit Provider</button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ background: "#64B5F6", height: "50px", width: "80px" }}
+          onClick={this.editProviderMenu}
+        >
+          Edit Provider
+        </Button>
         {this.state.editProviderMenu && (
           <div className="editMenu">
             <div>
@@ -39,11 +52,14 @@ export default class ProviderOne extends Component {
                 type="text"
                 onChange={this.props.onChangeHandler}
               />
-              <button
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ background: "#64B5F6", height: "50px", width: "80px" }}
                 onClick={() => this.props.updateProviderName(this.props.id)}
               >
                 Submit
-              </button>
+              </Button>
               <div>
                 <p>New Practice Name:</p>
                 <input
@@ -51,13 +67,20 @@ export default class ProviderOne extends Component {
                   type="text"
                   onChange={this.props.onChangeHandler}
                 />
-                <button
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{
+                    background: "#64B5F6",
+                    height: "50px",
+                    width: "80px"
+                  }}
                   onClick={() =>
                     this.props.updateProviderPracticeName(this.props.id)
                   }
                 >
                   Submit
-                </button>
+                </Button>
               </div>
             </div>
             <div>
@@ -67,11 +90,14 @@ export default class ProviderOne extends Component {
                 type="text"
                 onChange={this.props.onChangeHandler}
               />
-              <button
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ background: "#64B5F6", height: "50px", width: "80px" }}
                 onClick={() => this.props.updateProviderAddress(this.props.id)}
               >
                 Submit
-              </button>
+              </Button>
             </div>
             <div>
               <p>Change Provider Photo:</p>
@@ -80,11 +106,14 @@ export default class ProviderOne extends Component {
                 type="text"
                 onChange={this.props.onChangeHandler}
               />
-              <button
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ background: "#64B5F6", height: "50px", width: "80px" }}
                 onClick={() => this.props.updateProviderPhoto(this.props.id)}
               >
                 Submit
-              </button>
+              </Button>
             </div>
             <div>
               <p>Change Provider Phone:</p>
@@ -93,11 +122,14 @@ export default class ProviderOne extends Component {
                 type="text"
                 onChange={this.props.onChangeHandler}
               />
-              <button
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ background: "#64B5F6", height: "50px", width: "80px" }}
                 onClick={() => this.props.updateProviderPhone(this.props.id)}
               >
                 Submit
-              </button>
+              </Button>
             </div>
           </div>
         )}

@@ -17,6 +17,8 @@ import {
   getUser
 } from "../../redux/reducer";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 class Dashboard extends Component {
   constructor() {
@@ -105,7 +107,6 @@ class Dashboard extends Component {
 
   render() {
     const { visits, isLoading } = this.props;
-    // console.log(visits);
 
     let visitsArray = isLoading ? (
       <p>Loading...</p>
@@ -113,46 +114,66 @@ class Dashboard extends Component {
       visits
         //.filter(item => item.email === this.state.email)
         .map((element, index) => {
-          //console.log("email: " + this.state.email);
-          //console.log("visit email: " + visits[index].email);
           let dashboardVisitId = visits[index].visitid;
 
           if (visits[index].visitemail === this.state.email) {
             return (
-              <div className="visits" key={index}>
-                <div className="person">
-                  <img src={visits[index].image} alt="person" />
-                  <p>{visits[index].familyname}</p>
-                  <p>{visits[index].dob && visits[index].dob.slice(0, 10)}</p>
-                </div>
-                <div className="visitDetails">
-                  <DashboardDetail
-                    date={element.date.slice(0, 10)}
-                    details={element.details}
-                    rx={element.rx}
-                    balance={element.balance}
-                    visitId={dashboardVisitId}
-                    onChangeHandler={this.onChangeHandler}
-                    updateVisitDate={this.updateVisitDate}
-                    updateVisitBalance={this.updateVisitBalance}
-                    updateVisitDetails={this.updateVisitDetails}
-                    updateVisitRx={this.updateVisitRx}
-                  />
-                </div>
+              <div key={index}>
+                <div>
+                  <Grid container>
+                    <Grid item sm>
+                      <Paper
+                        style={{
+                          padding: 20,
+                          marginTop: 10,
+                          marginBottom: 10,
+                          backgroundColor: "#BBDEFB"
+                        }}
+                      >
+                        <div className="visits" key={index}>
+                          <div className="person">
+                            <img src={visits[index].image} alt="person" />
+                            <p>{visits[index].familyname}</p>
+                            <p>
+                              {visits[index].dob &&
+                                visits[index].dob.slice(0, 10)}
+                            </p>
+                          </div>
+                          <div className="visitDetails">
+                            <DashboardDetail
+                              date={element.date.slice(0, 10)}
+                              details={element.details}
+                              rx={element.rx}
+                              balance={element.balance}
+                              visitId={dashboardVisitId}
+                              onChangeHandler={this.onChangeHandler}
+                              updateVisitDate={this.updateVisitDate}
+                              updateVisitBalance={this.updateVisitBalance}
+                              updateVisitDetails={this.updateVisitDetails}
+                              updateVisitRx={this.updateVisitRx}
+                            />
+                          </div>
 
-                <div className="dr">
-                  <img src={visits[index].photo} alt="provider" />
-                  <p>{visits[index].providersname}</p>
-                  <p>{visits[index].phone}</p>
-                  <p>{visits[index].address}</p>
+                          <div className="dr">
+                            <img src={visits[index].photo} alt="provider" />
+                            <p>{visits[index].providersname}</p>
+                            <p>{visits[index].phone}</p>
+                            <p>{visits[index].address}</p>
+                          </div>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() =>
+                              this.deleteHandler(visits[index].visitid)
+                            }
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </Paper>
+                    </Grid>
+                  </Grid>
                 </div>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => this.deleteHandler(visits[index].visitid)}
-                >
-                  Delete
-                </Button>
               </div>
             );
           }
@@ -171,7 +192,7 @@ class Dashboard extends Component {
             history.
           </h1>
           <br />
-          <p>
+          <div>
             Step 1:{" "}
             <Link to="/family">
               <Button variant="contained" color="primary">
@@ -192,13 +213,11 @@ class Dashboard extends Component {
                 Add a visit{" "}
               </Button>
             </Link>{" "}
-            <br /> <br />
-            <p>
-              Then, view all of your healthcare history here on your dashboard.
-            </p>
+          </div>
+          <br /> <br />
+          <p>
+            Then, view all of your healthcare history here on your dashboard.
           </p>
-          <br />
-
           <div className="buttonDiv" />
         </div>
         <div className="visit" />

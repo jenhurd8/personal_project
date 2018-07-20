@@ -7,6 +7,7 @@ const cors = require("cors");
 const controller = require("./controller");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
+const path = require("path");
 
 const app = express();
 
@@ -26,6 +27,7 @@ massive(process.env.CONNECTION_STRING)
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static(`${__dirname}/../build`));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -95,7 +97,7 @@ app.get("/api/user", (req, res) => {
 
 //app.delete("/api/user/:id", controller.deleteUser);
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.get("/api/family", controller.getFamily);
 app.post("/api/family", controller.addFamily);
@@ -123,6 +125,10 @@ app.put("/api/visitDate/:id", controller.updateVisitDate);
 app.put("/api/visitDetails/:id", controller.updateVisitDetails);
 app.put("/api/visitRx/:id", controller.updateVisitRx);
 app.put("/api/visitBalance/:id", controller.updateVisitBalance);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

@@ -11,6 +11,7 @@ import {
   addVisit,
   getUser
 } from "../../redux/reducer";
+import Button from "@material-ui/core/Button";
 
 class Visit extends Component {
   constructor() {
@@ -35,14 +36,14 @@ class Visit extends Component {
   }
 
   componentDidMount() {
-    this.props.getVisits();
-    this.props.getFamily();
-    this.props.getProviders();
     this.props.getUser().then(result => {
       this.setState({
         email: result.value.data.email
       });
     });
+    this.props.getVisits();
+    this.props.getFamily();
+    this.props.getProviders();
   }
 
   onChangeHandler = e => {
@@ -120,9 +121,18 @@ class Visit extends Component {
         .map((provider, i) => {
           return (
             <div key={i}>
-              <button onClick={() => this.selectDrHandler(provider.id)}>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  background: "#64B5F6",
+                  height: "50px",
+                  width: "200px"
+                }}
+                onClick={() => this.selectDrHandler(provider.id)}
+              >
                 {provider.name}
-              </button>
+              </Button>
             </div>
           );
         })
@@ -133,9 +143,14 @@ class Visit extends Component {
       .map((family, i) => {
         return (
           <div key={i}>
-            <button onClick={() => this.selectPatientHandler(family.id)}>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ background: "#64B5F6", height: "50px", width: "200px" }}
+              onClick={() => this.selectPatientHandler(family.id)}
+            >
               {family.name}
-            </button>
+            </Button>
           </div>
         );
       });
@@ -143,15 +158,25 @@ class Visit extends Component {
     return (
       <div>
         <Nav />
+        <h1>Log a New Visit</h1>
         <div className="visitBody">
-          <p>Log a New Visit</p>
-          <p>Select your Provider</p>
-          {providersArray}
-          <p>Select your Family Member</p>
-          {familyArray}
-          <div className="visitBox">
+          <div className="providerList">
+            <br />
             {this.state.chosenDr}
+            <br />
+            <p>Select your Provider</p>
+
+            {providersArray}
+          </div>
+          <div className="familyList">
+            <br />
             {this.state.chosenFamily}
+            <br />
+            <p>Select your Family Member</p>
+
+            {familyArray}
+          </div>
+          <div className="visitBox">
             <br />
             Visit Date:
             <input name="date" type="date" onChange={this.onChangeHandler} />
@@ -173,16 +198,22 @@ class Visit extends Component {
               type="text"
               onChange={this.onChangeHandler}
             />
-            Balance:
+            Visit Cost:
             <input
               name="balance"
-              placeholder="Balance"
+              placeholder="Visit Cost"
               type="number"
               onChange={this.onChangeHandler}
             />
-            {/* redirect is giving dob.slice error and not showing update after refresh*/}
             <Link to="/dashboard">
-              <button
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  background: "#64B5F6",
+                  height: "50px",
+                  width: "80px"
+                }}
                 onClick={() =>
                   this.addVisit(
                     this.state.date,
@@ -194,7 +225,7 @@ class Visit extends Component {
                 }
               >
                 Add Visit
-              </button>
+              </Button>
             </Link>
           </div>
         </div>
