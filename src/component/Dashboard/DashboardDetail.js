@@ -17,7 +17,7 @@ export default class DashboardDetail extends Component {
 
   render() {
     return (
-      <div>
+      <div className="visitDetailBox">
         <div>
           Visit Details:
           <p>{this.props.date}</p>
@@ -25,9 +25,12 @@ export default class DashboardDetail extends Component {
           <p>{this.props.rx}</p>
           <p>${this.props.balance}</p>
           {/* <button onClick={this.showEditMenu}>Edit Visit</button> */}
+        </div>
+        <div>
           <Button
             variant="contained"
             color="primary"
+            style={{ backgroundColor: "#0D47A1" }}
             onClick={this.showEditMenu}
           >
             Edit Visit
@@ -49,8 +52,8 @@ export default class DashboardDetail extends Component {
                     color="primary"
                     style={{
                       background: "#64B5F6",
-                      height: "50px",
-                      width: "80px"
+                      height: "10px",
+                      width: "10px"
                     }}
                     onClick={() =>
                       this.props.updateVisitDate(this.props.visitId)
@@ -72,8 +75,8 @@ export default class DashboardDetail extends Component {
                     color="primary"
                     style={{
                       background: "#64B5F6",
-                      height: "50px",
-                      width: "80px"
+                      height: "10px",
+                      width: "10px"
                     }}
                     onClick={() =>
                       this.props.updateVisitDetails(this.props.visitId)
@@ -95,8 +98,8 @@ export default class DashboardDetail extends Component {
                     color="primary"
                     style={{
                       background: "#64B5F6",
-                      height: "50px",
-                      width: "80px"
+                      height: "10px",
+                      width: "10px"
                     }}
                     onClick={() => this.props.updateVisitRx(this.props.visitId)}
                   >
@@ -104,7 +107,7 @@ export default class DashboardDetail extends Component {
                   </Button>
                 </div>
                 <div>
-                  <p>Update Visit Balance:</p>
+                  <p>Update Visit Cost:</p>
                   <input
                     name="balance"
                     type="number"
@@ -115,8 +118,8 @@ export default class DashboardDetail extends Component {
                     color="primary"
                     style={{
                       background: "#64B5F6",
-                      height: "50px",
-                      width: "80px"
+                      height: "10px",
+                      width: "10px"
                     }}
                     onClick={() =>
                       this.props.updateVisitBalance(this.props.visitId)

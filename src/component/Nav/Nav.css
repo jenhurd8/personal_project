@@ -2,18 +2,13 @@
   display: flex;
   padding: 30px;
   justify-content: space-between;
-  background-color: #89cff0;
+  background-color: #bbdefb;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-/* .menu {
-  display: flex;
-  justify-content: space-between;
-} */
-/* .menuItems {
-  width: 15vw;
-} */
+
 a {
   text-decoration: none;
-  color: white;
+  color: #0d47a1;
 }
 #imgPic {
   height: 20px;
@@ -23,4 +18,14 @@ a {
 .logo {
   font-weight: bold;
   font-size: 30px;
+}
+#welcomeMessage {
+  color: #0d47a1;
+  margin-top: -6px;
+  padding-bottom: 5px;
+}
+#logoutMessage {
+  color: white;
+  display: flex;
+  justify-content: flex-end;
 }

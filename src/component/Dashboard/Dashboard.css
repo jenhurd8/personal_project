@@ -2,11 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #e0ffff;
+  background-color: #e3f2fd;
 }
-.buttonDiv {
-  padding: 10vh;
-}
+
 #warning {
-  background-color: yellow;
+  background-color: #fdece3;
+}
+.visits {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  /* align-items: center; */
+}
+.visitsArray {
 }

@@ -55,13 +55,17 @@ class Nav extends Component {
     if (this.state.email.length > 1) {
       return (
         <div>
-          <div>
+          <div id="welcomeMessage">
             Welcome {this.state.displayname}
             {" ! "}
             <img id="imgPic" src={this.state.picture} alt="person" />
           </div>
           <div>
-            <a href="http://localhost:3001/logout" onClick={() => this.logOut}>
+            <a
+              id="logoutMessage"
+              href="http://localhost:3001/logout"
+              onClick={() => this.logOut}
+            >
               Log out
             </a>
           </div>
@@ -79,7 +83,6 @@ class Nav extends Component {
   render() {
     return (
       <div className="nav">
-        {/* <div className="menu"> */}
         <div className="logo">
           <Link to="/">My Health</Link>
         </div>
@@ -100,7 +103,6 @@ class Nav extends Component {
         </div>
         {this.loggedIn()}
       </div>
-      // </div>
     );
   }
 }

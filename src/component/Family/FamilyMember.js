@@ -51,6 +51,11 @@ export default class FamilyMember extends Component {
                 <Button
                   variant="contained"
                   color="primary"
+                  style={{
+                    background: "#64B5F6",
+                    height: "10px",
+                    width: "10px"
+                  }}
                   onClick={() => this.props.updateFamilyName(this.props.id)}
                 >
                   Submit
@@ -65,6 +70,11 @@ export default class FamilyMember extends Component {
                   <Button
                     variant="contained"
                     color="primary"
+                    style={{
+                      background: "#64B5F6",
+                      height: "10px",
+                      width: "10px"
+                    }}
                     onClick={() => this.props.updateFamilyDob(this.props.id)}
                   >
                     Submit
@@ -81,6 +91,11 @@ export default class FamilyMember extends Component {
                   <Button
                     variant="contained"
                     color="primary"
+                    style={{
+                      background: "#64B5F6",
+                      height: "10px",
+                      width: "10px"
+                    }}
                     onClick={() => this.props.updateFamilyImage(this.props.id)}
                   >
                     Submit

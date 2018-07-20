@@ -1,5 +1,6 @@
-.inputs {
+.familyInputs {
   padding: 50px;
+  background-color: #90caf9;
 }
 .family {
   display: flex;
@@ -11,7 +12,6 @@
   flex-direction: row;
   width: 50vw;
   height: 30vh;
-  /* background-color: aqua; */
   margin: 10px;
 }
 .img {

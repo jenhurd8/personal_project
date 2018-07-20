@@ -36,14 +36,14 @@ class Visit extends Component {
   }
 
   componentDidMount() {
+    this.props.getVisits();
+    this.props.getFamily();
+    this.props.getProviders();
     this.props.getUser().then(result => {
       this.setState({
         email: result.value.data.email
       });
     });
-    this.props.getVisits();
-    this.props.getFamily();
-    this.props.getProviders();
   }
 
   onChangeHandler = e => {
@@ -65,13 +65,12 @@ class Visit extends Component {
           return (
             <div key={i}>
               <p>{item.name}</p>
+              <br />
               <img src={item.photo} alt="doctor" />
             </div>
           );
         })
     });
-
-    console.log(this.state.drSelected);
   }
 
   selectPatientHandler2(patient) {
@@ -89,13 +88,12 @@ class Visit extends Component {
           return (
             <div key={key}>
               <p>{item.name}</p>
+              <br />
               <img src={item.image} alt="person" />
             </div>
           );
         })
     });
-
-    console.log(this.state.chosenFamily);
   }
 
   addVisit(date, details, rx, email, balance) {
@@ -127,7 +125,8 @@ class Visit extends Component {
                 style={{
                   background: "#64B5F6",
                   height: "50px",
-                  width: "200px"
+                  width: "200px",
+                  margin: "10px"
                 }}
                 onClick={() => this.selectDrHandler(provider.id)}
               >
@@ -146,7 +145,12 @@ class Visit extends Component {
             <Button
               variant="contained"
               color="primary"
-              style={{ background: "#64B5F6", height: "50px", width: "200px" }}
+              style={{
+                background: "#64B5F6",
+                height: "50px",
+                width: "200px",
+                margin: "10px"
+              }}
               onClick={() => this.selectPatientHandler(family.id)}
             >
               {family.name}
@@ -163,6 +167,7 @@ class Visit extends Component {
           <div className="providerList">
             <br />
             {this.state.chosenDr}
+
             <br />
             <p>Select your Provider</p>
 
@@ -171,6 +176,7 @@ class Visit extends Component {
           <div className="familyList">
             <br />
             {this.state.chosenFamily}
+
             <br />
             <p>Select your Family Member</p>
 
@@ -181,7 +187,6 @@ class Visit extends Component {
             Visit Date:
             <input name="date" type="date" onChange={this.onChangeHandler} />
             <br />
-            <br />
             Visit Details:
             <input
               name="details"
@@ -190,7 +195,6 @@ class Visit extends Component {
               onChange={this.onChangeHandler}
             />
             <br />
-            <br />
             Prescriptions:
             <input
               name="rx"
@@ -198,6 +202,7 @@ class Visit extends Component {
               type="text"
               onChange={this.onChangeHandler}
             />
+            <br />
             Visit Cost:
             <input
               name="balance"
@@ -205,6 +210,7 @@ class Visit extends Component {
               type="number"
               onChange={this.onChangeHandler}
             />
+            <br />
             <Link to="/dashboard">
               <Button
                 variant="contained"

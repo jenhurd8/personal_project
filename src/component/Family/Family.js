@@ -123,21 +123,6 @@ class Family extends Component {
         .map((element, index) => {
           return (
             <div key={index}>
-              {/* <FamilyMember
-                name={element.name}
-                id={element.id}
-                key={index}
-                image={element.image}
-                dob={element.dob.slice(0, 10)}
-                // themecolor={element.themecolor}
-                deleteHandler={this.deleteHandler}
-                onChangeHandler={this.onChangeHandler}
-                updateFamilyName={this.updateFamilyName}
-                updateFamilyDob={this.updateFamilyDob}
-                updateFamilyImage={this.updateFamilyImage}
-                updateFamilyColor={this.updateFamilyColor}
-                selectColor={this.state.color}
-              /> */}
               <Grid container>
                 <Grid item sm>
                   <Paper
@@ -151,7 +136,6 @@ class Family extends Component {
                     <FamilyMember
                       name={element.name}
                       id={element.id}
-                      // key={index}
                       image={element.image}
                       dob={element.dob.slice(0, 10)}
                       // themecolor={element.themecolor}
@@ -171,13 +155,11 @@ class Family extends Component {
         })
     );
 
-    //console.log(familyArray[0].name);
-
     return (
       <div>
         <Nav />
         <div className="family">
-          <div className="inputs">
+          <div className="familyInputs">
             Add a family member:
             <br />
             <br />

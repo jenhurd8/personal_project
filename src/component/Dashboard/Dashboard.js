@@ -118,62 +118,66 @@ class Dashboard extends Component {
 
           if (visits[index].visitemail === this.state.email) {
             return (
-              <div key={index}>
-                <div>
-                  <Grid container>
-                    <Grid item sm>
-                      <Paper
-                        style={{
-                          padding: 20,
-                          marginTop: 10,
-                          marginBottom: 10,
-                          backgroundColor: "#BBDEFB"
-                        }}
-                      >
-                        <div className="visits" key={index}>
-                          <div className="person">
-                            <img src={visits[index].image} alt="person" />
-                            <p>{visits[index].familyname}</p>
-                            <p>
-                              {visits[index].dob &&
-                                visits[index].dob.slice(0, 10)}
-                            </p>
-                          </div>
-                          <div className="visitDetails">
-                            <DashboardDetail
-                              date={element.date.slice(0, 10)}
-                              details={element.details}
-                              rx={element.rx}
-                              balance={element.balance}
-                              visitId={dashboardVisitId}
-                              onChangeHandler={this.onChangeHandler}
-                              updateVisitDate={this.updateVisitDate}
-                              updateVisitBalance={this.updateVisitBalance}
-                              updateVisitDetails={this.updateVisitDetails}
-                              updateVisitRx={this.updateVisitRx}
-                            />
-                          </div>
-
-                          <div className="dr">
-                            <img src={visits[index].photo} alt="provider" />
-                            <p>{visits[index].providersname}</p>
-                            <p>{visits[index].phone}</p>
-                            <p>{visits[index].address}</p>
-                          </div>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() =>
-                              this.deleteHandler(visits[index].visitid)
-                            }
-                          >
-                            Delete
-                          </Button>
+              <div key={index} className="dashboardVisit">
+                <Grid container justify="center">
+                  <Grid item sm align="center" justify="center">
+                    <Paper
+                      style={{
+                        padding: 20,
+                        marginTop: 10,
+                        marginBottom: 10,
+                        backgroundColor: "#BBDEFB",
+                        width: "80%"
+                      }}
+                    >
+                      <div className="visits" key={index}>
+                        <div className="person">
+                          <img src={visits[index].image} alt="person" />
+                          <p>{visits[index].familyname}</p>
+                          <p>
+                            {visits[index].dob &&
+                              visits[index].dob.slice(0, 10)}
+                          </p>
                         </div>
-                      </Paper>
-                    </Grid>
+                        <div className="visitDetails">
+                          <DashboardDetail
+                            date={element.date.slice(0, 10)}
+                            details={element.details}
+                            rx={element.rx}
+                            balance={element.balance}
+                            visitId={dashboardVisitId}
+                            onChangeHandler={this.onChangeHandler}
+                            updateVisitDate={this.updateVisitDate}
+                            updateVisitBalance={this.updateVisitBalance}
+                            updateVisitDetails={this.updateVisitDetails}
+                            updateVisitRx={this.updateVisitRx}
+                          />
+                        </div>
+
+                        <div className="dr">
+                          <img src={visits[index].photo} alt="provider" />
+                          <p>{visits[index].providersname}</p>
+                          <p>{visits[index].phone}</p>
+                          <p>{visits[index].address}</p>
+                        </div>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          style={{
+                            height: "10px",
+                            width: "10px",
+                            backgroundColor: "#0D47A1"
+                          }}
+                          onClick={() =>
+                            this.deleteHandler(visits[index].visitid)
+                          }
+                        >
+                          DELETE
+                        </Button>
+                      </div>
+                    </Paper>
                   </Grid>
-                </div>
+                </Grid>
               </div>
             );
           }
@@ -195,21 +199,33 @@ class Dashboard extends Component {
           <div>
             Step 1:{" "}
             <Link to="/family">
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ backgroundColor: "#0D47A1" }}
+              >
                 Add a family member{" "}
               </Button>
             </Link>{" "}
             <br /> <br />
             Step 2:{" "}
             <Link to="/provider">
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ backgroundColor: "#0D47A1" }}
+              >
                 Add a healthcare provider{" "}
               </Button>
             </Link>{" "}
             <br /> <br />
             Step 3:{" "}
             <Link to="/visit">
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ backgroundColor: "#0D47A1" }}
+              >
                 Add a visit{" "}
               </Button>
             </Link>{" "}
@@ -218,10 +234,9 @@ class Dashboard extends Component {
           <p>
             Then, view all of your healthcare history here on your dashboard.
           </p>
-          <div className="buttonDiv" />
+          <br />
         </div>
-        <div className="visit" />
-        {visitsArray}
+        <div className="visitsArray">{visitsArray}</div>
       </div>
     );
   }

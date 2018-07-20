@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
+import "./ProviderOne.css";
 
 export default class ProviderOne extends Component {
   constructor(props) {
@@ -17,28 +18,35 @@ export default class ProviderOne extends Component {
   render() {
     return (
       <div className="providerDiv" key={this.props.index}>
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ background: "#64B5F6", height: "50px", width: "80px" }}
-          onClick={() => this.props.deleteHandler(this.props.id)}
-        >
-          Delete
-        </Button>
         <div className="drData">
           <p>{this.props.name}</p>
           <br />
           <p>Practice Name: {this.props.specialty}</p>
           <p>{this.props.address}</p>
           <p>Phone: {this.props.phone}</p>
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ background: "#64B5F6", height: "40px", width: "60px" }}
+            onClick={() => this.props.deleteHandler(this.props.id)}
+          >
+            Delete
+          </Button>
         </div>
         <div className="drPhoto">
           <img src={this.props.photo} alt="provider" />
         </div>
+
         <Button
           variant="contained"
           color="primary"
-          style={{ background: "#64B5F6", height: "50px", width: "80px" }}
+          style={{
+            background: "#64B5F6",
+            height: "50px",
+            width: "80px",
+            margin: "20px"
+          }}
           onClick={this.editProviderMenu}
         >
           Edit Provider
@@ -55,7 +63,7 @@ export default class ProviderOne extends Component {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ background: "#64B5F6", height: "50px", width: "80px" }}
+                style={{ background: "#64B5F6", height: "10px", width: "10px" }}
                 onClick={() => this.props.updateProviderName(this.props.id)}
               >
                 Submit
@@ -72,8 +80,8 @@ export default class ProviderOne extends Component {
                   color="primary"
                   style={{
                     background: "#64B5F6",
-                    height: "50px",
-                    width: "80px"
+                    height: "10px",
+                    width: "10px"
                   }}
                   onClick={() =>
                     this.props.updateProviderPracticeName(this.props.id)
@@ -93,7 +101,7 @@ export default class ProviderOne extends Component {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ background: "#64B5F6", height: "50px", width: "80px" }}
+                style={{ background: "#64B5F6", height: "10px", width: "10px" }}
                 onClick={() => this.props.updateProviderAddress(this.props.id)}
               >
                 Submit
@@ -109,7 +117,7 @@ export default class ProviderOne extends Component {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ background: "#64B5F6", height: "50px", width: "80px" }}
+                style={{ background: "#64B5F6", height: "10px", width: "10px" }}
                 onClick={() => this.props.updateProviderPhoto(this.props.id)}
               >
                 Submit
@@ -125,7 +133,7 @@ export default class ProviderOne extends Component {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ background: "#64B5F6", height: "50px", width: "80px" }}
+                style={{ background: "#64B5F6", height: "10px", width: "10px" }}
                 onClick={() => this.props.updateProviderPhone(this.props.id)}
               >
                 Submit

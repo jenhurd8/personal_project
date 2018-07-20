@@ -63,13 +63,13 @@ class Provider extends Component {
   }
 
   componentDidMount() {
+    this.props.getProviders();
+    this.props.getVisits();
     this.props.getUser().then(result => {
       this.setState({
         email: result.value.data.email
       });
     });
-    this.props.getProviders();
-    this.props.getVisits();
   }
 
   onChangeHandler = e => {
@@ -77,7 +77,6 @@ class Provider extends Component {
   };
 
   searchAgain() {
-    //forces page reload
     window.location.reload();
   }
 
@@ -163,7 +162,7 @@ class Provider extends Component {
         }
       });
   }
-  //name, specialty, address, photo, phone
+
   confirmedProvider() {
     this.props.addProvider({
       name: this.state.responseName && this.state.responseName,
@@ -367,7 +366,8 @@ class Provider extends Component {
             <Button
               variant="contained"
               color="primary"
-              style={{ background: "#64B5F6", height: "90px", width: "120px" }}
+              size="small"
+              style={{ background: "#64B5F6" }}
               onClick={this.searchAgain}
             >
               Search Again

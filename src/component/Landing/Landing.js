@@ -10,7 +10,11 @@ class Landing extends Component {
       <div className="landing">
         <h1 className="myHealth">My Health</h1>
         <Link to="/dashboard">
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: "#0D47A1" }}
+          >
             Enter here
           </Button>
         </Link>
