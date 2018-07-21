@@ -285,35 +285,15 @@ class Provider extends Component {
           <div className="inputs">
             <br />
             Add a doctor or health care provider here:
-            <br />
             <TextField
               label="Provider Name"
               name="providerSearchName"
               placeholder="Provider's First Last (ex: John Jones)"
               type="text"
               onChange={this.onChangeHandler}
-              margin="normal"
+              margin="dense"
             />
-            {/* Provider Name:
-            <input
-              name="providerSearchName"
-              placeholder="Provider's First Last (ex: John Jones)"
-              type="text"
-              onChange={this.onChangeHandler}
-            /> */}
             <br />
-            {/* <Field
-   name="name"
-   component={TextField}
-   select  > */}
-            {/* Provider Category:
-            <select name="suffix" onChange={this.onChangeHandler}>
-              <option value="">Select Provider Type</option>
-              <option value="MD">Doctor</option>
-              <option value="PA">Physician Assistant</option>
-              <option value="Hospital">Hospital</option>
-              <option value="Urgent Care">Urgent Care</option>
-            </select> */}
             <FormControl>
               <InputLabel>Provider Type</InputLabel>
               <NativeSelect
@@ -405,7 +385,7 @@ class Provider extends Component {
                 this.onSearchHandler(this.state.providerSearchName)
               }
             >
-              Click to Search for Provider
+              Search for Provider
             </Button>{" "}
             <Button
               variant="contained"
@@ -419,7 +399,7 @@ class Provider extends Component {
               }}
               onClick={this.searchAgain}
             >
-              Reset Search
+              Reset
             </Button>
             <br />
             {"    "}
