@@ -34,23 +34,24 @@ export default class ProviderOne extends Component {
             Delete
           </Button>
         </div>
+
         <div className="drPhoto">
           <img src={this.props.photo} alt="provider" />
         </div>
-
         <Button
           variant="contained"
           color="primary"
           style={{
-            background: "#64B5F6",
-            height: "50px",
-            width: "80px",
-            margin: "20px"
+            background: "#0d47a1",
+            height: "10px",
+            width: "10px"
+            // margin: "20px"
           }}
           onClick={this.editProviderMenu}
         >
-          Edit Provider
+          Edit
         </Button>
+
         {this.state.editProviderMenu && (
           <div className="editMenu">
             <div>

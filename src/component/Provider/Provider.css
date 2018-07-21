@@ -1,10 +1,12 @@
 .inputs {
   background-color: #90caf9;
+  padding: 20px;
 }
 .provider {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  padding-top: 90px;
 }
 .providerDiv {
   margin: 15px;

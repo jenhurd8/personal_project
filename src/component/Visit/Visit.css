@@ -3,9 +3,15 @@
   flex-direction: row;
   justify-content: space-evenly;
 }
+.visit {
+  padding-top: 85px;
+}
 h1 {
   display: flex;
   justify-content: center;
+  color: #0d47a1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
 }
 .familyList,
 .visitBox,

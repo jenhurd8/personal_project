@@ -21,6 +21,9 @@ import ToggleDisplay from "react-toggle-display";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 
 class Provider extends Component {
   constructor() {
@@ -275,6 +278,7 @@ class Provider extends Component {
         <Nav />
         <div className="provider">
           <div className="inputs">
+            <br />
             Add a doctor or health care provider here:
             <br />
             <br />
@@ -287,6 +291,10 @@ class Provider extends Component {
               onChange={this.onChangeHandler}
             />
             <br />
+            {/* <Field
+   name="name"
+   component={TextField}
+   select  > */}
             Provider Category:
             <select name="suffix" onChange={this.onChangeHandler}>
               <option value="">Select Provider Type</option>
@@ -295,6 +303,17 @@ class Provider extends Component {
               <option value="Hospital">Hospital</option>
               <option value="Urgent Care">Urgent Care</option>
             </select>
+            {/* <Select
+              style={{ width: "30%" }}
+              name="suffix"
+              onChange={this.onChangeHandler}
+            >
+              <MenuItem value={""}>Select Provider Type</MenuItem>
+              <MenuItem value={"MD"}>Doctor</MenuItem>
+              <MenuItem value={"PA"}>Physician Assistant</MenuItem>
+              <MenuItem value={"Hospital"}>Hospital</MenuItem>
+              <MenuItem value={"Urgent Care"}>Urgent Care</MenuItem>
+            </Select> */}
             <br />
             Provider Location:
             <select name="value" onChange={this.onChangeHandler}>
@@ -355,23 +374,34 @@ class Provider extends Component {
             <Button
               variant="contained"
               color="primary"
-              style={{ background: "#64B5F6", height: "90px", width: "120px" }}
+              style={{
+                background: "#bbdefb",
+                color: "#0d47a1",
+                height: "50px",
+                width: "200px"
+              }}
               onClick={() =>
                 this.onSearchHandler(this.state.providerSearchName)
               }
             >
               Click to Search for Provider
-            </Button>
-            {"    "}
+            </Button>{" "}
             <Button
               variant="contained"
               color="primary"
               size="small"
-              style={{ background: "#64B5F6" }}
+              style={{
+                background: "#bbdefb",
+                color: "#0d47a1",
+                height: "50px",
+                width: "100px"
+              }}
               onClick={this.searchAgain}
             >
-              Search Again
+              Reset Search
             </Button>
+            <br />
+            {"    "}
             <br />
             <p>{this.state.responseName}</p>
             <p>{this.state.responseAddress}</p>
@@ -382,7 +412,12 @@ class Provider extends Component {
             <Button
               variant="contained"
               color="primary"
-              style={{ background: "#64B5F6", height: "90px", width: "120px" }}
+              style={{
+                background: "#bbdefb",
+                color: "#0d47a1",
+                height: "50px",
+                width: "200px"
+              }}
               onClick={this.confirmedProvider}
             >
               Confirm Provider and Add to List
@@ -395,7 +430,12 @@ class Provider extends Component {
             <Button
               variant="contained"
               color="primary"
-              style={{ background: "#64B5F6", height: "80px", width: "80px" }}
+              style={{
+                background: "#bbdefb",
+                color: "#0d47a1",
+                height: "50px",
+                width: "200px"
+              }}
               onClick={this.showEditMenu}
             >
               Add A New Provider
@@ -460,7 +500,7 @@ class Provider extends Component {
             <br />
           </div>
           <div className="providerArray">
-            <h1>Your Provider List</h1>
+            {/* <h1>Your Provider List</h1> */}
             {/* <button onClick={this.editProviderMenu}>Edit Provider Menu</button> */}
             <br />
             {providerArray}

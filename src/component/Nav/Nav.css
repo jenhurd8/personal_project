@@ -4,6 +4,9 @@
   justify-content: space-between;
   background-color: #bbdefb;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 a {

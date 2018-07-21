@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
+import "./FamilyMember.css";
+import TextField from "@material-ui/core/TextField";
 
 export default class FamilyMember extends Component {
   constructor(props) {
@@ -26,6 +28,9 @@ export default class FamilyMember extends Component {
           >
             Delete
           </Button>
+
+          <br />
+          <br />
           <p>{this.props.name}</p>
           <img src={this.props.image} alt="person" />
           <p>{this.props.dob}</p>
@@ -35,19 +40,33 @@ export default class FamilyMember extends Component {
           <Button
             variant="contained"
             color="primary"
+            style={{
+              height: "10px",
+              width: "10px",
+              backgroundColor: "#0D47A1"
+            }}
             onClick={this.showEditMenu}
           >
-            Edit Family Member
+            Edit
           </Button>
           {this.state.showEditMenu && (
             <div className="editMenu">
               <div>
-                <p>Name:</p>
+                <br />
+                <TextField
+                  label="Name"
+                  name="name"
+                  placeholder="Name"
+                  type="text"
+                  onChange={this.props.onChangeHandler}
+                  margin="normal"
+                />
+                {/* <p>Name:</p>
                 <input
                   name="name"
                   type="text"
                   onChange={this.props.onChangeHandler}
-                />
+                /> */}
                 <Button
                   variant="contained"
                   color="primary"
@@ -58,15 +77,23 @@ export default class FamilyMember extends Component {
                   }}
                   onClick={() => this.props.updateFamilyName(this.props.id)}
                 >
-                  Submit
+                  Update
                 </Button>
                 <div>
-                  <p>Date of Birth:</p>
+                  <TextField
+                    label="Date of Birth"
+                    name="dob"
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    onChange={this.props.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>Date of Birth:</p>
                   <input
                     name="dob"
                     type="date"
                     onChange={this.props.onChangeHandler}
-                  />
+                  /> */}
                   <Button
                     variant="contained"
                     color="primary"
@@ -77,16 +104,24 @@ export default class FamilyMember extends Component {
                     }}
                     onClick={() => this.props.updateFamilyDob(this.props.id)}
                   >
-                    Submit
+                    Update
                   </Button>
                 </div>
 
                 <div>
-                  <p>Image URL:</p>
+                  {/* <p>Image URL:</p>
                   <input
                     name="image"
                     type="text"
                     onChange={this.props.onChangeHandler}
+                  /> */}
+                  <TextField
+                    label="Image URL"
+                    name="image"
+                    placeholder="Add an image URL"
+                    type="text"
+                    onChange={this.props.onChangeHandler}
+                    margin="normal"
                   />
                   <Button
                     variant="contained"
@@ -98,7 +133,7 @@ export default class FamilyMember extends Component {
                     }}
                     onClick={() => this.props.updateFamilyImage(this.props.id)}
                   >
-                    Submit
+                    Update
                   </Button>
                 </div>
 

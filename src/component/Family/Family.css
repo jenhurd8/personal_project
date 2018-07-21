@@ -1,11 +1,13 @@
 .familyInputs {
   padding: 50px;
   background-color: #90caf9;
+  /* position: fixed; */
 }
 .family {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  padding-top: 90px;
 }
 .familyMember {
   display: flex;

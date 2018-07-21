@@ -19,6 +19,7 @@ import {
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
 
 class Dashboard extends Component {
   constructor() {
@@ -119,8 +120,8 @@ class Dashboard extends Component {
           if (visits[index].visitemail === this.state.email) {
             return (
               <div key={index} className="dashboardVisit">
-                <Grid container justify="center">
-                  <Grid item sm align="center" justify="center">
+                <Grid container align="center" justify="center">
+                  <Grid item sm>
                     <Paper
                       style={{
                         padding: 20,

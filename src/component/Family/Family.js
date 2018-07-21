@@ -18,6 +18,7 @@ import {
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
 
 class Family extends Component {
   constructor() {
@@ -160,32 +161,57 @@ class Family extends Component {
         <Nav />
         <div className="family">
           <div className="familyInputs">
-            Add a family member:
+            Add a family member
             <br />
             <br />
-            Name:
-            <input
+            <TextField
+              //id="name"
+              label="Name"
               name="name"
               placeholder="Name"
               type="text"
               onChange={this.onChangeHandler}
+              margin="normal"
             />
+            {/* <input
+              name="name"
+              placeholder="Name"
+              type="text"
+              onChange={this.onChangeHandler}
+            /> */}
             <br />
-            Date of Birth:
-            <input
+            <TextField
+              //id="dob"
+              label="Date of Birth"
+              name="dob"
+              // placeholder="Date of Birth"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              onChange={this.onChangeHandler}
+              margin="normal"
+            />
+            {/* <input
               name="dob"
               placeholder="Date of Birth"
               type="date"
               onChange={this.onChangeHandler}
-            />
+            /> */}
             <br />
-            Add a picture:
-            <input
+            <TextField
+              //id="image"
+              label="Image URL"
               name="image"
               placeholder="Add an image URL"
               type="text"
               onChange={this.onChangeHandler}
+              margin="normal"
             />
+            {/* <input
+              name="image"
+              placeholder="Add an image URL"
+              type="text"
+              onChange={this.onChangeHandler}
+            /> */}
             <br />
             {/* Choose a theme color for this person:
             <select

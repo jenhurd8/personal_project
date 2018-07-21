@@ -162,77 +162,80 @@ class Visit extends Component {
     return (
       <div>
         <Nav />
-        <h1>Log a New Visit</h1>
-        <div className="visitBody">
-          <div className="providerList">
-            <br />
-            {this.state.chosenDr}
+        <div className="visit">
+          <br />
+          <h1>Log a New Visit</h1>
+          <div className="visitBody">
+            <div className="providerList">
+              <br />
+              {this.state.chosenDr}
 
-            <br />
-            <p>Select your Provider</p>
+              <br />
+              <p>Select your Provider</p>
 
-            {providersArray}
-          </div>
-          <div className="familyList">
-            <br />
-            {this.state.chosenFamily}
+              {providersArray}
+            </div>
+            <div className="familyList">
+              <br />
+              {this.state.chosenFamily}
 
-            <br />
-            <p>Select your Family Member</p>
+              <br />
+              <p>Select your Family Member</p>
 
-            {familyArray}
-          </div>
-          <div className="visitBox">
-            <br />
-            Visit Date:
-            <input name="date" type="date" onChange={this.onChangeHandler} />
-            <br />
-            Visit Details:
-            <input
-              name="details"
-              placeholder="Details"
-              type="text"
-              onChange={this.onChangeHandler}
-            />
-            <br />
-            Prescriptions:
-            <input
-              name="rx"
-              placeholder="Prescriptions"
-              type="text"
-              onChange={this.onChangeHandler}
-            />
-            <br />
-            Visit Cost:
-            <input
-              name="balance"
-              placeholder="Visit Cost"
-              type="number"
-              onChange={this.onChangeHandler}
-            />
-            <br />
-            <Link to="/dashboard">
-              <Button
-                variant="contained"
-                color="primary"
-                style={{
-                  background: "#64B5F6",
-                  height: "50px",
-                  width: "80px"
-                }}
-                onClick={() =>
-                  this.addVisit(
-                    this.state.date,
-                    this.state.details,
-                    this.state.rx,
-                    this.state.email,
-                    this.state.balance
-                  )
-                }
-              >
-                Add Visit
-              </Button>
-            </Link>
+              {familyArray}
+            </div>
+            <div className="visitBox">
+              <br />
+              Visit Date:
+              <input name="date" type="date" onChange={this.onChangeHandler} />
+              <br />
+              Visit Details:
+              <input
+                name="details"
+                placeholder="Details"
+                type="text"
+                onChange={this.onChangeHandler}
+              />
+              <br />
+              Prescriptions:
+              <input
+                name="rx"
+                placeholder="Prescriptions"
+                type="text"
+                onChange={this.onChangeHandler}
+              />
+              <br />
+              Visit Cost:
+              <input
+                name="balance"
+                placeholder="Visit Cost"
+                type="number"
+                onChange={this.onChangeHandler}
+              />
+              <br />
+              <Link to="/dashboard">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{
+                    background: "#64B5F6",
+                    height: "50px",
+                    width: "80px"
+                  }}
+                  onClick={() =>
+                    this.addVisit(
+                      this.state.date,
+                      this.state.details,
+                      this.state.rx,
+                      this.state.email,
+                      this.state.balance
+                    )
+                  }
+                >
+                  Add Visit
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
