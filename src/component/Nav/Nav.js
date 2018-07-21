@@ -26,7 +26,7 @@ class Nav extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.users);
+    //console.log(this.props.users);
     if (this.props.users.length === 0) {
       this.props
         .getUser()

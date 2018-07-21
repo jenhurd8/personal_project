@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./DashboardDetail.css";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 export default class DashboardDetail extends Component {
   constructor(props) {
@@ -41,12 +42,22 @@ export default class DashboardDetail extends Component {
             <div className="editMenu">
               <div>
                 <div>
-                  <p>Date of Visit:</p>
+                  <TextField
+                    //id="dob"
+                    label="Date of Visit"
+                    name="date"
+                    // placeholder="Date of Birth"
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    onChange={this.props.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>Date of Visit:</p>
                   <input
                     name="date"
                     type="date"
                     onChange={this.props.onChangeHandler}
-                  />
+                  /> */}
                   <Button
                     variant="contained"
                     color="primary"
@@ -64,12 +75,21 @@ export default class DashboardDetail extends Component {
                 </div>
 
                 <div>
-                  <p>Updated Visit Details:</p>
+                  <TextField
+                    //id="image"
+                    label="Visit Details"
+                    name="details"
+                    placeholder="Visit Details"
+                    type="text"
+                    onChange={this.props.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>Updated Visit Details:</p>
                   <input
                     name="details"
                     type="text"
                     onChange={this.props.onChangeHandler}
-                  />
+                  /> */}
                   <Button
                     variant="contained"
                     color="primary"
@@ -87,12 +107,21 @@ export default class DashboardDetail extends Component {
                 </div>
 
                 <div>
-                  <p>Update Prescriptions:</p>
+                  <TextField
+                    //id="image"
+                    label="Prescriptions"
+                    name="rx"
+                    placeholder="Prescriptions"
+                    type="text"
+                    onChange={this.props.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>Update Prescriptions:</p>
                   <input
                     name="rx"
                     type="text"
                     onChange={this.props.onChangeHandler}
-                  />
+                  /> */}
                   <Button
                     variant="contained"
                     color="primary"
@@ -107,12 +136,21 @@ export default class DashboardDetail extends Component {
                   </Button>
                 </div>
                 <div>
-                  <p>Update Visit Cost:</p>
+                  <TextField
+                    //id="image"
+                    label="Visit Cost"
+                    name="balance"
+                    placeholder="Visit Cost"
+                    type="text"
+                    onChange={this.props.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>Update Visit Cost:</p>
                   <input
                     name="balance"
                     type="number"
                     onChange={this.props.onChangeHandler}
-                  />
+                  /> */}
                   <Button
                     variant="contained"
                     color="primary"

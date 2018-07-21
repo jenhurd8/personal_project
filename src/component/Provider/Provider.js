@@ -93,6 +93,7 @@ class Provider extends Component {
 
   deleteHandler(id) {
     this.props.removeProvider(id);
+    console.log(id);
     this.searchAgain();
   }
 
@@ -281,15 +282,21 @@ class Provider extends Component {
             <br />
             Add a doctor or health care provider here:
             <br />
-            <br />
-            <br />
-            Provider Name:
+            <TextField
+              label="Provider Name"
+              name="providerSearchName"
+              placeholder="Provider's First Last (ex: John Jones)"
+              type="text"
+              onChange={this.onChangeHandler}
+              margin="normal"
+            />
+            {/* Provider Name:
             <input
               name="providerSearchName"
               placeholder="Provider's First Last (ex: John Jones)"
               type="text"
               onChange={this.onChangeHandler}
-            />
+            /> */}
             <br />
             {/* <Field
    name="name"
@@ -443,44 +450,84 @@ class Provider extends Component {
             <ToggleDisplay if={this.state.showEditMenu}>
               <div className="editMenu">
                 <div>
-                  <p>New Provider Name:</p>
+                  <TextField
+                    label="New Provider Name"
+                    name="responseName"
+                    placeholder="New Provider Name"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>New Provider Name:</p>
                   <input
                     name="responseName"
                     type="text"
                     onChange={this.onChangeHandler}
-                  />
+                  /> */}
                 </div>
                 <div>
-                  <p>New Provider Address:</p>
+                  <TextField
+                    label="New Provider Address"
+                    name="responseAddress"
+                    placeholder="New Provider Address"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>New Provider Address:</p>
                   <input
                     name="responseAddress"
                     type="text"
                     onChange={this.onChangeHandler}
-                  />
+                  /> */}
                 </div>
                 <div>
-                  <p>New Provider Phone:</p>
+                  <TextField
+                    label="New Provider Phone"
+                    name="bdPhone"
+                    placeholder="New Provider Phone"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>New Provider Phone:</p>
                   <input
                     name="bdPhone"
                     type="text"
                     onChange={this.onChangeHandler}
-                  />
+                  /> */}
                 </div>
                 <div>
-                  <p>New Practice Name:</p>
+                  <TextField
+                    label="New Provider Name"
+                    name="bdPracticeName"
+                    placeholder="New Provider Name"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>New Practice Name:</p>
                   <input
                     name="bdPracticeName"
                     type="text"
                     onChange={this.onChangeHandler}
-                  />
+                  /> */}
                 </div>
                 <div>
-                  <p>Add a Provider Image:</p>
+                  <TextField
+                    label="Add a Provider Image"
+                    name="bdPhoto"
+                    placeholder="Add a Provider Image"
+                    type="text"
+                    onChange={this.onChangeHandler}
+                    margin="normal"
+                  />
+                  {/* <p>Add a Provider Image:</p>
                   <input
                     name="bdPhoto"
                     type="text"
                     onChange={this.onChangeHandler}
-                  />
+                  /> */}
                 </div>
                 <Button
                   variant="contained"

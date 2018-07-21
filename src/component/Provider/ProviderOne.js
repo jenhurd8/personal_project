@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import "./ProviderOne.css";
+import TextField from "@material-ui/core/TextField";
 
 export default class ProviderOne extends Component {
   constructor(props) {
@@ -55,12 +56,20 @@ export default class ProviderOne extends Component {
         {this.state.editProviderMenu && (
           <div className="editMenu">
             <div>
-              <p>New Provider Name:</p>
+              <TextField
+                label="Provider Name"
+                name="name"
+                placeholder="Provider Name"
+                type="text"
+                onChange={this.props.onChangeHandler}
+                margin="normal"
+              />
+              {/* <p>New Provider Name:</p>
               <input
                 name="name"
                 type="text"
                 onChange={this.props.onChangeHandler}
-              />
+              /> */}
               <Button
                 variant="contained"
                 color="primary"
@@ -70,12 +79,20 @@ export default class ProviderOne extends Component {
                 Submit
               </Button>
               <div>
-                <p>New Practice Name:</p>
+                <TextField
+                  label="Practice Name"
+                  name="specialty"
+                  placeholder="Practice Name"
+                  type="text"
+                  onChange={this.props.onChangeHandler}
+                  margin="normal"
+                />
+                {/* <p>New Practice Name:</p>
                 <input
                   name="specialty"
                   type="text"
                   onChange={this.props.onChangeHandler}
-                />
+                /> */}
                 <Button
                   variant="contained"
                   color="primary"
@@ -93,12 +110,20 @@ export default class ProviderOne extends Component {
               </div>
             </div>
             <div>
-              <p>New Address:</p>
+              <TextField
+                label="Address"
+                name="address"
+                placeholder="Address"
+                type="text"
+                onChange={this.props.onChangeHandler}
+                margin="normal"
+              />
+              {/* <p>New Address:</p>
               <input
                 name="address"
                 type="text"
                 onChange={this.props.onChangeHandler}
-              />
+              /> */}
               <Button
                 variant="contained"
                 color="primary"
@@ -109,12 +134,20 @@ export default class ProviderOne extends Component {
               </Button>
             </div>
             <div>
-              <p>Change Provider Photo:</p>
+              <TextField
+                label="Provider Photo URL"
+                name="photo"
+                placeholder="Provider Photo URL"
+                type="text"
+                onChange={this.props.onChangeHandler}
+                margin="normal"
+              />
+              {/* <p>Change Provider Photo:</p>
               <input
                 name="photo"
                 type="text"
                 onChange={this.props.onChangeHandler}
-              />
+              /> */}
               <Button
                 variant="contained"
                 color="primary"
@@ -125,12 +158,20 @@ export default class ProviderOne extends Component {
               </Button>
             </div>
             <div>
-              <p>Change Provider Phone:</p>
+              <TextField
+                label="Provider Phone"
+                name="phone"
+                placeholder="Provider Phone"
+                type="text"
+                onChange={this.props.onChangeHandler}
+                margin="normal"
+              />
+              {/* <p>Change Provider Phone:</p>
               <input
                 name="phone"
                 type="text"
                 onChange={this.props.onChangeHandler}
-              />
+              /> */}
               <Button
                 variant="contained"
                 color="primary"
