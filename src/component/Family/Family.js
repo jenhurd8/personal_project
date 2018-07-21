@@ -13,7 +13,8 @@ import {
   updateFamilyColor,
   updateFamilyDob,
   updateFamilyImage,
-  getUser
+  getUser,
+  getVisits
 } from "../../redux/reducer";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -48,6 +49,7 @@ class Family extends Component {
       });
     });
     this.props.getFamily();
+    this.props.getVisits();
   }
 
   onChangeHandler = e => {
@@ -69,6 +71,23 @@ class Family extends Component {
     window.location.reload();
     console.log(this.state.email);
   };
+
+  // deleteHandler(id) {
+  //   const { visits } = this.props;
+
+  //   function searchTable(id) {
+  //     console.log(visits);
+
+  //     if (_.includes(visits, id)) {
+  //       // if (visits.map(e => id === e.family_id)) {
+  //       alert("you cannot delete");
+  //     } else {
+  //       this.props.removeFamily(id);
+  //     }
+  //   }
+
+  //   searchTable(id);
+  // }
 
   deleteHandler(id) {
     this.props.removeFamily(id);
@@ -253,7 +272,8 @@ function mapStateToProps(state) {
   return {
     family: state.family,
     loading: state.loading,
-    user: state.user
+    user: state.user,
+    visits: state.visits
   };
 }
 
@@ -268,6 +288,7 @@ export default connect(
     updateFamilyColor,
     updateFamilyDob,
     updateFamilyImage,
-    getUser
+    getUser,
+    getVisits
   }
 )(Family);

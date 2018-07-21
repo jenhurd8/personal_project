@@ -19,7 +19,6 @@ import {
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
 
 class Dashboard extends Component {
   constructor() {
@@ -33,7 +32,7 @@ class Dashboard extends Component {
       drSelected: "",
       patientSelected: "",
       showEditMenu: false,
-      filter: ""
+      filterString: ""
     };
     this.deleteHandler = this.deleteHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -43,6 +42,7 @@ class Dashboard extends Component {
     this.updateVisitRx = this.updateVisitRx.bind(this);
     this.updateVisitBalance = this.updateVisitBalance.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.filterHandler = this.filterHandler.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +66,10 @@ class Dashboard extends Component {
 
   showEditMenu() {
     this.setState({ showEditMenu: !this.state.showEditMenu });
+  }
+
+  filterHandler(filter) {
+    this.setState({ filterString: filter });
   }
 
   updateVisitDate(id) {
@@ -112,77 +116,77 @@ class Dashboard extends Component {
     let visitsArray = isLoading ? (
       <p>Loading...</p>
     ) : (
-      visits
-        //.filter(item => item.email === this.state.email)
-        .map((element, index) => {
-          let dashboardVisitId = visits[index].visitid;
+      visits.map((element, index) => {
+        let dashboardVisitId = visits[index].visitid;
 
-          if (visits[index].visitemail === this.state.email) {
-            return (
-              <div key={index} className="dashboardVisit">
-                <Grid container align="center" justify="center">
-                  <Grid item sm>
-                    <Paper
-                      style={{
-                        padding: 20,
-                        marginTop: 10,
-                        marginBottom: 10,
-                        backgroundColor: "#BBDEFB",
-                        width: "80%"
-                      }}
-                    >
-                      <div className="visits" key={index}>
-                        <div className="person">
-                          <img src={visits[index].image} alt="person" />
-                          <p>{visits[index].familyname}</p>
-                          <p>
-                            {visits[index].dob &&
-                              visits[index].dob.slice(0, 10)}
-                          </p>
-                        </div>
-                        <div className="visitDetails">
-                          <DashboardDetail
-                            date={element.date.slice(0, 10)}
-                            details={element.details}
-                            rx={element.rx}
-                            balance={element.balance}
-                            visitId={dashboardVisitId}
-                            onChangeHandler={this.onChangeHandler}
-                            updateVisitDate={this.updateVisitDate}
-                            updateVisitBalance={this.updateVisitBalance}
-                            updateVisitDetails={this.updateVisitDetails}
-                            updateVisitRx={this.updateVisitRx}
-                          />
-                        </div>
-
-                        <div className="dr">
-                          <img src={visits[index].photo} alt="provider" />
-                          <p>{visits[index].providersname}</p>
-                          <p>{visits[index].phone}</p>
-                          <p>{visits[index].address}</p>
-                        </div>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          style={{
-                            height: "10px",
-                            width: "10px",
-                            backgroundColor: "#0D47A1"
-                          }}
-                          onClick={() =>
-                            this.deleteHandler(visits[index].visitid)
-                          }
-                        >
-                          DELETE
-                        </Button>
+        if (
+          visits[index].visitemail === this.state.email &&
+          element.familyname.includes(this.state.filterString)
+        ) {
+          return (
+            <div key={index} className="dashboardVisit">
+              <Grid container align="center" justify="center">
+                <Grid item sm>
+                  <Paper
+                    style={{
+                      padding: 20,
+                      marginTop: 10,
+                      marginBottom: 10,
+                      backgroundColor: "#BBDEFB",
+                      width: "80%"
+                    }}
+                  >
+                    <div className="visits" key={index}>
+                      <div className="person">
+                        <img src={visits[index].image} alt="person" />
+                        <p>{visits[index].familyname}</p>
+                        <p>
+                          {visits[index].dob && visits[index].dob.slice(0, 10)}
+                        </p>
                       </div>
-                    </Paper>
-                  </Grid>
+                      <div className="visitDetails">
+                        <DashboardDetail
+                          date={element.date.slice(0, 10)}
+                          details={element.details}
+                          rx={element.rx}
+                          balance={element.balance}
+                          visitId={dashboardVisitId}
+                          onChangeHandler={this.onChangeHandler}
+                          updateVisitDate={this.updateVisitDate}
+                          updateVisitBalance={this.updateVisitBalance}
+                          updateVisitDetails={this.updateVisitDetails}
+                          updateVisitRx={this.updateVisitRx}
+                        />
+                      </div>
+
+                      <div className="dr">
+                        <img src={visits[index].photo} alt="provider" />
+                        <p>{visits[index].providersname}</p>
+                        <p>{visits[index].phone}</p>
+                        <p>{visits[index].address}</p>
+                      </div>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        style={{
+                          height: "10px",
+                          width: "10px",
+                          backgroundColor: "#0D47A1"
+                        }}
+                        onClick={() =>
+                          this.deleteHandler(visits[index].visitid)
+                        }
+                      >
+                        DELETE
+                      </Button>
+                    </div>
+                  </Paper>
                 </Grid>
-              </div>
-            );
-          }
-        })
+              </Grid>
+            </div>
+          );
+        }
+      })
     );
 
     return (
@@ -236,6 +240,13 @@ class Dashboard extends Component {
             Then, view all of your healthcare history here on your dashboard.
           </p>
           <br />
+        </div>
+        <div id="inputSearch">
+          Search by name:{" "}
+          <input
+            onChange={e => this.filterHandler(e.target.value)}
+            type="text"
+          />
         </div>
         <div className="visitsArray">{visitsArray}</div>
       </div>
