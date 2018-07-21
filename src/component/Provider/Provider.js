@@ -24,6 +24,10 @@ import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import NativeSelect from "@material-ui/core/NativeSelect";
 
 class Provider extends Component {
   constructor() {
@@ -98,6 +102,8 @@ class Provider extends Component {
   }
 
   onSearchHandler() {
+    console.log(this.state.suffix);
+    console.log(this.state.value);
     let completeSearchString = `${this.state.providerSearchName} ${
       this.state.suffix
     } ${this.state.value}`;
@@ -302,81 +308,91 @@ class Provider extends Component {
    name="name"
    component={TextField}
    select  > */}
-            Provider Category:
+            {/* Provider Category:
             <select name="suffix" onChange={this.onChangeHandler}>
               <option value="">Select Provider Type</option>
               <option value="MD">Doctor</option>
               <option value="PA">Physician Assistant</option>
               <option value="Hospital">Hospital</option>
               <option value="Urgent Care">Urgent Care</option>
-            </select>
-            {/* <Select
-              style={{ width: "30%" }}
-              name="suffix"
-              onChange={this.onChangeHandler}
-            >
-              <MenuItem value={""}>Select Provider Type</MenuItem>
-              <MenuItem value={"MD"}>Doctor</MenuItem>
-              <MenuItem value={"PA"}>Physician Assistant</MenuItem>
-              <MenuItem value={"Hospital"}>Hospital</MenuItem>
-              <MenuItem value={"Urgent Care"}>Urgent Care</MenuItem>
-            </Select> */}
-            <br />
-            Provider Location:
-            <select name="value" onChange={this.onChangeHandler}>
-              <option value="">Select Provider State</option>
-              <option value="AL">Alabama</option>
-              <option value="AK">Alaska</option>
-              <option value="AZ">Arizona</option>
-              <option value="AR">Arkansas</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DE">Delaware</option>
-              <option value="DC">District Of Columbia</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="IA">Iowa</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="ME">Maine</option>
-              <option value="MD">Maryland</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MS">Mississippi</option>
-              <option value="MO">Missouri</option>
-              <option value="MT">Montana</option>
-              <option value="NE">Nebraska</option>
-              <option value="NV">Nevada</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NY">New York</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VT">Vermont</option>
-              <option value="VA">Virginia</option>
-              <option value="WA">Washington</option>
-              <option value="WV">West Virginia</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WY">Wyoming</option>
-            </select>
+            </select> */}
+            <FormControl>
+              <InputLabel>Provider Type</InputLabel>
+              <NativeSelect
+                onChange={this.onChangeHandler}
+                input={<Input name="suffix" />}
+              >
+                <option value="" />
+                <option value={""}>Select Provider Type</option>
+                <option value={"MD"}>Doctor</option>
+                <option value={"PA"}>Physician Assistant</option>
+                <option value={"Hospital"}>Hospital</option>
+                <option value={"Urgent Care"}>Urgent Care</option>
+              </NativeSelect>
+
+              <br />
+              {/* Provider Location:
+            <select name="value" onChange={this.onChangeHandler}> */}
+              {/* <InputLabel>Provider State</InputLabel> */}
+              <NativeSelect
+                onChange={this.onChangeHandler}
+                input={<Input name="value" />}
+              >
+                <option value="">Select Provider State</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="DC">District Of Columbia</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+                {/* </select> */}
+              </NativeSelect>
+            </FormControl>
             <br />
             <Button
               variant="contained"

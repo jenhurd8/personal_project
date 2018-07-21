@@ -14,6 +14,7 @@
     "massive": "^5.0.0",
     "material-dashboard": "^2.1.0",
     "material-dashboard-react": "^1.3.0",
+    "material-ui": "^1.0.0-beta.47",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
     "react": "^16.4.1",
