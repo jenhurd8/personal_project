@@ -1,25 +1,79 @@
-.inputs {
-  padding-top: 2%;
-  padding-left: 2%;
-  width: 25%;
-  background-color: #90caf9;
-  margin-bottom: -200px;
-  padding-bottom: 200px;
-  position: relative;
-  left: 0;
-  top: 0;
+@media (min-width: 0px) {
+  .inputs {
+    margin-top: 35%;
+    background-color: #e3f2fd;
+    position: static;
+    width: 90%;
+    padding: 0%;
+  }
+  .provider {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+  .providerDiv {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 25%;
+    width: 100%;
+  }
+  h1 {
+    font-weight: bold;
+  }
 }
-.provider {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding-top: 88px;
+
+@media (min-width: 700px) {
+  .inputs {
+    margin-top: 15%;
+    background-color: #e3f2fd;
+    position: static;
+    width: 90%;
+    padding: 0%;
+  }
+  .provider {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+  .providerDiv {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5%;
+    width: 100%;
+  }
+  h1 {
+    font-weight: bold;
+  }
 }
-.providerDiv {
-  margin: 15px;
-  display: flex;
-  flex-direction: row;
-}
-h1 {
-  font-weight: bold;
+
+@media (min-width: 1000px) {
+  .inputs {
+    margin-top: 0%;
+    padding-top: 2%;
+    padding-left: 2%;
+    width: 25%;
+    background-color: #90caf9;
+    margin-bottom: -200px;
+    padding-bottom: 200px;
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+  .provider {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 88px;
+  }
+  .providerDiv {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0%;
+  }
+  h1 {
+    font-weight: bold;
+  }
 }

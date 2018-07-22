@@ -23,18 +23,18 @@
   .bar {
     display: none;
   }
+}
 
-  @media (min-width: 500px) {
-    .charts {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 350px;
-      position: relative;
-    }
-    .bar {
-      display: none;
-    }
+@media (min-width: 500px) {
+  .charts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 350px;
+    position: relative;
+  }
+  .bar {
+    display: none;
   }
 }
 
