@@ -1,3 +1,19 @@
 .left {
   margin-right: 15px;
 }
+
+@media (min-width: 0px) {
+  .familyMember {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .familyMember {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0%;
+  }
+}
