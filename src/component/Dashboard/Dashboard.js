@@ -141,12 +141,18 @@ class Dashboard extends Component {
                         <img src={visits[index].image} alt="person" />
                         <p>{visits[index].familyname}</p>
                         <p>
-                          {visits[index].dob && visits[index].dob.slice(0, 10)}
+                          {visits[index].dob.slice(5, 10) +
+                            "-" +
+                            visits[index].dob.slice(0, 4)}
                         </p>
                       </div>
                       <div className="visitDetails">
                         <DashboardDetail
-                          date={element.date.slice(0, 10)}
+                          date={
+                            element.date.slice(5, 10) +
+                            "-" +
+                            element.date.slice(0, 4)
+                          }
                           details={element.details}
                           rx={element.rx}
                           balance={element.balance}

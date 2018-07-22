@@ -11,6 +11,9 @@ import {
   getUser,
   deleteUser
 } from "../../redux/reducer";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 class Nav extends Component {
   constructor() {
@@ -19,14 +22,22 @@ class Nav extends Component {
       id: "",
       email: "",
       displayname: "",
+      anchorEl: null,
       picture: ""
     };
     this.loggedIn = this.loggedIn.bind(this);
     this.logOut = this.logOut.bind(this);
   }
 
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
   componentDidMount() {
-    //console.log(this.props.users);
+    console.log(this.props.users);
     if (this.props.users.length === 0) {
       this.props
         .getUser()
@@ -81,11 +92,14 @@ class Nav extends Component {
   }
 
   render() {
+    const { anchorEl } = this.state;
+
     return (
       <div className="nav">
         <div className="logo">
           <Link to="/">My Health</Link>
         </div>
+
         <div className="menuItems">
           <Link to="/dashboard">Dashboard</Link>
         </div>
@@ -101,7 +115,45 @@ class Nav extends Component {
         <div className="menuItems">
           <Link to="/charts">Health Data</Link>
         </div>
-        {this.loggedIn()}
+        <div id="largeDeviceLogin">{this.loggedIn()}</div>
+        <div id="smallDeviceMenu">
+          <Button
+            aria-owns={anchorEl ? "simple-menu" : null}
+            aria-haspopup="true"
+            onClick={this.handleClick}
+            style={{
+              color: "#0d47a1",
+              font: "Verdana, Geneva, Tahoma, sans-serif"
+            }}
+          >
+            MENU &#9776;
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={this.handleClose}
+          >
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/dashboard">Dashboard</Link>
+            </MenuItem>
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/family">Manage Family</Link>
+            </MenuItem>
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/provider">Manager Providers</Link>
+            </MenuItem>
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/visit">Log a Visit</Link>
+            </MenuItem>
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/charts">Health Data</Link>
+            </MenuItem>
+            <MenuItem onClick={this.handleClose}>
+              <div>{this.loggedIn()}</div>
+            </MenuItem>
+          </Menu>
+        </div>
       </div>
     );
   }

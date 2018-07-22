@@ -11,3 +11,12 @@ body {
   text-align: left;
   padding: 10px;
 }
+
+@media (min-width: 0px) {
+  #visitDetailsDashboard {
+    padding-left: 0px;
+    margin-left: 0px;
+    width: 100%;
+    text-align: left;
+  }
+}

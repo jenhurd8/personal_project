@@ -16,3 +16,42 @@ button {
 .myHealth {
   font-size: 100px;
 }
+
+@media (min-width: 0px) {
+  .landing {
+    background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,h_600,w_320/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+  }
+
+  .myHealth {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  .landing {
+    background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,g_north,h_1024,w_768/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+  }
+  .myHealth {
+    font-size: 80px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .landing {
+    background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,g_south,h_1400,w_1000/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+  }
+
+  .myHealth {
+    font-size: 100px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .landing {
+    background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_1000/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+  }
+
+  .myHealth {
+    font-size: 100px;
+  }
+}

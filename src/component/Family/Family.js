@@ -149,8 +149,9 @@ class Family extends Component {
                       name={element.name}
                       id={element.id}
                       image={element.image}
-                      dob={element.dob.slice(0, 10)}
-                      // themecolor={element.themecolor}
+                      dob={
+                        element.dob.slice(5, 10) + "-" + element.dob.slice(0, 4)
+                      }
                       deleteHandler={this.deleteHandler}
                       onChangeHandler={this.onChangeHandler}
                       updateFamilyName={this.updateFamilyName}
