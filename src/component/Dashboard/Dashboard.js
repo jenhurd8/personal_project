@@ -165,20 +165,22 @@ class Dashboard extends Component {
                         <p>{visits[index].phone}</p>
                         <p>{visits[index].address}</p>
                       </div>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        style={{
-                          height: "10px",
-                          width: "10px",
-                          backgroundColor: "#0D47A1"
-                        }}
-                        onClick={() =>
-                          this.deleteHandler(visits[index].visitid)
-                        }
-                      >
-                        DELETE
-                      </Button>
+                      <div id="deleteButton">
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          style={{
+                            height: "10px",
+                            width: "10px",
+                            backgroundColor: "#0D47A1"
+                          }}
+                          onClick={() =>
+                            this.deleteHandler(visits[index].visitid)
+                          }
+                        >
+                          DELETE
+                        </Button>
+                      </div>
                     </div>
                   </Paper>
                 </Grid>
@@ -242,7 +244,7 @@ class Dashboard extends Component {
           <br />
         </div>
         <div id="inputSearch">
-          Search by name:{" "}
+          Search by Name:{" "}
           <input
             onChange={e => this.filterHandler(e.target.value)}
             type="text"

@@ -5,7 +5,12 @@
   background-color: #e3f2fd;
   padding-top: 90px;
 }
-
+.person {
+  width: 20%;
+}
+.visitDetails {
+  width: 40%;
+}
 #warning {
   background-color: #fdece3;
 }
@@ -13,14 +18,21 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 80%;
-  /* align-items: center; */
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
-.visitsArray {
+.dr {
+  text-align: left;
+  width: 20%;
 }
+
 img {
   border-radius: 10%;
 }
 #inputSearch {
   margin-left: 10%;
+}
+#deleteButton {
+  width: 8%;
 }

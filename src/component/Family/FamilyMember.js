@@ -33,6 +33,7 @@ export default class FamilyMember extends Component {
           <br />
           <p>{this.props.name}</p>
           <img src={this.props.image} alt="person" />
+
           <p>{this.props.dob}</p>
           <p>{this.props.themecolor}</p>
         </div>
@@ -52,7 +53,6 @@ export default class FamilyMember extends Component {
           {this.state.showEditMenu && (
             <div className="editMenu">
               <div>
-                <br />
                 <TextField
                   label="Name"
                   name="name"
@@ -61,12 +61,7 @@ export default class FamilyMember extends Component {
                   onChange={this.props.onChangeHandler}
                   margin="normal"
                 />
-                {/* <p>Name:</p>
-                <input
-                  name="name"
-                  type="text"
-                  onChange={this.props.onChangeHandler}
-                /> */}
+
                 <Button
                   variant="contained"
                   color="primary"
@@ -88,12 +83,7 @@ export default class FamilyMember extends Component {
                     onChange={this.props.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>Date of Birth:</p>
-                  <input
-                    name="dob"
-                    type="date"
-                    onChange={this.props.onChangeHandler}
-                  /> */}
+
                   <Button
                     variant="contained"
                     color="primary"
@@ -109,12 +99,6 @@ export default class FamilyMember extends Component {
                 </div>
 
                 <div>
-                  {/* <p>Image URL:</p>
-                  <input
-                    name="image"
-                    type="text"
-                    onChange={this.props.onChangeHandler}
-                  /> */}
                   <TextField
                     label="Image URL"
                     name="image"
@@ -136,26 +120,6 @@ export default class FamilyMember extends Component {
                     Update
                   </Button>
                 </div>
-
-                {/* <div>
-                  <p>Theme Color:</p>
-                  <select
-                    value={this.props.selectColor}
-                    name="color"
-                    onChange={this.props.onChangeHandler}
-                  >
-                    <option color="red">Red</option>
-                    <option color="blue">Blue</option>
-                    <option color="yelow">Yellow</option>
-                  </select>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.props.updateFamilyColor(this.props.id)}
-                  >
-                    Submit
-                  </Button>
-                </div> */}
               </div>
             </div>
           )}

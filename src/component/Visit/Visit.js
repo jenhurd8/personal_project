@@ -187,10 +187,8 @@ class Visit extends Component {
             </div>
             <div className="visitBox">
               <br />
-              {/* Visit Date:
-              <input name="date" type="date" onChange={this.onChangeHandler} /> */}
+
               <TextField
-                //id="name"
                 label="Date"
                 name="date"
                 InputLabelProps={{ shrink: true }}
@@ -207,21 +205,9 @@ class Visit extends Component {
                 onChange={this.onChangeHandler}
                 margin="normal"
               />
-              {/* Visit Details:
-              <input
-                name="details"
-                placeholder="Details"
-                type="text"
-                onChange={this.onChangeHandler}
-              /> */}
+
               <br />
-              {/* Prescriptions:
-              <input
-                name="rx"
-                placeholder="Prescriptions"
-                type="text"
-                onChange={this.onChangeHandler}
-              /> */}
+
               <TextField
                 id="rx"
                 label="Prescriptions"
@@ -239,13 +225,7 @@ class Visit extends Component {
                 onChange={this.onChangeHandler}
                 margin="normal"
               />
-              {/* Visit Cost:
-              <input
-                name="balance"
-                placeholder="Visit Cost"
-                type="number"
-                onChange={this.onChangeHandler}
-              /> */}
+
               <br />
               <Link to="/dashboard">
                 <Button

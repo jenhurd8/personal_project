@@ -19,15 +19,13 @@ export default class DashboardDetail extends Component {
   render() {
     return (
       <div className="visitDetailBox">
-        <div>
+        <div id="visitDetailsDashboard">
           Visit Details:
           <p>{this.props.date}</p>
           <p>{this.props.details}</p>
           <p>{this.props.rx}</p>
           <p>${this.props.balance}</p>
-          {/* <button onClick={this.showEditMenu}>Edit Visit</button> */}
-        </div>
-        <div>
+          <br />
           <Button
             variant="contained"
             color="primary"
@@ -37,27 +35,21 @@ export default class DashboardDetail extends Component {
             Edit Visit
           </Button>
         </div>
+
         <div>
           {this.state.showEditMenu && (
             <div className="editMenu">
               <div>
                 <div>
                   <TextField
-                    //id="dob"
                     label="Date of Visit"
                     name="date"
-                    // placeholder="Date of Birth"
                     type="date"
                     InputLabelProps={{ shrink: true }}
                     onChange={this.props.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>Date of Visit:</p>
-                  <input
-                    name="date"
-                    type="date"
-                    onChange={this.props.onChangeHandler}
-                  /> */}
+
                   <Button
                     variant="contained"
                     color="primary"
@@ -76,7 +68,6 @@ export default class DashboardDetail extends Component {
 
                 <div>
                   <TextField
-                    //id="image"
                     label="Visit Details"
                     name="details"
                     placeholder="Visit Details"
@@ -84,12 +75,7 @@ export default class DashboardDetail extends Component {
                     onChange={this.props.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>Updated Visit Details:</p>
-                  <input
-                    name="details"
-                    type="text"
-                    onChange={this.props.onChangeHandler}
-                  /> */}
+
                   <Button
                     variant="contained"
                     color="primary"
@@ -108,7 +94,6 @@ export default class DashboardDetail extends Component {
 
                 <div>
                   <TextField
-                    //id="image"
                     label="Prescriptions"
                     name="rx"
                     placeholder="Prescriptions"
@@ -116,12 +101,7 @@ export default class DashboardDetail extends Component {
                     onChange={this.props.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>Update Prescriptions:</p>
-                  <input
-                    name="rx"
-                    type="text"
-                    onChange={this.props.onChangeHandler}
-                  /> */}
+
                   <Button
                     variant="contained"
                     color="primary"
@@ -137,7 +117,6 @@ export default class DashboardDetail extends Component {
                 </div>
                 <div>
                   <TextField
-                    //id="image"
                     label="Visit Cost"
                     name="balance"
                     placeholder="Visit Cost"
@@ -145,12 +124,7 @@ export default class DashboardDetail extends Component {
                     onChange={this.props.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>Update Visit Cost:</p>
-                  <input
-                    name="balance"
-                    type="number"
-                    onChange={this.props.onChangeHandler}
-                  /> */}
+
                   <Button
                     variant="contained"
                     color="primary"

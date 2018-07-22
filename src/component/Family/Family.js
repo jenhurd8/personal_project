@@ -72,25 +72,17 @@ class Family extends Component {
     console.log(this.state.email);
   };
 
-  // deleteHandler(id) {
-  //   const { visits } = this.props;
-
-  //   function searchTable(id) {
-  //     console.log(visits);
-
-  //     if (_.includes(visits, id)) {
-  //       // if (visits.map(e => id === e.family_id)) {
-  //       alert("you cannot delete");
-  //     } else {
-  //       this.props.removeFamily(id);
-  //     }
-  //   }
-
-  //   searchTable(id);
-  // }
-
   deleteHandler(id) {
-    this.props.removeFamily(id);
+    const { visits } = this.props;
+
+    visits.map((element, index) => {
+      if (element.family_id === id) {
+        alert("You cannot delete a person that is in use on the dashboard!");
+      } else {
+        this.props.removeFamily(id);
+        window.location.reload();
+      }
+    });
   }
 
   updateFamily(id) {
@@ -184,7 +176,6 @@ class Family extends Component {
             <br />
             <br />
             <TextField
-              //id="name"
               label="Name"
               name="name"
               placeholder="Name"
@@ -192,32 +183,17 @@ class Family extends Component {
               onChange={this.onChangeHandler}
               margin="normal"
             />
-            {/* <input
-              name="name"
-              placeholder="Name"
-              type="text"
-              onChange={this.onChangeHandler}
-            /> */}
             <br />
             <TextField
-              //id="dob"
               label="Date of Birth"
               name="dob"
-              // placeholder="Date of Birth"
               type="date"
               InputLabelProps={{ shrink: true }}
               onChange={this.onChangeHandler}
               margin="normal"
             />
-            {/* <input
-              name="dob"
-              placeholder="Date of Birth"
-              type="date"
-              onChange={this.onChangeHandler}
-            /> */}
             <br />
             <TextField
-              //id="image"
               label="Image URL"
               name="image"
               placeholder="Add an image URL"
@@ -225,28 +201,10 @@ class Family extends Component {
               onChange={this.onChangeHandler}
               margin="normal"
             />
-            {/* <input
-              name="image"
-              placeholder="Add an image URL"
-              type="text"
-              onChange={this.onChangeHandler}
-            /> */}
             <br />
-            {/* Choose a theme color for this person:
-            <select
-              value={this.state.color}
-              name="color"
-              onChange={this.onChangeHandler}
-            >
-              <option color="red">Red</option>
-              <option color="blue">Blue</option>
-              <option color="yelow">Yellow</option>
-            </select> */}
             <br />
-            {/* <button onClick={this.onSubmitHandler}>Submit</button> */}
             <Button
               variant="contained"
-              //color="primary"
               onClick={this.onSubmitHandler}
               style={{
                 background: "#64B5F6",

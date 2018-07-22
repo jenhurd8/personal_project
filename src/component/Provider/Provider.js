@@ -94,9 +94,16 @@ class Provider extends Component {
   }
 
   deleteHandler(id) {
-    this.props.removeProvider(id);
-    console.log(id);
-    this.searchAgain();
+    const { visits } = this.props;
+
+    visits.map((element, index) => {
+      if (element.providers_id === id) {
+        alert("You cannot delete a provider that is in use on the dashboard!");
+      } else {
+        this.props.removeProvider(id);
+        this.searchAgain();
+      }
+    });
   }
 
   onSearchHandler() {
@@ -309,9 +316,6 @@ class Provider extends Component {
               </NativeSelect>
 
               <br />
-              {/* Provider Location:
-            <select name="value" onChange={this.onChangeHandler}> */}
-              {/* <InputLabel>Provider State</InputLabel> */}
               <NativeSelect
                 onChange={this.onChangeHandler}
                 input={<Input name="value" />}
@@ -368,9 +372,9 @@ class Provider extends Component {
                 <option value="WV">West Virginia</option>
                 <option value="WI">Wisconsin</option>
                 <option value="WY">Wyoming</option>
-                {/* </select> */}
               </NativeSelect>
             </FormControl>
+            <br />
             <br />
             <Button
               variant="contained"
@@ -452,12 +456,6 @@ class Provider extends Component {
                     onChange={this.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>New Provider Name:</p>
-                  <input
-                    name="responseName"
-                    type="text"
-                    onChange={this.onChangeHandler}
-                  /> */}
                 </div>
                 <div>
                   <TextField
@@ -468,12 +466,6 @@ class Provider extends Component {
                     onChange={this.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>New Provider Address:</p>
-                  <input
-                    name="responseAddress"
-                    type="text"
-                    onChange={this.onChangeHandler}
-                  /> */}
                 </div>
                 <div>
                   <TextField
@@ -484,12 +476,6 @@ class Provider extends Component {
                     onChange={this.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>New Provider Phone:</p>
-                  <input
-                    name="bdPhone"
-                    type="text"
-                    onChange={this.onChangeHandler}
-                  /> */}
                 </div>
                 <div>
                   <TextField
@@ -500,12 +486,6 @@ class Provider extends Component {
                     onChange={this.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>New Practice Name:</p>
-                  <input
-                    name="bdPracticeName"
-                    type="text"
-                    onChange={this.onChangeHandler}
-                  /> */}
                 </div>
                 <div>
                   <TextField
@@ -516,12 +496,6 @@ class Provider extends Component {
                     onChange={this.onChangeHandler}
                     margin="normal"
                   />
-                  {/* <p>Add a Provider Image:</p>
-                  <input
-                    name="bdPhoto"
-                    type="text"
-                    onChange={this.onChangeHandler}
-                  /> */}
                 </div>
                 <Button
                   variant="contained"
@@ -541,8 +515,6 @@ class Provider extends Component {
             <br />
           </div>
           <div className="providerArray">
-            {/* <h1>Your Provider List</h1> */}
-            {/* <button onClick={this.editProviderMenu}>Edit Provider Menu</button> */}
             <br />
             {providerArray}
           </div>

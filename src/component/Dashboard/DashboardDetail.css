@@ -4,5 +4,10 @@ body {
 .visitDetailBox {
   display: flex;
   flex-direction: row;
-  margin: 20px;
+  margin: 5px;
+  margin-right: 15px;
+}
+#visitDetailsDashboard {
+  text-align: left;
+  padding: 10px;
 }
