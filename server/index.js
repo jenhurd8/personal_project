@@ -89,7 +89,7 @@ app.get("/logout", (req, res) => {
       // }/v2/logout?federated&returnTo=http%3A%2F%2Flocalhost:3000/landing&client_id=${
     }/v2/logout?federated&returnTo=http%3A%2F%2F${
       process.env.DEV_HOST_WITHOUT_HTTP
-    }/landing&client_id=${process.env.CLIENT_ID}`
+    }&client_id=${process.env.CLIENT_ID}`
   );
 });
 
