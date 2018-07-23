@@ -74,7 +74,8 @@ class Nav extends Component {
           <div>
             <a
               id="logoutMessage"
-              href="http://localhost:3001/logout"
+              // href="http://localhost:3001/logout"
+              href="`${process.env.REACT_APP_HOST}`/logout"
               onClick={() => this.logOut}
             >
               Log out
@@ -83,7 +84,8 @@ class Nav extends Component {
         </div>
       );
     } else {
-      return <a href="http://localhost:3001/login">Login</a>;
+      // return <a href="http://localhost:3001/login">Login</a>;
+      return <a href="`${process.env.REACT_APP_HOST}`/login">Login</a>;
     }
   }
 

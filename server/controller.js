@@ -401,14 +401,4 @@ module.exports = {
         });
       });
   }
-
-  // deleteUser: (req, res, next) => {
-  //   let db = req.app.get("db");
-
-  // db.deleteVisit(req.params.id).then(visits => {
-  //   db.getVisits().then(visits => {
-  //     return res.status(200).send(visits);
-  //   });
-  // });
-  // }
 };

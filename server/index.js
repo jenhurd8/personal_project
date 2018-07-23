@@ -72,7 +72,8 @@ passport.deserializeUser((user, done) => done(null, user));
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    successRedirect: "http://localhost:3000/#/dashboard",
+    // successRedirect: "http://localhost:3000/#/dashboard",
+    successRedirect: `${process.env.REACT_APP_DEV_HOST}/#/dashboard`,
     failureRedirect: "/login"
   })
 );
@@ -85,9 +86,10 @@ app.get("/logout", (req, res) => {
   res.redirect(
     `https://${
       process.env.DOMAIN
-    }/v2/logout?federated&returnTo=http%3A%2F%2Flocalhost:3000/landing&client_id=${
-      process.env.CLIENT_ID
-    }`
+      // }/v2/logout?federated&returnTo=http%3A%2F%2Flocalhost:3000/landing&client_id=${
+    }/v2/logout?federated&returnTo=http%3A%2F%2F${
+      process.env.REACT_APP_DEV_HOST
+    }/landing&client_id=${process.env.CLIENT_ID}`
   );
 });
 
