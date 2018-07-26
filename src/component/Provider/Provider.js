@@ -115,7 +115,9 @@ class Provider extends Component {
 
     axios
       .get(
-        `${process.env.REACT_APP_HOST}/api/searchGoogle/${completeSearchString}`
+        // for use on localhost editing
+        // `${process.env.REACT_APP_HOST}/api/searchGoogle/${completeSearchString}`
+        `/api/searchGoogle/${completeSearchString}`
       )
       .then(response => {
         if (response.data.status !== "ZERO_RESULTS") {
@@ -127,9 +129,9 @@ class Provider extends Component {
           });
           axios
             .get(
-              `${process.env.REACT_APP_HOST}/api/searchGoogle2/${
-                this.state.responseId
-              }`
+              // for use on localhost editing
+              // `${process.env.REACT_APP_HOST}/api/searchGoogle2/${
+              `/api/searchGoogle2/${this.state.responseId}`
             )
             .then(response => {
               this.setState({
@@ -146,9 +148,11 @@ class Provider extends Component {
 
                 axios
                   .get(
-                    `${process.env.REACT_APP_HOST}/api/betterDoctor/${
-                      this.state.providerSearchName
-                    }/${this.state.value}`
+                    // for use on localhost editing
+                    // `${process.env.REACT_APP_HOST}/api/betterDoctor/${
+                    `/api/betterDoctor/${this.state.providerSearchName}/${
+                      this.state.value
+                    }`
                   )
 
                   .then(response => {
