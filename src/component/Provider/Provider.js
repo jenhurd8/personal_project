@@ -112,14 +112,14 @@ class Provider extends Component {
     let completeSearchString = `${this.state.providerSearchName} ${
       this.state.suffix
     } ${this.state.value}`;
+
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${completeSearchString}&inputtype=textquery&fields=photos,place_id,icon,photos,plus_code,reference,formatted_address,name,rating,opening_hours,geometry&key=${
-          process.env.REACT_APP_api_key
-        }`
+        `${process.env.REACT_APP_HOST}/api/searchGoogle/${completeSearchString}`
       )
       .then(response => {
         if (response.data.status !== "ZERO_RESULTS") {
+          //console.log(response);
           this.setState({
             responseName: response.data.candidates[0].name,
             responseAddress: response.data.candidates[0].formatted_address,
@@ -127,26 +127,32 @@ class Provider extends Component {
           });
           axios
             .get(
-              `https://maps.googleapis.com/maps/api/place/details/json?placeid=${
+              `${process.env.REACT_APP_HOST}/api/searchGoogle2/${
                 this.state.responseId
-              }&fields=name,rating,formatted_phone_number&key=${
-                process.env.REACT_APP_api_key
               }`
             )
             .then(response => {
               this.setState({
                 bdPhone: response.data.result.formatted_phone_number
               });
+
               if (this.state.suffix === "MD") {
+                let config = {
+                  params: {
+                    name: this.state.providerSearchName,
+                    state: this.state.value
+                  }
+                };
+
                 axios
                   .get(
-                    `https://api.betterdoctor.com/2016-03-01/doctors?name=${
+                    `${process.env.REACT_APP_HOST}/api/betterDoctor/${
                       this.state.providerSearchName
-                    }&location=${this.state.value}&skip=0&limit=10&user_key=${
-                      process.env.REACT_APP_api_key2
-                    }`
+                    }/${this.state.value}`
                   )
+
                   .then(response => {
+                    console.log(response.data);
                     if (response.data.data.length !== 0) {
                       this.setState({
                         bdPhoto: response.data.data[0].profile.image_url,

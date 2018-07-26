@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 module.exports = {
   addFamily: (req, res, next) => {
     let db = req.app.get("db");
@@ -399,6 +401,18 @@ module.exports = {
         db.getVisits().then(visits => {
           return res.status(200).send(visits);
         });
+      });
+  },
+
+  searchGoogle: (req, res, next) => {
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${completeSearchString}&inputtype=textquery&fields=photos,place_id,icon,photos,plus_code,reference,formatted_address,name,rating,opening_hours,geometry&key=${
+          process.env.REACT_APP_api_key
+        }`
+      )
+      .then(function(res) {
+        console.log(res);
       });
   }
 };

@@ -8,6 +8,7 @@ const controller = require("./controller");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
 const path = require("path");
+const axios = require("axios");
 
 const app = express();
 
@@ -95,6 +96,47 @@ app.get("/logout", (req, res) => {
 
 app.get("/api/user", (req, res) => {
   res.status(200).send(req.session.passport.user);
+});
+
+app.get("/api/searchGoogle/:id", (req, res) => {
+  // console.log(req.params.id);
+  axios
+    .get(
+      `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${
+        req.params.id
+      }&inputtype=textquery&fields=photos,place_id,icon,photos,plus_code,reference,formatted_address,name,rating,opening_hours,geometry&key=${
+        process.env.REACT_APP_api_key
+      }`
+    )
+    .then(response => res.status(200).json(response.data))
+    .catch(err => console.log(err));
+});
+
+app.get("/api/searchGoogle2/:id", (req, res) => {
+  // console.log(req.params.id);
+  axios
+    .get(
+      `https://maps.googleapis.com/maps/api/place/details/json?placeid=${
+        req.params.id
+      }&fields=name,rating,formatted_phone_number&key=${
+        process.env.REACT_APP_api_key
+      }`
+    )
+    .then(response => res.status(200).json(response.data))
+    .catch(err => console.log(err));
+});
+
+app.get("/api/betterDoctor/:name/:id", (req, res) => {
+  axios
+    .get(
+      `https://api.betterdoctor.com/2016-03-01/doctors?name=${
+        req.params.name
+      }&location=${req.params.id}&skip=0&limit=10&user_key=${
+        process.env.REACT_APP_api_key2
+      }`
+    )
+    .then(response => res.status(200).json(response.data))
+    .catch(err => console.log(err));
 });
 
 //app.delete("/api/user/:id", controller.deleteUser);
