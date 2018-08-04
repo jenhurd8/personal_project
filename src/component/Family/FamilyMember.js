@@ -33,9 +33,7 @@ export default class FamilyMember extends Component {
           <br />
           <p>{this.props.name}</p>
           <img src={this.props.image} alt="person" />
-
           <p>{this.props.dob}</p>
-          <p>{this.props.themecolor}</p>
         </div>
         <div className="right">
           <Button
@@ -48,7 +46,7 @@ export default class FamilyMember extends Component {
             }}
             onClick={this.showEditMenu}
           >
-            Edit
+            Edit!
           </Button>
           {this.state.showEditMenu && (
             <div className="editMenu">

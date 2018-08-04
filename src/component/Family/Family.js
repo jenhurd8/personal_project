@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import "./Family.css";
 import Nav from "../../component/Nav/Nav.js";
 import FamilyMember from "./FamilyMember";
-//import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   removeFamily,
   addFamily,
   getFamily,
-  updateFamily,
   updateFamilyName,
-  updateFamilyColor,
   updateFamilyDob,
   updateFamilyImage,
   getUser,
@@ -39,7 +36,7 @@ class Family extends Component {
     this.updateFamilyName = this.updateFamilyName.bind(this);
     this.updateFamilyDob = this.updateFamilyDob.bind(this);
     this.updateFamilyImage = this.updateFamilyImage.bind(this);
-    this.updateFamilyColor = this.updateFamilyColor.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
 
   componentDidMount() {
@@ -60,16 +57,36 @@ class Family extends Component {
     this.setState({ showEditMenu: !this.state.showEditMenu });
   }
 
-  onSubmitHandler = e => {
-    this.props.addFamily({
-      name: this.state.name,
-      image: this.state.image,
-      dob: this.state.dob,
-      themecolor: this.state.color,
-      email: this.state.email
+  resetState() {
+    this.setState({
+      name: "",
+      dob: "",
+      image: "",
+      color: "Red",
+      email: "",
+      showEditMenu: false
     });
-    window.location.reload();
-    console.log(this.state.email);
+  }
+
+  onSubmitHandler = e => {
+    this.props
+      .addFamily({
+        name: this.state.name,
+        image: this.state.image,
+        dob: this.state.dob,
+        themecolor: this.state.color,
+        email: this.state.email
+      })
+      .then(
+        this.setState({
+          name: "",
+          dob: "",
+          image: "",
+          color: "Red",
+          email: "",
+          showEditMenu: false
+        })
+      );
   };
 
   deleteHandler(id) {
@@ -80,52 +97,38 @@ class Family extends Component {
         alert("You cannot delete a person that is in use on the dashboard!");
       } else {
         this.props.removeFamily(id);
-        window.location.reload();
       }
     });
   }
 
-  updateFamily(id) {
-    this.props.updateFamily(id, {
-      name: this.state.name,
-      image: this.state.image,
-      dob: this.state.dob,
-      themecolor: this.state.color,
-      email: this.state.email
-    });
-    window.location.reload();
-  }
-
   updateFamilyName(id) {
-    this.props.updateFamilyName(id, {
-      name: this.state.name
-    });
-    window.location.reload();
+    this.props
+      .updateFamilyName(id, {
+        name: this.state.name
+      })
+      .then(this.resetState());
   }
 
   updateFamilyImage(id) {
-    this.props.updateFamilyImage(id, {
-      image: this.state.image
-    });
-    window.location.reload();
+    this.props
+      .updateFamilyImage(id, {
+        image: this.state.image
+      })
+      .then(this.resetState());
   }
 
   updateFamilyDob(id) {
-    this.props.updateFamilyDob(id, {
-      dob: this.state.dob
-    });
-    window.location.reload();
-  }
-
-  updateFamilyColor(id) {
-    console.log(this.state.color);
-    this.props.updateFamilyColor(id, {
-      color: this.state.color
-    });
-    window.location.reload();
+    this.props
+      .updateFamilyDob(id, {
+        dob: this.state.dob
+      })
+      .then(this.resetState())
+      .then();
   }
 
   render() {
+    console.log(this.props.family);
+    console.log(this.state.name);
     const { family, isLoading } = this.props;
     let familyArray = isLoading ? (
       <p>Loading...</p>
@@ -157,8 +160,6 @@ class Family extends Component {
                       updateFamilyName={this.updateFamilyName}
                       updateFamilyDob={this.updateFamilyDob}
                       updateFamilyImage={this.updateFamilyImage}
-                      updateFamilyColor={this.updateFamilyColor}
-                      selectColor={this.state.color}
                     />
                   </Paper>
                 </Grid>
@@ -183,6 +184,7 @@ class Family extends Component {
               type="text"
               onChange={this.onChangeHandler}
               margin="normal"
+              value={this.state.name}
             />
             <br />
             <TextField
@@ -192,6 +194,7 @@ class Family extends Component {
               InputLabelProps={{ shrink: true }}
               onChange={this.onChangeHandler}
               margin="normal"
+              value={this.state.dob}
             />
             <br />
             <TextField
@@ -201,6 +204,7 @@ class Family extends Component {
               type="text"
               onChange={this.onChangeHandler}
               margin="normal"
+              value={this.state.image}
             />
             <br />
             <br />
@@ -242,9 +246,7 @@ export default connect(
     removeFamily,
     addFamily,
     getFamily,
-    updateFamily,
     updateFamilyName,
-    updateFamilyColor,
     updateFamilyDob,
     updateFamilyImage,
     getUser,

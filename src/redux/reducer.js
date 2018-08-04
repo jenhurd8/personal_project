@@ -3,11 +3,9 @@ import axios from "axios";
 const GET_FAMILY = "GET_FAMILY";
 const ADD_FAMILY = "ADD_FAMILY";
 const REMOVE_FAMILY = "REMOVE_FAMILY";
-const UPDATE_FAMILY = "UPDATE_FAMILY";
 const UPDATE_FAMILY_NAME = "UPDATE_FAMILY_NAME";
 const UPDATE_FAMILY_IMAGE = "UPDATE_FAMILY_IMAGE";
 const UPDATE_FAMILY_DOB = "UPDATE_FAMILY_DOB";
-const UPDATE_FAMILY_COLOR = "UPDATE_FAMILY_COLOR";
 
 const GET_PROVIDERS = "GET_PROVIDERS";
 const ADD_PROVIDER = "ADD_PROVIDER";
@@ -55,13 +53,6 @@ export function addFamily(obj) {
   };
 }
 
-export function updateFamily(id, obj) {
-  return {
-    type: UPDATE_FAMILY,
-    payload: axios.put(`/api/family/${id}`, obj)
-  };
-}
-
 export function updateFamilyName(id, name) {
   return {
     type: UPDATE_FAMILY_NAME,
@@ -80,13 +71,6 @@ export function updateFamilyDob(id, dob) {
   return {
     type: UPDATE_FAMILY_DOB,
     payload: axios.put(`/api/familyDob/${id}`, dob)
-  };
-}
-
-export function updateFamilyColor(id, color) {
-  return {
-    type: UPDATE_FAMILY_COLOR,
-    payload: axios.put(`/api/familyColor/${id}`, color)
   };
 }
 
@@ -267,11 +251,7 @@ export default function reducer(state = initialState, action) {
     case "ADD_FAMILY_PENDING":
       return { ...state, isLoading: true };
     case "ADD_FAMILY_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        family: [...state.family, action.payload.data]
-      };
+      return { ...state, isLoading: false, family: action.payload.data };
     case "ADD_FAMILY_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
 
@@ -282,65 +262,26 @@ export default function reducer(state = initialState, action) {
     case "REMOVE_FAMILY_REJECTED":
       return { ...state, isLoading: false, error: action.payload };
 
-    case "UPDATE_FAMILY_REJECTED":
-      return { ...state, isLoading: true, error: action.payload };
-
-    case "UPDATE_FAMILY_PENDING":
-      return { ...state, isLoading: true };
-    case "UPDATE_FAMILY_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        family: [...state.family, action.payload.data]
-      };
-
     case "UPDATE_FAMILY_NAME_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
-
     case "UPDATE_FAMILY_NAME_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_FAMILY_NAME_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        family: [...state.family, action.payload.data]
-      };
+      return { ...state, isLoading: false, family: action.payload.data };
 
     case "UPDATE_FAMILY_IMAGE_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
-
     case "UPDATE_FAMILY_IMAGE_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_FAMILY_IMAGE_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        family: [...state.family, action.payload.data]
-      };
+      return { ...state, isLoading: false, family: action.payload.data };
 
     case "UPDATE_FAMILY_DOB_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
-
     case "UPDATE_FAMILY_DOB_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_FAMILY_DOB_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        family: [...state.family, action.payload.data]
-      };
-
-    case "UPDATE_FAMILY_COLOR_REJECTED":
-      return { ...state, isLoading: true, error: action.payload };
-
-    case "UPDATE_FAMILY_COLOR_PENDING":
-      return { ...state, isLoading: true };
-    case "UPDATE_FAMILY_COLOR_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        family: [...state.family, action.payload.data]
-      };
+      return { ...state, isLoading: false, family: action.payload.data };
 
     case "GET_PROVIDERS_PENDING":
       return { ...state, isLoading: true };
