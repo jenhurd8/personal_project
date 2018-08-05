@@ -2,7 +2,7 @@
   height: 100vh;
   width: 100vw;
   background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_1000/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
-  background-size: 100% 100%;
+  background-size: contain;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,8 @@ button {
 
 @media (min-width: 0px) {
   .landing {
-    background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,h_600,w_320/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+    background: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,h_600,w_320/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg")
+      no-repeat center center fixed;
   }
 
   .myHealth {
@@ -29,7 +30,8 @@ button {
 
 @media (min-width: 768px) {
   .landing {
-    background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,g_north,h_1024,w_768/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+    background: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,g_north,h_1024,w_768/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg")
+      no-repeat center center fixed;
   }
   .myHealth {
     font-size: 80px;
@@ -38,7 +40,12 @@ button {
 
 @media (min-width: 1000px) {
   .landing {
-    background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,g_south,h_1400,w_1000/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+    background: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_1000/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg")
+      no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 
   .myHealth {
@@ -48,9 +55,13 @@ button {
 
 @media (min-width: 1400px) {
   .landing {
-    background-image: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_1000/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg");
+    background: url("http://res.cloudinary.com/jjenjjenjjen/image/upload/c_fill,g_south,w_4000/v1531946261/balance-beach-exercise-317157_pj1c6g.jpg")
+      no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
-
   .myHealth {
     font-size: 100px;
   }
