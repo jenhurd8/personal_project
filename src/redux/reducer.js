@@ -301,7 +301,6 @@ export default function reducer(state = initialState, action) {
 
     case "UPDATE_PROVIDER_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
-
     case "UPDATE_PROVIDER_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_PROVIDER_FULFILLED":

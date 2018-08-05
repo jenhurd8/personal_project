@@ -17,6 +17,8 @@ export default class FamilyMember extends Component {
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.state);
     return (
       <div className="familyMember" key={this.props.index}>
         <div className="left">
@@ -46,7 +48,7 @@ export default class FamilyMember extends Component {
             }}
             onClick={this.showEditMenu}
           >
-            Edit!
+            Edit
           </Button>
           {this.state.showEditMenu && (
             <div className="editMenu">
@@ -68,7 +70,10 @@ export default class FamilyMember extends Component {
                     height: "10px",
                     width: "10px"
                   }}
-                  onClick={() => this.props.updateFamilyName(this.props.id)}
+                  onClick={() => {
+                    this.props.updateFamilyName(this.props.id);
+                    this.showEditMenu();
+                  }}
                 >
                   Update
                 </Button>
@@ -90,7 +95,10 @@ export default class FamilyMember extends Component {
                       height: "10px",
                       width: "10px"
                     }}
-                    onClick={() => this.props.updateFamilyDob(this.props.id)}
+                    onClick={() => {
+                      this.props.updateFamilyDob(this.props.id);
+                      this.showEditMenu();
+                    }}
                   >
                     Update
                   </Button>
@@ -113,7 +121,10 @@ export default class FamilyMember extends Component {
                       height: "10px",
                       width: "10px"
                     }}
-                    onClick={() => this.props.updateFamilyImage(this.props.id)}
+                    onClick={() => {
+                      this.props.updateFamilyImage(this.props.id);
+                      this.showEditMenu();
+                    }}
                   >
                     Update
                   </Button>
