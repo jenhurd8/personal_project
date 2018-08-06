@@ -29,7 +29,6 @@ module.exports = {
 
   deleteFamily: (req, res, next) => {
     let db = req.app.get("db");
-    //console.log(req.params.id);
     db.deleteFamily(req.params.id).then(family => {
       db.getFamily().then(family => {
         return res.status(200).send(family);
@@ -38,7 +37,6 @@ module.exports = {
   },
 
   updateFamily: (req, res, next) => {
-    console.log(req.body);
     let db = req.app.get("db");
     let { name, image, dob, themecolor, email } = req.body;
     db.family
@@ -138,12 +136,16 @@ module.exports = {
   },
 
   addProvider: (req, res, next) => {
-    console.log(req.body);
+    //console.log(req.body);
     let db = req.app.get("db");
     const { name, specialty, address, photo, phone, email } = req.body;
 
     db.addProvider([name, specialty, address, photo, phone, email])
-      .then(() => res.sendStatus(200))
+      .then(providers => {
+        db.getProviders().then(providers => {
+          return res.status(200).send(providers);
+        });
+      })
       .catch(err => {
         res.status(500).send({
           errorMessage: "error!"

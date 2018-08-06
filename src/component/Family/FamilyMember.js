@@ -17,8 +17,6 @@ export default class FamilyMember extends Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div className="familyMember" key={this.props.index}>
         <div className="left">

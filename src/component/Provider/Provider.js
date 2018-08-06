@@ -189,15 +189,24 @@ class Provider extends Component {
   }
 
   confirmedProvider() {
-    this.props.addProvider({
-      name: this.state.responseName && this.state.responseName,
-      specialty: this.state.bdPracticeName && this.state.bdPracticeName,
-      address: this.state.responseAddress && this.state.responseAddress,
-      photo: this.state.bdPhoto && this.state.bdPhoto,
-      phone: this.state.bdPhone && this.state.bdPhone,
-      email: this.state.email && this.state.email
-    });
-    window.location.reload();
+    this.props
+      .addProvider({
+        name: this.state.responseName,
+        specialty: this.state.bdPracticeName,
+        address: this.state.responseAddress,
+        photo: this.state.bdPhoto,
+        phone: this.state.bdPhone,
+        email: this.state.email
+      })
+      .then(
+        this.setState({
+          name: "",
+          specialty: "",
+          address: "",
+          photo: "",
+          phone: ""
+        })
+      );
   }
 
   updateProvider(id) {

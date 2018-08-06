@@ -293,11 +293,7 @@ export default function reducer(state = initialState, action) {
     case "ADD_PROVIDER_PENDING":
       return { ...state, isLoading: true };
     case "ADD_PROVIDER_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        providers: [...state.providers, action.payload.data]
-      };
+      return { ...state, isLoading: false, providers: action.payload.data };
 
     case "UPDATE_PROVIDER_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
