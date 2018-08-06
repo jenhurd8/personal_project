@@ -372,7 +372,7 @@ export default function reducer(state = initialState, action) {
     case "REMOVE_PROVIDER_PENDING":
       return { ...state, isLoading: true };
     case "REMOVE_PROVIDER_FULFILLED":
-      return { ...state, isLoading: false, provider: action.payload.data };
+      return { ...state, isLoading: false, providers: action.payload.data };
     case "REMOVE_PROVIDER_REJECTED":
       return { ...state, isLoading: false, error: action.payload };
 

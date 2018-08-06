@@ -101,7 +101,7 @@ class Provider extends Component {
         alert("You cannot delete a provider that is in use on the dashboard!");
       } else {
         this.props.removeProvider(id);
-        this.searchAgain();
+        // this.searchAgain();
       }
     });
   }
