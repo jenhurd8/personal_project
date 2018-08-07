@@ -101,7 +101,6 @@ class Provider extends Component {
         alert("You cannot delete a provider that is in use on the dashboard!");
       } else {
         this.props.removeProvider(id);
-        // this.searchAgain();
       }
     });
   }
@@ -113,79 +112,66 @@ class Provider extends Component {
       this.state.suffix
     } ${this.state.value}`;
 
-    axios
-      .get(
-        // for use on localhost editing
-        // `${process.env.REACT_APP_HOST}/api/searchGoogle/${completeSearchString}`
-        `/api/searchGoogle/${completeSearchString}`
-      )
-      .then(response => {
-        if (response.data.status !== "ZERO_RESULTS") {
-          //console.log(response);
-          this.setState({
-            responseName: response.data.candidates[0].name,
-            responseAddress: response.data.candidates[0].formatted_address,
-            responseId: response.data.candidates[0].place_id
-          });
-          axios
-            .get(
-              // for use on localhost editing
-              // `${process.env.REACT_APP_HOST}/api/searchGoogle2/${
-              `/api/searchGoogle2/${this.state.responseId}`
-            )
-            .then(response => {
-              this.setState({
-                bdPhone: response.data.result.formatted_phone_number
-              });
-
-              if (this.state.suffix === "MD") {
-                let config = {
-                  params: {
-                    name: this.state.providerSearchName,
-                    state: this.state.value
-                  }
-                };
-
-                axios
-                  .get(
-                    // for use on localhost editing
-                    // `${process.env.REACT_APP_HOST}/api/betterDoctor/${
-                    `/api/betterDoctor/${this.state.providerSearchName}/${
-                      this.state.value
-                    }`
-                  )
-
-                  .then(response => {
-                    console.log(response.data);
-                    if (response.data.data.length !== 0) {
-                      this.setState({
-                        bdPhoto: response.data.data[0].profile.image_url,
-                        bdPhone:
-                          response.data.data[0].practices[0].phones[0].number,
-                        bdPracticeName: response.data.data[0].practices[0].name
-                      });
-                    }
-                  });
-              }
-              if (this.state.suffix === "Urgent Care") {
-                this.setState({
-                  bdPhoto:
-                    "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_150/v1531601624/urgent-160140_1280_ew6omg.png"
-                });
-              }
-              if (this.state.suffix === "Hospital") {
-                this.setState({
-                  bdPhoto:
-                    "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_200/v1531601637/hospital-1636334_1920_cu7vox.jpg"
-                });
-              }
+    axios.get(`/api/searchGoogle/${completeSearchString}`).then(response => {
+      if (response.data.status !== "ZERO_RESULTS") {
+        this.setState({
+          responseName: response.data.candidates[0].name,
+          responseAddress: response.data.candidates[0].formatted_address,
+          responseId: response.data.candidates[0].place_id
+        });
+        axios
+          .get(`/api/searchGoogle2/${this.state.responseId}`)
+          .then(response => {
+            this.setState({
+              bdPhone: response.data.result.formatted_phone_number
             });
-        } else {
-          this.setState({
-            responseName: "No Providers Found"
+
+            if (this.state.suffix === "MD") {
+              let config = {
+                params: {
+                  name: this.state.providerSearchName,
+                  state: this.state.value
+                }
+              };
+
+              axios
+                .get(
+                  `/api/betterDoctor/${this.state.providerSearchName}/${
+                    this.state.value
+                  }`
+                )
+
+                .then(response => {
+                  console.log(response.data);
+                  if (response.data.data.length !== 0) {
+                    this.setState({
+                      bdPhoto: response.data.data[0].profile.image_url,
+                      bdPhone:
+                        response.data.data[0].practices[0].phones[0].number,
+                      bdPracticeName: response.data.data[0].practices[0].name
+                    });
+                  }
+                });
+            }
+            if (this.state.suffix === "Urgent Care") {
+              this.setState({
+                bdPhoto:
+                  "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_150/v1531601624/urgent-160140_1280_ew6omg.png"
+              });
+            }
+            if (this.state.suffix === "Hospital") {
+              this.setState({
+                bdPhoto:
+                  "http://res.cloudinary.com/jjenjjenjjen/image/upload/c_scale,w_200/v1531601637/hospital-1636334_1920_cu7vox.jpg"
+              });
+            }
           });
-        }
-      });
+      } else {
+        this.setState({
+          responseName: "No Providers Found"
+        });
+      }
+    });
   }
 
   confirmedProvider() {
@@ -218,42 +204,36 @@ class Provider extends Component {
       phone: this.state.phone,
       email: this.state.email
     });
-    window.location.reload();
   }
 
   updateProviderName(id) {
     this.props.updateProviderName(id, {
       name: this.state.name
     });
-    window.location.reload();
   }
 
   updateProviderPracticeName(id) {
     this.props.updateProviderPracticeName(id, {
       specialty: this.state.specialty
     });
-    window.location.reload();
   }
 
   updateProviderAddress(id) {
     this.props.updateProviderAddress(id, {
       address: this.state.address
     });
-    window.location.reload();
   }
 
   updateProviderPhoto(id) {
     this.props.updateProviderPhoto(id, {
       photo: this.state.photo
     });
-    window.location.reload();
   }
 
   updateProviderPhone(id) {
     this.props.updateProviderPhone(id, {
       phone: this.state.phone
     });
-    window.location.reload();
   }
 
   render() {

@@ -76,28 +76,28 @@ class Dashboard extends Component {
     this.props.updateVisitDate(id, {
       date: this.state.date
     });
-    window.location.reload();
+    //window.location.reload();
   }
 
   updateVisitDetails(id) {
     this.props.updateVisitDetails(id, {
       details: this.state.details
     });
-    window.location.reload();
+    //window.location.reload();
   }
 
   updateVisitRx(id) {
     this.props.updateVisitRx(id, {
       rx: this.state.rx
     });
-    window.location.reload();
+    // window.location.reload();
   }
 
   updateVisitBalance(id) {
     this.props.updateVisitBalance(id, {
       balance: this.state.balance
     });
-    window.location.reload();
+    //window.location.reload();
   }
 
   isLoggedIn() {

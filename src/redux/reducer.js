@@ -300,23 +300,14 @@ export default function reducer(state = initialState, action) {
     case "UPDATE_PROVIDER_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_PROVIDER_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        providers: [...state.providers, action.payload.data]
-      };
-
-    case "UPDATE_PROVIDER_NAME_REJECTED":
-      return { ...state, isLoading: true, error: action.payload };
+      return { ...state, isLoading: false, providers: action.payload.data };
 
     case "UPDATE_PROVIDER_NAME_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_PROVIDER_NAME_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        providers: [...state.providers, action.payload.data]
-      };
+      return { ...state, isLoading: false, providers: action.payload.data };
+    case "UPDATE_PROVIDER_NAME_REJECTED":
+      return { ...state, isLoading: true, error: action.payload };
 
     case "UPDATE_PROVIDER_PRACTICE_NAME_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
@@ -324,11 +315,7 @@ export default function reducer(state = initialState, action) {
     case "UPDATE_PROVIDER_PRACTICE_NAME_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_PROVIDER_PRACTICE_NAME_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        providers: [...state.providers, action.payload.data]
-      };
+      return { ...state, isLoading: false, providers: action.payload.data };
 
     case "UPDATE_PROVIDER_ADDRESS_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
@@ -336,11 +323,7 @@ export default function reducer(state = initialState, action) {
     case "UPDATE_PROVIDER_ADDRESS_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_PROVIDER_ADDRESS_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        providers: [...state.providers, action.payload.data]
-      };
+      return { ...state, isLoading: false, providers: action.payload.data };
 
     case "UPDATE_PROVIDER_PHOTO_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
@@ -348,11 +331,7 @@ export default function reducer(state = initialState, action) {
     case "UPDATE_PROVIDER_PHOTO_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_PROVIDER_PHOTO_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        providers: [...state.providers, action.payload.data]
-      };
+      return { ...state, isLoading: false, providers: action.payload.data };
 
     case "UPDATE_PROVIDER_PHONE_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
@@ -360,11 +339,7 @@ export default function reducer(state = initialState, action) {
     case "UPDATE_PROVIDER_PHONE_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_PROVIDER_PHONE_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        providers: [...state.providers, action.payload.data]
-      };
+      return { ...state, isLoading: false, providers: action.payload.data };
 
     case "ADD_PROVIDER_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
@@ -393,22 +368,14 @@ export default function reducer(state = initialState, action) {
     case "ADD_VISIT_PENDING":
       return { ...state, isLoading: true };
     case "ADD_VISIT_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        visits: [...state.visits, action.payload.data]
-      };
+      return { ...state, isLoading: false, visits: action.payload.data };
     case "ADD_VISIT_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
 
     case "UPDATE_VISIT_DATE_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_VISIT_DATE_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        visits: [...state.visits, action.payload.data]
-      };
+      return { ...state, isLoading: false, visits: action.payload.data };
     case "UPDATE_VISIT_DATE_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
 
@@ -418,11 +385,7 @@ export default function reducer(state = initialState, action) {
     case "UPDATE_VISIT_DETAILS_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_VISIT_DETAILS_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        visits: [...state.visits, action.payload.data]
-      };
+      return { ...state, isLoading: false, visits: action.payload.data };
 
     case "UPDATE_VISIT_RX_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
@@ -430,22 +393,14 @@ export default function reducer(state = initialState, action) {
     case "UPDATE_VISIT_RX_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_VISIT_RX_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        visits: [...state.visits, action.payload.data]
-      };
+      return { ...state, isLoading: false, visits: action.payload.data };
 
     case "UPDATE_VISIT_BALANCE_REJECTED":
       return { ...state, isLoading: true, error: action.payload };
     case "UPDATE_VISIT_BALANCE_PENDING":
       return { ...state, isLoading: true };
     case "UPDATE_VISIT_BALANCE_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        visits: [...state.visits, action.payload.data]
-      };
+      return { ...state, isLoading: false, visits: action.payload.data };
 
     case "GET_USER_PENDING":
       return { ...state, isLoading: true };

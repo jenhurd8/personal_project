@@ -73,7 +73,6 @@ passport.deserializeUser((user, done) => done(null, user));
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    // successRedirect: "http://localhost:3000/#/dashboard",
     successRedirect: "/#/dashboard",
     failureRedirect: "/login"
   })
@@ -81,14 +80,10 @@ app.get(
 
 app.get("/logout", (req, res) => {
   console.log("destroyed");
-  // res.redirect(`https://${process.env.DOMAIN}/v2/logout`);
   req.logout();
   req.session.destroy();
   res.redirect(
-    `https://${
-      process.env.DOMAIN
-      // }/v2/logout?federated&returnTo=http%3A%2F%2Flocalhost:3000/landing&client_id=${
-    }/v2/logout?federated&returnTo=http%3A%2F%2F${
+    `https://${process.env.DOMAIN}/v2/logout?federated&returnTo=http%3A%2F%2F${
       process.env.DEV_HOST_WITHOUT_HTTP
     }&client_id=${process.env.CLIENT_ID}`
   );
@@ -99,7 +94,6 @@ app.get("/api/user", (req, res) => {
 });
 
 app.get("/api/searchGoogle/:id", (req, res) => {
-  // console.log(req.params.id);
   axios
     .get(
       `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${
@@ -113,7 +107,6 @@ app.get("/api/searchGoogle/:id", (req, res) => {
 });
 
 app.get("/api/searchGoogle2/:id", (req, res) => {
-  // console.log(req.params.id);
   axios
     .get(
       `https://maps.googleapis.com/maps/api/place/details/json?placeid=${
@@ -138,8 +131,6 @@ app.get("/api/betterDoctor/:name/:id", (req, res) => {
     .then(response => res.status(200).json(response.data))
     .catch(err => console.log(err));
 });
-
-//app.delete("/api/user/:id", controller.deleteUser);
 
 const port = process.env.PORT || 3001;
 
