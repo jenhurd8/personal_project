@@ -321,9 +321,12 @@ module.exports = {
       email,
       balance
     } = req.body;
-
     db.addVisit([family_id, providers_id, date, details, rx, email, balance])
-      .then(() => res.sendStatus(200))
+      .then(visits => {
+        db.getVisits().then(visits => {
+          return res.status(200).send(visits);
+        });
+      })
       .catch(err => {
         res.status(500).send({
           errorMessage: "error!"

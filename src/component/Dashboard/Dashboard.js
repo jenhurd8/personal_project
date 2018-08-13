@@ -76,28 +76,24 @@ class Dashboard extends Component {
     this.props.updateVisitDate(id, {
       date: this.state.date
     });
-    //window.location.reload();
   }
 
   updateVisitDetails(id) {
     this.props.updateVisitDetails(id, {
       details: this.state.details
     });
-    //window.location.reload();
   }
 
   updateVisitRx(id) {
     this.props.updateVisitRx(id, {
       rx: this.state.rx
     });
-    // window.location.reload();
   }
 
   updateVisitBalance(id) {
     this.props.updateVisitBalance(id, {
       balance: this.state.balance
     });
-    //window.location.reload();
   }
 
   isLoggedIn() {
@@ -111,91 +107,94 @@ class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.props.isLoading);
     const { visits, isLoading } = this.props;
 
-    let visitsArray = isLoading ? (
-      <p>Loading...</p>
-    ) : (
-      visits.map((element, index) => {
-        let dashboardVisitId = visits[index].visitid;
+    let visitsArray =
+      isLoading === true ? (
+        <p>Loading...</p>
+      ) : (
+        visits.map((element, index) => {
+          let dashboardVisitId = visits[index].visitid;
 
-        if (
-          visits[index].visitemail === this.state.email &&
-          element.familyname.includes(this.state.filterString)
-        ) {
-          return (
-            <div key={index} className="dashboardVisit">
-              <Grid container align="center" justify="center">
-                <Grid item sm>
-                  <Paper
-                    style={{
-                      padding: 20,
-                      marginTop: 10,
-                      marginBottom: 10,
-                      backgroundColor: "#BBDEFB",
-                      width: "80%"
-                    }}
-                  >
-                    <div className="visits" key={index}>
-                      <div className="person">
-                        <img src={visits[index].image} alt="person" />
-                        <p>{visits[index].familyname}</p>
-                        <p>
-                          {visits[index].dob.slice(5, 10) +
-                            "-" +
-                            visits[index].dob.slice(0, 4)}
-                        </p>
-                      </div>
-                      <div className="visitDetails">
-                        <DashboardDetail
-                          date={
-                            element.date.slice(5, 10) +
-                            "-" +
-                            element.date.slice(0, 4)
-                          }
-                          details={element.details}
-                          rx={element.rx}
-                          balance={element.balance}
-                          visitId={dashboardVisitId}
-                          onChangeHandler={this.onChangeHandler}
-                          updateVisitDate={this.updateVisitDate}
-                          updateVisitBalance={this.updateVisitBalance}
-                          updateVisitDetails={this.updateVisitDetails}
-                          updateVisitRx={this.updateVisitRx}
-                        />
-                      </div>
+          if (
+            visits[index].visitemail === this.state.email &&
+            element.familyname.includes(this.state.filterString)
+          ) {
+            return (
+              <div key={index} className="dashboardVisit">
+                <Grid container align="center" justify="center">
+                  <Grid item sm>
+                    <Paper
+                      style={{
+                        padding: 20,
+                        marginTop: 10,
+                        marginBottom: 10,
+                        backgroundColor: "#BBDEFB",
+                        width: "80%"
+                      }}
+                    >
+                      <div className="visits" key={index}>
+                        <div className="person">
+                          <img src={visits[index].image} alt="person" />
+                          <p>{visits[index].familyname}</p>
+                          <p>
+                            {visits[index].dob.slice(5, 10) +
+                              "-" +
+                              visits[index].dob.slice(0, 4)}
+                          </p>
+                        </div>
+                        <div className="visitDetails">
+                          <DashboardDetail
+                            date={
+                              element.date.slice(5, 10) +
+                              "-" +
+                              element.date.slice(0, 4)
+                            }
+                            details={element.details}
+                            rx={element.rx}
+                            balance={element.balance}
+                            visitId={dashboardVisitId}
+                            onChangeHandler={this.onChangeHandler}
+                            updateVisitDate={this.updateVisitDate}
+                            updateVisitBalance={this.updateVisitBalance}
+                            updateVisitDetails={this.updateVisitDetails}
+                            updateVisitRx={this.updateVisitRx}
+                          />
+                        </div>
 
-                      <div className="dr">
-                        <img src={visits[index].photo} alt="provider" />
-                        <p>{visits[index].providersname}</p>
-                        <p>{visits[index].phone}</p>
-                        <p>{visits[index].address}</p>
+                        <div className="dr">
+                          <img src={visits[index].photo} alt="provider" />
+                          <p>{visits[index].providersname}</p>
+                          <p>{visits[index].phone}</p>
+                          <p>{visits[index].address}</p>
+                        </div>
+                        <div id="deleteButton">
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            style={{
+                              height: "10px",
+                              width: "10px",
+                              backgroundColor: "#0D47A1"
+                            }}
+                            onClick={() =>
+                              this.deleteHandler(visits[index].visitid)
+                            }
+                          >
+                            DELETE
+                          </Button>
+                        </div>
                       </div>
-                      <div id="deleteButton">
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          style={{
-                            height: "10px",
-                            width: "10px",
-                            backgroundColor: "#0D47A1"
-                          }}
-                          onClick={() =>
-                            this.deleteHandler(visits[index].visitid)
-                          }
-                        >
-                          DELETE
-                        </Button>
-                      </div>
-                    </div>
-                  </Paper>
+                    </Paper>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </div>
-          );
-        }
-      })
-    );
+              </div>
+            );
+          }
+        })
+      );
 
     return (
       <div>
@@ -267,7 +266,7 @@ function mapStateToProps(state) {
     family: state.family,
     visits: state.visits,
     providers: state.providers,
-    loading: state.loading,
+    isLoading: state.isLoading,
     user: state.user
   };
 }

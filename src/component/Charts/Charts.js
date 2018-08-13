@@ -12,7 +12,7 @@ const data = {
   labels: "",
   datasets: [
     {
-      label: "Cost per Year",
+      label: "Cost Per Year",
       backgroundColor: [
         "#0082c8",
         "#46f0f0",
@@ -38,6 +38,18 @@ const data = {
       maintainAspectRatio: false
     }
   ]
+  // options: {
+  //   maintainAspectRatio: false,
+  //   tooltips: {
+  //     enabled: true,
+  //     mode: "single",
+  //     callbacks: {
+  //       label: function(tooltipItems, data) {
+  //         return "$" + tooltipItems.yLabel;
+  //       }
+  //     }
+  //   }
+  // }
 };
 
 class Charts extends Component {
@@ -106,11 +118,21 @@ class Charts extends Component {
               width={500}
               height={250}
               options={{
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                tooltips: {
+                  enabled: true,
+                  mode: "single",
+                  callbacks: {
+                    label: function(tooltipItems, data) {
+                      return "$" + tooltipItems.yLabel;
+                    }
+                  }
+                }
               }}
             />
           </div>
           <div className="doughnut">
+            <h3 className="charts_mobile_header">Dollars Spent Per Year $</h3>
             <Doughnut data={data} height={400} />
           </div>
         </div>
