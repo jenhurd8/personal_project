@@ -390,6 +390,8 @@ class Provider extends Component {
             >
               Search for Provider
             </Button>{" "}
+            <br />
+            <br />
             <Button
               variant="contained"
               color="primary"
