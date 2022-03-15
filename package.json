@@ -14,7 +14,7 @@
     "handlebars": "^4.4.3",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
-    "lodash-es": "^4.17.15",
+    "lodash-es": "^4.17.21",
     "lodash.template": "^4.5.0",
     "massive": "^5.0.0",
     "material-dashboard": "^2.1.0",
